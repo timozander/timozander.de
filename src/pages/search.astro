@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import Search from "@components/Search.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// Retrieve all articles
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+
+// List of items to search in
+const searchList = posts.map(({ data }) => ({
+  title: data.title,
+  description: data.description,
+  data,
+}));
+---
+
+<BaseLayout
+  title="Search"
+  description="Search any article..."
+  activeNav="search"
+>
+  <Search client:load searchList={searchList} />
+</BaseLayout>

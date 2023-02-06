@@ -1,0 +1,36 @@
+---
+import Datetime from "./Datetime.astro";
+
+interface Props {
+  title: string;
+  href: string;
+  description: string;
+  secHeading?: boolean;
+  pubDatetime: Date;
+}
+const { title, href, description, secHeading, pubDatetime } = Astro.props;
+---
+
+<li class="my-6">
+  <a href={href} class="inline-block text-lg font-medium">
+    {
+      secHeading ? (
+        <h2 class="text-lg font-medium decoration-dashed hover:underline">
+          {title}
+        </h2>
+      ) : (
+        <h3 class="text-lg font-medium decoration-dashed hover:underline">
+          {title}
+        </h3>
+      )
+    }
+  </a>
+  <Datetime datetime={pubDatetime} />
+  <p>{description}</p>
+</li>
+
+<style>
+  a {
+    @apply text-skin-accent;
+  }
+</style>

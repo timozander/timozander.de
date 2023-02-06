@@ -1,0 +1,52 @@
+---
+import { SITE } from "@config";
+import Footer from "@components/Footer.astro";
+import Header, { ActiveNavValues } from "@components/Header.astro";
+import Layout from "./Layout.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+
+export interface Props {
+  title: string;
+  description?: string;
+  breadcrumbs?: boolean;
+  activeNav?: ActiveNavValues;
+
+  author?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  breadcrumbs = true,
+  description,
+  author,
+  ogImage,
+  activeNav,
+} = Astro.props;
+---
+
+<Layout title={`${title} | ${SITE.title}`} author={author} ogImage={ogImage}>
+  <Header activeNav={activeNav} />
+  {breadcrumbs ? <Breadcrumbs /> : <div class="mt-8" />}
+  <main id="main-content">
+    <h1>
+      {title}
+    </h1>
+    {description && <p>{description}</p>}
+
+    <slot />
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  #main-content {
+    @apply mx-auto w-full max-w-5xl px-4 pb-12;
+  }
+  #main-content h1 {
+    @apply text-2xl font-semibold sm:text-3xl;
+  }
+  #main-content p {
+    @apply mt-2 mb-6 italic;
+  }
+</style>

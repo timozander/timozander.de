@@ -1,0 +1,26 @@
+---
+import { slugifyStr } from "@utils/slugify";
+import BaseLayout from "./BaseLayout.astro";
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    id?: string;
+    description?: string;
+    breadcrumbs?: boolean;
+  };
+}
+
+const { frontmatter } = Astro.props;
+// TODO fixme
+---
+
+<BaseLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  breadcrumbs={frontmatter.breadcrumbs}
+>
+  <section class="prose max-w-5xl">
+    <slot />
+  </section>
+</BaseLayout>
