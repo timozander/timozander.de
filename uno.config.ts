@@ -34,6 +34,7 @@ export default defineConfig({
     colors: {
       skin: {
         base: "rgb(var(--color-text-base))",
+        fill: "rgb(var(--color-fill))",
         accent: "rgb(var(--color-accent))",
         line: "rgb(var(--color-border))",
       },

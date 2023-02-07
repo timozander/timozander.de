@@ -5,9 +5,8 @@ export const SITE = {
   author: "Timo Zander",
   desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
   title: "Timo Zander",
-  shorttitle: "TZ",
   ogImage: "astropaper-og.jpg",
-  lightAndDarkMode: true,
+  lightAndDarkMode: false,
   postPerPage: 3,
 };
 
@@ -18,7 +17,14 @@ export const LOGO_IMAGE = {
   height: 46,
 };
 
+// TODO add email
 export const SOCIALS: SocialObjects = [
+  {
+    name: "Mail",
+    href: "mailto:yourmail@gmail.com",
+    linkTitle: `Send an email to ${SITE.title}`,
+    active: true,
+  },
   {
     name: "Github",
     href: "https://github.com/timozander",
@@ -30,12 +36,6 @@ export const SOCIALS: SocialObjects = [
     href: "https://www.linkedin.com/in/timo-zander-b42784222/",
     linkTitle: `${SITE.title} on LinkedIn`,
     active: true,
-  },
-  {
-    name: "Mail",
-    href: "mailto:yourmail@gmail.com",
-    linkTitle: `Send an email to ${SITE.title}`,
-    active: false,
   },
   {
     name: "Twitter",

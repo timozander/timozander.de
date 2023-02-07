@@ -7,6 +7,8 @@ export interface Props {
   disabled?: boolean;
 }
 
+export const LINKBUTTON_CTA_CLASS = "cta";
+
 const { href, className, ariaLabel, title, disabled = false } = Astro.props;
 ---
 
@@ -25,5 +27,13 @@ const { href, className, ariaLabel, title, disabled = false } = Astro.props;
 <style>
   a {
     @apply hover:text-skin-accent;
+  }
+
+  a.cta {
+    @apply px-6 py-3 text-xl font-semibold border-2 border-skin-accent bg-skin-accent text-skin-fill mx-2 rounded-lg;
+  }
+
+  a.cta:hover {
+    @apply bg-skin-fill text-skin-accent;
   }
 </style>
