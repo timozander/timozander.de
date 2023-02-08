@@ -1,0 +1,25 @@
+---
+import TimeDisplay from "@components/TimeDisplay.astro";
+
+interface Props {
+  title: string;
+  href: string;
+  pubDatetime: Date;
+}
+const { title, href, description, secHeading, pubDatetime } = Astro.props;
+---
+
+<li class="my-6">
+  <a href={href} class="inline-block text-lg font-medium">
+    <h2 class="text-xl mb-1 font-medium decoration-dashed hover:underline">
+      {title}
+    </h2>
+  </a>
+  <TimeDisplay datetime={pubDatetime} />
+</li>
+
+<style>
+  a {
+    @apply text-skin-accent;
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+export interface Props {
+  datetime: string | Date;
+  size?: "sm" | "lg";
+  class?: string;
+}
+
+const { datetime, class: cssClass } = Astro.props;
+
+const myDatetime = new Date(datetime);
+
+const date = myDatetime.toLocaleDateString([], {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<div class={`flex items-center space-x-2 opacity-80 ${cssClass}`}>
+  <i class="i-ph-calendar-blank"></i>
+
+  <span class="sr-only">Posted on:</span>
+  <span class="text-sm">
+    {date}
+  </span>
+</div>

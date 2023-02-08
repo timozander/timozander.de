@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import type { SearchInformation } from "./Search";
+import SearchOverlay from "./SearchOverlay.vue";
+
+// Retrieve all articles
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+console.log(posts);
+// TODO fixme
+// List of items to search in
+const searchData = posts.map(
+  ({ slug, data }) =>
+    ({
+      title: data.title,
+      description: data.description,
+      slug: slug,
+    } as SearchInformation)
+);
+---
+
+<SearchOverlay client:idle searchData={searchData} />
