@@ -1,25 +1,37 @@
 ---
+type HTMLAttributeAnchorTarget = "_self" | "_blank" | "_parent" | "_top";
+
+export type ButtonType = "primary" | "default";
 export interface Props {
   href: string;
   className?: string;
   ariaLabel?: string;
+  type?: ButtonType;
   title?: string;
   disabled?: boolean;
+  target?: HTMLAttributeAnchorTarget;
 }
 
-export const LINKBUTTON_CTA_CLASS = "cta";
-
-const { href, className, ariaLabel, title, disabled = false } = Astro.props;
+const {
+  href,
+  className,
+  ariaLabel,
+  title,
+  target = undefined,
+  disabled = false,
+  type = "default",
+} = Astro.props;
 ---
 
 <a
   type="button"
   href={disabled ? "#" : href}
   tabindex={disabled ? "-1" : "0"}
-  class={`group ${className}`}
+  class={`${className} ${type}`}
   aria-label={ariaLabel}
   title={title}
   aria-disabled={disabled}
+  target={target}
 >
   <slot />
 </a>
@@ -29,11 +41,11 @@ const { href, className, ariaLabel, title, disabled = false } = Astro.props;
     @apply hover:text-skin-accent;
   }
 
-  a.cta {
-    @apply px-6 py-3 text-xl font-semibold border-2 border-skin-accent bg-skin-accent text-skin-fill mx-2 rounded-lg;
+  a.primary {
+    @apply transition px-6 py-3 text-xl font-medium border-2 border-skin-accent bg-skin-accent text-skin-fill mx-2 rounded-lg;
   }
 
-  a.cta:hover {
-    @apply bg-skin-fill text-skin-accent;
+  a.primary:hover {
+    @apply bg-transparent text-skin-accent;
   }
 </style>

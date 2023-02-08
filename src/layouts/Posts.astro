@@ -1,7 +1,7 @@
 ---
 import Card from "@components/Card.astro";
 import LinkButton from "@components/LinkButton.astro";
-import slugify from "@utils/slugify";
+import PostLink from "@components/posts/PostLink.astro";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
 
@@ -19,16 +19,15 @@ const next = pageNum < totalPages ? "" : "disabled";
 
 <BaseLayout
   title="Posts"
-  description="All the articles I've posted."
+  description="Read my thoughts on various tech-related topics."
   activeNav="posts"
 >
   <ul>
     {
-      posts.map(({ data }) => (
-        <Card
-          href={`/posts/${slugify(data)}`}
+      posts.map(({ slug, data }) => (
+        <PostLink
+          href={`/posts/${slug}`}
           title={data.title}
-          description={data.description}
           pubDatetime={data.pubDatetime}
         />
       ))

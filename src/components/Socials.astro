@@ -17,8 +17,9 @@ const { centered = false } = Astro.props;
         href={social.href}
         className="link-button"
         title={social.linkTitle}
+        target="_blank"
       >
-        <Fragment set:html={socialIcons[social.name]} />
+        <i class={social.iconName + " text-4xl"} />
       </LinkButton>
     ))
   }
@@ -29,6 +30,7 @@ const { centered = false } = Astro.props;
     @apply flex-wrap justify-center gap-1;
   }
   .social-icons .link-button {
-    @apply p-2 hover:rotate-6 sm:p-1;
+    transition: top 0.5s ease;
+    @apply relative hover:-top-0.5 ease p-2 sm:p-1;
   }
 </style>

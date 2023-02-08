@@ -3,7 +3,6 @@ import { CollectionEntry, getCollection } from "astro:content";
 import Card from "@components/Card.astro";
 import getUniqueTags from "@utils/getUniqueTags";
 import getPostsByTag from "@utils/getPostsByTag";
-import slugify from "@utils/slugify";
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 export interface Props {
@@ -38,9 +37,9 @@ const tagPosts = getPostsByTag(posts, tag);
 >
   <ul>
     {
-      tagPosts.map(({ data }) => (
+      tagPosts.map(({ slug, data }) => (
         <Card
-          href={`/posts/${slugify(data)}`}
+          href={`/posts/${slug}`}
           title={data.title}
           description={data.description}
           pubDatetime={data.pubDatetime}

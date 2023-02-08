@@ -1,5 +1,6 @@
 export type SocialObjects = {
   name: SocialMedia;
+  iconName: string;
   href: string;
   active: boolean;
   linkTitle: string;

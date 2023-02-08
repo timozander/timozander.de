@@ -1,3 +1,4 @@
+import { SOCIALS } from "./src/config";
 import {
   defineConfig,
   presetIcons,
@@ -30,6 +31,7 @@ export default defineConfig({
       },
     }),
   ],
+  safelist: [...SOCIALS.map(i => i.iconName)],
   theme: {
     colors: {
       skin: {
@@ -37,6 +39,10 @@ export default defineConfig({
         fill: "rgb(var(--color-fill))",
         accent: "rgb(var(--color-accent))",
         line: "rgb(var(--color-border))",
+      },
+      font: {
+        base: '"Open Sans", Helvetica, Arial, sans-serif',
+        code: "",
       },
       // 'skin-base': 'rgb(var(--color-text-base))',
       // 'skin-accent': 'rgb(var(--color-accent))',

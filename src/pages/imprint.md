@@ -6,4 +6,4 @@ breadcrumbs: false
 
 TODO ...
 
-The theme is loosely based on [AstroPaper](https://github.com/satnaing/astro-paper).
+The theme is loosely based on [AstroPaper](https://github.com/satnaing/astro-paper). Icons by [Phosphor Icons](https://phosphoricons.com/)

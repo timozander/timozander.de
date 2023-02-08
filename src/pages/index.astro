@@ -3,18 +3,16 @@ import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/sections/Header.astro";
 import Footer from "@components/sections/Footer.astro";
-import LinkButton, { LINKBUTTON_CTA_CLASS } from "@components/LinkButton.astro";
+import LinkButton from "@components/LinkButton.astro";
 import Hr from "@components/Hr.astro";
 import Card from "@components/Card.astro";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
-import slugify from "@utils/slugify";
-import { SOCIALS } from "@config";
+import { SITE, SOCIALS } from "@config";
 
 const posts = await getCollection("blog");
 
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 
@@ -24,18 +22,19 @@ const email = SOCIALS.filter(s => s.name === "Mail")[0]!!;
 <Layout>
   <Header />
   <main id="main-content">
-    <section id="hero" class="flex">
-      <div class="pr-12 basis-1/3">
-        <img src="zander.jpg" />
+    <section id="hero" class="flex flex-col sm:flex-row gap-8 sm:gap-12">
+      <div class="basis-1/3">
+        <img src="zander.jpg" class="max-w-70% sm:max-w-100% mx-auto" />
       </div>
       <div class="flex flex-col justify-center basis-2/3">
-        <h1>Timo Zander</h1>
+        <h1>Hey, I'm Timo</h1>
         <p>Software Engineer, TypeScript enthusiast, and tech writer</p>
 
         <div class="social-wrapper">
           <LinkButton
             href={email.href}
-            className={LINKBUTTON_CTA_CLASS + " cta-button"}
+            type="primary"
+            className={"cta-button"}
             title={email.linkTitle}
           >
             Get in touch
@@ -44,65 +43,24 @@ const email = SOCIALS.filter(s => s.name === "Mail")[0]!!;
           {socialCount > 0 && <Socials />}
         </div>
       </div>
-
-      <!-- <p>
-        Read the blog posts or check
-        <LinkButton
-          className="hover:text-skin-accent underline underline-offset-4 decoration-dashed"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> for more info.
-      </p>
-      {
-        // only display if at least one social link is enabled
-        socialCount > 0 && (
-          <div class="social-wrapper">
-            <div class="social-links">Social Links:</div>
-            <Socials />
-          </div>
-        )
-      } -->
     </section>
 
-    {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured">
-            <h2>Featured</h2>
-            <ul>
-              {featuredPosts.map(({ data }) => (
-                <Card
-                  href={`/posts/${slugify(data)}`}
-                  title={data.title}
-                  description={data.description}
-                  pubDatetime={data.pubDatetime}
-                  secHeading={false}
-                />
-              ))}
-            </ul>
-          </section>
-          <Hr />
-        </>
-      )
-    }
-
+    <Hr />
     <section id="recent-posts">
-      <h2>Recent Posts</h2>
+      <h2>Discover my recent posts</h2>
       <ul>
         {
-          sortedPosts.map(
-            ({ data }, index) =>
-              index < 4 && (
-                <Card
-                  href={`/posts/${slugify(data)}`}
-                  title={data.title}
-                  description={data.description}
-                  pubDatetime={data.pubDatetime}
-                  secHeading={false}
-                />
-              )
-          )
+          sortedPosts
+            .slice(0, SITE.recentPostCount)
+            .map(({ slug, data }) => (
+              <Card
+                href={`/posts/${slug}`}
+                title={data.title}
+                description={data.description}
+                pubDatetime={data.pubDatetime}
+                secHeading={false}
+              />
+            ))
         }
       </ul>
       <div class="all-posts-btn-wrapper">
@@ -127,7 +85,8 @@ const email = SOCIALS.filter(s => s.name === "Mail")[0]!!;
     @apply py-28;
   }
   #hero h1 {
-    @apply my-4 inline-block text-6xl font-bold;
+    font-family: var(--font-base);
+    @apply my-4 inline-block text-5xl font-bold;
   }
 
   #hero img {
@@ -140,11 +99,11 @@ const email = SOCIALS.filter(s => s.name === "Mail")[0]!!;
   }
 
   #hero .social-wrapper {
-    @apply mt-3 flex items-center;
+    @apply mt-3 flex gap-4 items-center flex-col sm:flex-row items-center;
   }
 
   #hero .cta-button {
-    @apply mr-6;
+    @apply w-full sm:w-auto text-center;
   }
 
   #hero .social-wrapper :global(svg) {

@@ -1,5 +1,5 @@
 ---
-import Datetime from "./Datetime.astro";
+import TimeDisplay from "./TimeDisplay.astro";
 
 interface Props {
   title: string;
@@ -25,7 +25,7 @@ const { title, href, description, secHeading, pubDatetime } = Astro.props;
       )
     }
   </a>
-  <Datetime datetime={pubDatetime} />
+  <TimeDisplay datetime={pubDatetime} />
   <p>{description}</p>
 </li>
 
