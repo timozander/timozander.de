@@ -65,12 +65,8 @@ const email = SOCIALS.filter(s => s.name === "Mail")[0]!!;
       </ul>
       <div class="all-posts-btn-wrapper">
         <LinkButton href="/posts">
-          All Posts
-          <svg xmlns="http://www.w3.org/2000/svg"
-            ><path
-              d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-            ></path>
-          </svg>
+          Read more
+          <i class="i-ph-arrow-right"></i>
         </LinkButton>
       </div>
     </section>
@@ -79,6 +75,11 @@ const email = SOCIALS.filter(s => s.name === "Mail")[0]!!;
   <Footer />
 </Layout>
 
+<style is:global>
+  #hero .social-wrapper {
+    @apply text-4xl;
+  }
+</style>
 <style>
   /* ===== Hero Section ===== */
   #hero {

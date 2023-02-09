@@ -9,19 +9,9 @@
   }
 }
 
-:root,
-html[data-theme="light"] {
-  --color-text-base: 40, 39, 40;
-  --color-card: 230, 230, 230;
-  --color-card-muted: 205, 205, 205;
-  --color-border: var(--color-accent);
-
-  --color-fill: 255, 241, 244;
-  --color-accent: 106, 0, 23;
-}
-
 html[data-theme="dark"] {
   --color-text-base: 234, 237, 243;
+  --color-text-muted: 192, 201, 219;
   --color-card: 52, 63, 96;
   --color-card-muted: 138, 51, 2;
   --color-border: 90, 93, 132;

@@ -8,9 +8,7 @@ import {
 } from "unocss";
 
 export default defineConfig({
-  shortcuts: [
-    { "i-logo": "i-logos-astro w-6em h-6em transform transition-800" },
-  ],
+  shortcuts: [],
   transformers: [transformerDirectives()],
   presets: [
     presetUno(),
@@ -36,6 +34,7 @@ export default defineConfig({
     colors: {
       skin: {
         base: "rgb(var(--color-text-base))",
+        muted: "rgb(var(--color-text-muted))",
         fill: "rgb(var(--color-fill))",
         accent: "rgb(var(--color-accent))",
         line: "rgb(var(--color-border))",

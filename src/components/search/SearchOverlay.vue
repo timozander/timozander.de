@@ -1,69 +1,184 @@
 <script setup lang="ts">
-import Fuse from 'fuse.js'
-import { computed, onMounted, ref } from 'vue';
-import type { SearchInformation } from './Search';
+import Fuse from "fuse.js";
+import { computed, nextTick, onMounted, ref, watch } from "vue";
+import type { SearchInformation } from "./Search";
 
-const isVisible = ref(false)
-const searchInput = ref('')
+// TODO fixme
+const isVisible = ref(false);
+const searchInput = ref("");
+const selectedItemIndex = ref(-1);
+
+const searchBar = ref<HTMLElement | null>(null);
+const resultItems = ref<HTMLElement[] | null>(null);
+
+const minMatchCharLength = 3;
 
 const props = defineProps<{
-    searchData: SearchInformation[]
-}>()
+  searchData: SearchInformation[];
+}>();
 
 onMounted(() => {
-    window.addEventListener('search', () => {
-        isVisible.value = true
-    })
+  window.addEventListener("search", () => {
+    isVisible.value = true;
+  });
 
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            isVisible.value = false
-        }
-    })
-})
+  window.addEventListener("keydown", e => {
+    if (e.key === "Escape") {
+      isVisible.value = false;
+    }
+
+    const scrollIntoView = () => {
+      if (selectedItemIndex.value === -1) return;
+      const element = resultItems.value?.[selectedItemIndex.value];
+
+      if (element !== undefined) {
+        nextTick(() => element.scrollIntoView({ behavior: "smooth" }));
+      }
+    };
+
+    if (e.key === "ArrowDown") {
+      selectedItemIndex.value =
+        (selectedItemIndex.value + 1) % searchResults.value.length;
+      scrollIntoView();
+    }
+
+    if (e.key === "ArrowUp") {
+      selectedItemIndex.value =
+        (selectedItemIndex.value - 1) % searchResults.value.length;
+      scrollIntoView();
+    }
+
+    if (e.key === "Enter" && selectedItemIndex.value !== -1) {
+      const selectedItem = searchResults.value[selectedItemIndex.value];
+
+      window.location.href = `/posts/${selectedItem.item.slug}`;
+    }
+  });
+});
+
+watch(isVisible, () => {
+  if (isVisible.value === true) {
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    console.log("focus");
+
+    nextTick(() => {
+      searchBar.value?.focus();
+    });
+  }
+
+  if (!isVisible.value) {
+    document.documentElement.style.overflow = "auto";
+    document.body.style.overflow = "auto";
+  }
+});
+
+watch(searchInput, () => {
+  selectedItemIndex.value = -1;
+});
 
 const fuse = new Fuse(props.searchData, {
-    keys: ["title", "description", "content"],
-    includeMatches: true,
-    minMatchCharLength: 3,
-    threshold: 0.5,
+  keys: ["title", "description", "content"],
+  includeMatches: true,
+  minMatchCharLength,
 });
 
 const searchResults = computed(() => {
-    console.log("test")
-    return fuse.search<SearchInformation>(searchInput.value)
-})
+  return fuse.search<SearchInformation>(searchInput.value);
+});
 
 const sluggify = (post: SearchInformation) => {
-    return `/posts/${post.slug}`
-}
-
+  return `/posts/${post.slug}`;
+};
 </script>
 <template>
-    <div class="search-overlay" v-if="isVisible">
+  <div class="search-overlay" @click.self="isVisible = false" v-if="isVisible">
+    <div class="search-container flex flex-col">
+      <div class="text-right mb-3 mt--3 sm:display-none">
+        <button
+          class="text-white text-2xl font-bold"
+          @click="isVisible = false"
+        >
+          <i class="i-ph-x"><span class="sr-only">&times;</span></i>
+        </button>
+      </div>
+      <input
+        type="text"
+        ref="searchBar"
+        v-model="searchInput"
+        autofocus
+        placeholder="Search..."
+      />
 
-        <div class="search-container">
-            <input type="text" v-model="searchInput" autofocus placeholder="Search..." />
-
-            <div>
-                <a v-for="r in searchResults" :href="sluggify(r.item)">
-                    {{ r.item.title }}
-                </a>
-            </div>
-        </div>
+      <p class="text-hint" v-if="searchInput.length < minMatchCharLength">
+        Enter your search term
+      </p>
+      <p class="text-hint" v-else-if="searchResults.length === 0">
+        No results found.
+      </p>
+      <div class="results" v-else>
+        <a
+          v-for="(r, index) in searchResults"
+          ref="resultItems"
+          :class="{ selected: index === selectedItemIndex }"
+          :href="`/posts/${r.item.slug}`"
+        >
+          {{ r.item.title }}
+          <span class="block pt-1 text-md font-normal opacity-60">{{
+            r.item.description
+          }}</span>
+        </a>
+      </div>
     </div>
+  </div>
 </template>
 <style>
+body.modal-open {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 .search-overlay {
-    @apply position-absolute top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 z-50;
-    backdrop-filter: blur(4px);
+  @apply position-fixed px-2 sm:px-0 top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 z-50;
+  backdrop-filter: blur(4px);
 }
 
 .search-container {
-    @apply mt-64 mx-auto w-50% rounded-lg bg-skin-fill p-6;
+  --vertical-margin: 50px;
+
+  @apply mx-auto w-full sm:w-75% md:w-50% max-w-4xl rounded-lg bg-skin-fill p-6;
+  margin-top: var(--vertical-margin);
+  margin-bottom: var(--vertical-margin);
+  max-height: calc(100% - 2 * var(--vertical-margin));
+}
+
+@media (min-width: 768px) {
+  .search-container {
+    --vertical-margin: 150px;
+  }
+}
+
+.search-container .text-hint {
+  @apply @apply text-center p-3 opacity-70;
 }
 
 .search-container input {
-    @apply px-6 py-3 w-full text-black rounded;
+  @apply px-6 py-3 w-full text-black rounded mb-6;
+}
+
+.search-container .results {
+  @apply overflow-y-auto;
+}
+
+.search-container .results a {
+  @apply transition-all block px-6 py-3 rounded bg-white bg-opacity-5 font-medium mb-3 border border-transparent;
+}
+
+.search-container .results a.selected {
+  @apply border-white;
+}
+
+.search-container .results a:hover {
+  @apply bg-opacity-10;
 }
 </style>
