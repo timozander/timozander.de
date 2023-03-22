@@ -5,7 +5,7 @@ export const SITE = {
   author: "Timo Zander",
   desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
   title: "Timo Zander",
-  ogImage: "astropaper-og.jpg",
+  ogImage: "og-image.jpg",
   lightAndDarkMode: false,
   postPerPage: 30,
   recentPostCount: 3,

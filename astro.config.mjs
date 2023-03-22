@@ -8,16 +8,22 @@ import vue from "@astrojs/vue";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astro-paper.pages.dev/",
-  integrations: [UnoCSS(), sitemap(), vue()],
-  markdown: {
-    remarkPlugins: [remarkToc, [remarkCollapse, {
-      test: "Table of contents"
-    }]],
-    shikiConfig: {
-      theme: "one-dark-pro",
-      wrap: true
-    },
-    extendDefaultPlugins: true
-  }
+	site: "https://astro-paper.pages.dev/",
+	integrations: [UnoCSS(), sitemap(), vue()],
+	markdown: {
+		remarkPlugins: [
+			remarkToc,
+			[
+				remarkCollapse,
+				{
+					test: "Table of contents",
+				},
+			],
+		],
+		shikiConfig: {
+			theme: "material-ocean",
+			wrap: true,
+		},
+		extendDefaultPlugins: true,
+	},
 });

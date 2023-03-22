@@ -3,7 +3,6 @@ import Fuse from "fuse.js";
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 import type { SearchInformation } from "./Search";
 
-// TODO fixme
 const isVisible = ref(false);
 const searchInput = ref("");
 const selectedItemIndex = ref(-1);
@@ -51,7 +50,7 @@ onMounted(() => {
     if (e.key === "Enter" && selectedItemIndex.value !== -1) {
       const selectedItem = searchResults.value[selectedItemIndex.value];
 
-      window.location.href = `/posts/${selectedItem.item.slug}`;
+      window.location.href = `/blog/${selectedItem.item.slug}`;
     }
   });
 });
@@ -86,10 +85,6 @@ const fuse = new Fuse(props.searchData, {
 const searchResults = computed(() => {
   return fuse.search<SearchInformation>(searchInput.value);
 });
-
-const sluggify = (post: SearchInformation) => {
-  return `/posts/${post.slug}`;
-};
 </script>
 <template>
   <div class="search-overlay" @click.self="isVisible = false" v-if="isVisible">
@@ -121,7 +116,7 @@ const sluggify = (post: SearchInformation) => {
           v-for="(r, index) in searchResults"
           ref="resultItems"
           :class="{ selected: index === selectedItemIndex }"
-          :href="`/posts/${r.item.slug}`"
+          :href="`/blog/${r.item.slug}`"
         >
           {{ r.item.title }}
           <span class="block pt-1 text-md font-normal opacity-60">{{

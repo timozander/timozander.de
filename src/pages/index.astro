@@ -9,10 +9,12 @@ import Card from "@components/Card.astro";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import { SITE, SOCIALS } from "@config";
+import PostsList from "@components/posts/PostsList.astro";
 
 const posts = await getCollection("blog");
+const externalPosts = await getCollection("externalPosts");
 
-const sortedPosts = getSortedPosts(posts);
+const sortedPosts = getSortedPosts(posts, externalPosts);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 
@@ -48,23 +50,9 @@ const email = SOCIALS.filter(s => s.name === "Mail")[0]!!;
     <Hr />
     <section id="recent-posts">
       <h2>Discover my recent posts</h2>
-      <ul>
-        {
-          sortedPosts
-            .slice(0, SITE.recentPostCount)
-            .map(({ slug, data }) => (
-              <Card
-                href={`/posts/${slug}`}
-                title={data.title}
-                description={data.description}
-                pubDatetime={data.pubDatetime}
-                secHeading={false}
-              />
-            ))
-        }
-      </ul>
+      <PostsList posts={sortedPosts.slice(0, SITE.recentPostCount)} />
       <div class="all-posts-btn-wrapper">
-        <LinkButton href="/posts">
+        <LinkButton href="/blog">
           Read more
           <i class="i-ph-arrow-right"></i>
         </LinkButton>

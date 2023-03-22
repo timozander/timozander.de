@@ -12,7 +12,7 @@ export interface Props {
 
 const { post } = Astro.props;
 
-const { title, author, description, ogImage, pubDatetime, tags } = post.data;
+const { title, author, description, ogImage, date, tags } = post.data;
 
 const { Content } = await post.render();
 
@@ -24,23 +24,27 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
   <Header />
   <div class="mx-auto flex w-full max-w-5xl justify-start px-2">
     <button
-      class="focus-outline mt-8 mb-2 flex hover:opacity-75"
+      class="focus-outline mt-8 mb-5 flex hover:opacity-75"
       onclick="history.back()"
     >
-      <svg xmlns="http://www.w3.org/2000/svg"
-        ><path
-          d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
-        ></path>
-      </svg><span>Go back</span>
+      <i class="i-ph-caret-left mt-1 mr-1"></i>
+      <span>All posts</span>
     </button>
   </div>
   <main id="main-content">
     <h1 class="post-title">{title}</h1>
-    <TimeDisplay datetime={pubDatetime} size="lg" class="my-2" />
+    <TimeDisplay datetime={date} size="lg" class="my-2" />
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-5xl">
       <Content />
     </article>
 
+    <button
+      class="focus-outline mt-12 text-skin-muted flex hover:opacity-75"
+      onclick="history.back()"
+    >
+      <i class="i-ph-caret-left mt-1 mr-1"></i>
+      <span>More posts</span>
+    </button>
     <ul class="tags-container">
       {tags.map(tag => <Tag name={tag} />)}
     </ul>
@@ -56,6 +60,6 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
     @apply text-5xl font-semibold text-skin-accent;
   }
   .tags-container {
-    @apply my-8;
+    @apply mb-8;
   }
 </style>

@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from "astro:content";
+import PostLink from "./PostLink.astro";
+
+interface Props {
+  posts: (CollectionEntry<"blog"> | CollectionEntry<"externalPosts">)[];
+}
+
+const { posts } = Astro.props;
+---
+
+<ul>
+  {
+    posts.map(({ slug, data, body }) => {
+      let link = `/blog/${slug}`;
+
+      let source = "source" in data ? data.source : undefined;
+
+      if (source && body.length > 0) {
+        link = body;
+      }
+
+      return (
+        <PostLink
+          href={link}
+          title={data.title}
+          date={data.date}
+          source={source}
+        />
+      );
+    })
+  }
+</ul>

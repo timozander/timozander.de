@@ -4,7 +4,7 @@ import Hr from "@components/Hr.astro";
 
 import logoPNG from "/assets/logo.png";
 
-export type ActiveNavValues = "posts" | "tags" | "about" | "search";
+export type ActiveNavValues = "blog" | "tags" | "about" | "search";
 export interface Props {
   activeNav?: ActiveNavValues;
 }
@@ -20,7 +20,7 @@ const { activeNav } = Astro.props;
         {
           LOGO_IMAGE.enable ? (
             <img
-              src={LOGO_IMAGE.svg ? logoSVG : logoPNG}
+              src={logoPNG}
               alt="AstroPaper Logo"
               width={LOGO_IMAGE.width}
               height={LOGO_IMAGE.height}
@@ -45,8 +45,8 @@ const { activeNav } = Astro.props;
         </button>
         <ul id="menu-items" class="display-none !sm:flex">
           <li>
-            <a href="/posts" class={activeNav === "posts" ? "active" : ""}>
-              Posts
+            <a href="/blog" class={activeNav === "blog" ? "active" : ""}>
+              Blog
             </a>
           </li>
           <li>

@@ -4,22 +4,46 @@ import TimeDisplay from "@components/TimeDisplay.astro";
 interface Props {
   title: string;
   href: string;
-  pubDatetime: Date;
+  date: Date;
+  source?: string;
 }
-const { title, href, description, secHeading, pubDatetime } = Astro.props;
+const { title, href, date, source } = Astro.props;
 ---
 
-<li class="my-6">
-  <a href={href} class="inline-block text-lg font-medium">
-    <h2 class="text-xl mb-1 font-medium decoration-dashed hover:underline">
+<li class="my-7">
+  <a
+    href={href}
+    target={!!source ? "_blank" : "_self"}
+    class="inline-block text-lg font-medium mb-1"
+  >
+    {
+      !!source && (
+        <>
+          <span class="source transition-all text-skin-muted inline-block text-xs bg-white bg-opacity-10 rounded px-2 py-0.5">
+            {source}
+            <i class="i-ph-arrow-square-out mb-1 ml-1" />
+          </span>
+          <br />
+        </>
+      )
+    }
+    <h2 class="text-xl font-medium decoration-dashed inline">
       {title}
     </h2>
   </a>
-  <TimeDisplay datetime={pubDatetime} />
+  <TimeDisplay datetime={date} />
 </li>
 
 <style>
   a {
     @apply text-skin-accent;
+  }
+
+  a:hover .source {
+    @apply bg-opacity-20;
+  }
+
+  a:hover h2 {
+    @apply underline;
   }
 </style>

@@ -1,15 +1,12 @@
 ---
-import Card from "@components/Card.astro";
-import LinkButton from "@components/LinkButton.astro";
-import RssButton from "@components/media/RssButton.astro";
-import PostLink from "@components/posts/PostLink.astro";
+import PostsList from "@components/posts/PostsList.astro";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
 
 export interface Props {
   pageNum: number;
   totalPages: number;
-  posts: CollectionEntry<"blog">[];
+  posts: PostType[];
 }
 
 const { pageNum, totalPages, posts } = Astro.props;
@@ -19,28 +16,18 @@ const next = pageNum < totalPages ? "" : "disabled";
 ---
 
 <BaseLayout
-  title="Posts"
+  title="Blog"
   description="Read my thoughts on various tech-related topics."
-  activeNav="posts"
+  activeNav="blog"
 >
-  <ul>
-    {
-      posts.map(({ slug, data }) => (
-        <PostLink
-          href={`/posts/${slug}`}
-          title={data.title}
-          pubDatetime={data.pubDatetime}
-        />
-      ))
-    }
-  </ul>
+  <PostsList posts={posts} />
 
   {
     totalPages > 1 && (
       <nav class="pagination-wrapper" aria-label="Pagination">
         <LinkButton
           disabled={prev === "disabled"}
-          href={`/posts${pageNum - 1 !== 1 ? "/" + (pageNum - 1) : ""}`}
+          href={`/blog${pageNum - 1 !== 1 ? "/" + (pageNum - 1) : ""}`}
           className={`mr-4 select-none ${prev}`}
           ariaLabel="Previous"
         >
@@ -49,7 +36,7 @@ const next = pageNum < totalPages ? "" : "disabled";
         </LinkButton>
         <LinkButton
           disabled={next === "disabled"}
-          href={`/posts/${pageNum + 1}`}
+          href={`/blog/${pageNum + 1}`}
           className={`ml-4 select-none ${next}`}
           ariaLabel="Next"
         >

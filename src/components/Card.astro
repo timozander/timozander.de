@@ -5,27 +5,22 @@ interface Props {
   title: string;
   href: string;
   description: string;
-  secHeading?: boolean;
-  pubDatetime: Date;
+  date: Date;
 }
-const { title, href, description, secHeading, pubDatetime } = Astro.props;
+const { title, href, description, date } = Astro.props;
 ---
 
 <li class="my-6">
   <a href={href} class="inline-block text-lg font-medium">
     {
-      secHeading ? (
-        <h2 class="text-lg font-medium decoration-dashed hover:underline">
-          {title}
-        </h2>
-      ) : (
+      (
         <h3 class="text-lg font-medium decoration-dashed hover:underline">
           {title}
         </h3>
       )
     }
   </a>
-  <TimeDisplay datetime={pubDatetime} />
+  <TimeDisplay datetime={date} />
   <p>{description}</p>
 </li>
 

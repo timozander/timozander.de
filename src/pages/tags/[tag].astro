@@ -39,10 +39,10 @@ const tagPosts = getPostsByTag(posts, tag);
     {
       tagPosts.map(({ slug, data }) => (
         <Card
-          href={`/posts/${slug}`}
+          href={`/blog/${slug}`}
           title={data.title}
           description={data.description}
-          pubDatetime={data.pubDatetime}
+          pubDatetime={data.date}
         />
       ))
     }

@@ -1,9 +1,8 @@
 ---
 author: Sat Naing
-pubDatetime: 2022-09-23T15:22:00Z
+date: 2022-09-23T15:22:00Z
 title: Adding new posts in AstroPaper theme
-featured: true
-draft: false
+draft: true
 tags:
   - docs
 ogImage: ""

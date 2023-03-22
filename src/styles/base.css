@@ -91,7 +91,6 @@ svg.icon-tabler {
   @apply text-justify;
 }
 
-/* TODO fix table */
 .prose table td,
 .prose table th {
   @apply border-solid border-1 border-skin-line;
