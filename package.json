@@ -20,7 +20,7 @@
     "@astrojs/vue": "^2.0.1",
     "@fontsource/fira-code": "^4.5.13",
     "@fontsource/rubik": "^4.5.14",
-    "astro": "^2.0.8",
+    "astro": "^2.1.4",
     "fuse.js": "^6.6.2",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^8.0.1",
