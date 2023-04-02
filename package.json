@@ -12,7 +12,6 @@
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "cz": "cz",
-    "prepare": "husky install",
     "lint": "eslint ."
   },
   "dependencies": {
