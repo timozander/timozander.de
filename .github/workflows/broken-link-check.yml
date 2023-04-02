@@ -8,11 +8,26 @@ on:
   
 name: Broken Link Check
 jobs:
-  check:
-    name: Broken Link Check
+  broken-link-checker:
     runs-on: ubuntu-latest
     steps:
-    - name: Broken Link Check
-      uses: technote-space/broken-link-checker-action@v2
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get GH Pages URL
+        id: gh_pages_url
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            let result = await github.request('GET /repos/:owner/:repo/pages', {
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            console.log(result.data.html_url);
+            return result.data.html_url
+          result-encoding: string
+
+      - name: Check broken links
+        uses: ruzickap/action-my-broken-link-checker@v2
+        with:
+          url: ${{ steps.gh_pages_url.outputs.result }}
+          cmd_params: '--buffer-size=8192 --max-connections=10 --color=always --header="User-Agent:curl/7.54.0" --timeout=20'
