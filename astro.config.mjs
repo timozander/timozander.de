@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
+import rehypeExternalLinks from 'rehype-external-links'
 import sitemap from "@astrojs/sitemap";
 import UnoCSS from "unocss/astro";
 // https://astro.build/config
@@ -8,7 +9,7 @@ import vue from "@astrojs/vue";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://astro-paper.pages.dev/",
+	site: "https://timozander.de/",
 	integrations: [UnoCSS(), sitemap(), vue()],
 	markdown: {
 		remarkPlugins: [
@@ -20,6 +21,7 @@ export default defineConfig({
 				},
 			],
 		],
+		rehypeExternalLinks,
 		shikiConfig: {
 			theme: "material-ocean",
 			wrap: true,

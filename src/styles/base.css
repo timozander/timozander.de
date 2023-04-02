@@ -136,3 +136,11 @@ html {
 #main-content {
   @apply max-w-5xl mx-auto px-4;
 }
+
+
+.prose hr {
+  @apply border-solid border-0 border-b-1 mx-50 border-skin-line;
+}
+.prose hr::before {
+  content:'....';
+}

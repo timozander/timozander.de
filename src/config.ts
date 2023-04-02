@@ -23,7 +23,7 @@ export const SOCIALS: SocialObjects = [
   {
     name: "Mail",
     iconName: "i-ph-envelope",
-    href: "mailto:yourmail@gmail.com",
+    href: "mailto:timo@timozander.de",
     linkTitle: `Send an email to ${SITE.title}`,
     active: true,
   },
