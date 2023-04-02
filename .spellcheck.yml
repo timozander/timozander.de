@@ -9,7 +9,8 @@ matrix:
   pipeline:
   - pyspelling.filters.markdown:
       markdown_extensions:
-      - markdown.extensions.extra:
+      - markdown.extensions.extra
+      - pymdownx.superfences
   - pyspelling.filters.html:
       comments: false
       ignores:
