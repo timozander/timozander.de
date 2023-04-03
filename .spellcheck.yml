@@ -18,5 +18,6 @@ matrix:
       - code
       - pre
   sources:
-  - '**/*.md|!externalPosts/*|!README.md'
+  - '**/*.md'
+  - '!(externalPosts/.*|README.md)'
   default_encoding: utf-8
