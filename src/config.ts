@@ -3,7 +3,7 @@ import type { SocialObjects } from "./types";
 export const SITE = {
   website: "https://astro-paper.pages.dev/",
   author: "Timo Zander",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  desc: "Hey, my name is Timo Zander. I am a software developer and write about all things tech.",
   title: "Timo Zander",
   ogImage: "og-image.jpg",
   lightAndDarkMode: false,
@@ -18,7 +18,6 @@ export const LOGO_IMAGE = {
   height: 46,
 };
 
-// TODO add email
 export const SOCIALS: SocialObjects = [
   {
     name: "Mail",
