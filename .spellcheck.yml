@@ -11,13 +11,19 @@ matrix:
       markdown_extensions:
       - markdown.extensions.extra
       - pymdownx.superfences
-  - pyspelling.filters.url:
   - pyspelling.filters.html:
       comments: false
       ignores:
       - code
       - pre
+  - pyspelling.filters.context:
+      delimiters:
+      # Ignore multiline content in frontmatter (frontmatter has 3 dashes)
+      - open: '(?s)^(?P<open> *\-{3,})$'
+        close: '^(?P=open)$'
+  - pyspelling.filters.url:
   sources:
-  - '**/*.md'
-  - '!(externalPosts/.*|README.md)'
+  - '**/*.md|!**/externalPosts/*|!README.md'
+  # - 'src/(!externalPosts|**))/**/*.md'
+  # - '**/*.md|!(externalPosts/**/*|README.md)'
   default_encoding: utf-8
