@@ -16,6 +16,31 @@ const props = defineProps<{
   searchData: SearchInformation[];
 }>();
 
+const generateHref = (item: SearchInformation) => {
+  if (item.externalSource) {
+    return item.externalSource;
+  } else {
+    return `/blog/${item.slug}`;
+  }
+};
+
+const openItem = (item: SearchInformation) => {
+  if (item.externalSource) {
+    const anchor = document.createElement("a");
+    Object.assign(anchor, {
+      target: "_blank",
+      rel: "noopener noreferrer",
+      href: item.externalSource,
+    }).click();
+
+    anchor.remove();
+  } else {
+    window.location.href = `/blog/${item.slug}`;
+  }
+
+  isVisible.value = false;
+};
+
 onMounted(() => {
   window.addEventListener("search", () => {
     isVisible.value = true;
@@ -50,7 +75,7 @@ onMounted(() => {
     if (e.key === "Enter" && selectedItemIndex.value !== -1) {
       const selectedItem = searchResults.value[selectedItemIndex.value];
 
-      window.location.href = `/blog/${selectedItem.item.slug}`;
+      openItem(selectedItem.item);
     }
   });
 });
@@ -116,12 +141,20 @@ const searchResults = computed(() => {
           v-for="(r, index) in searchResults"
           ref="resultItems"
           :class="{ selected: index === selectedItemIndex }"
-          :href="`/blog/${r.item.slug}`"
+          :target="r.item.externalSource ? '_blank' : '_self'"
+          :href="generateHref(r.item)"
+          @click.prevent="openItem(r.item)"
         >
           {{ r.item.title }}
-          <span class="block pt-1 text-md font-normal opacity-60">{{
-            r.item.description
-          }}</span>
+          <span
+            v-if="r.item.description"
+            class="block pt-1 text-md font-normal opacity-60"
+            >{{ r.item.description }}</span
+          >
+          <i
+            class="i-ph-arrow-square-out mb-1 ml-1"
+            v-else-if="r.item.externalSource"
+          />
         </a>
       </div>
     </div>

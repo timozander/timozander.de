@@ -1,17 +1,21 @@
 ---
+import getSortedPosts from "@utils/getSortedPosts";
 import { getCollection } from "astro:content";
 import type { SearchInformation } from "./Search";
 import SearchOverlay from "./SearchOverlay.vue";
 
 // Retrieve all articles
-const posts = await getCollection("blog", ({ data }) => !data.draft);
+const posts = await getCollection("blog");
+const externalPosts = await getCollection("externalPosts");
+const sortedPosts = getSortedPosts(posts, externalPosts);
 
 // List of items to search in
-const searchData = posts.map(
-  ({ slug, data }) =>
+const searchData = sortedPosts.map(
+  ({ slug, data, body }) =>
     ({
       title: data.title,
-      description: data.description,
+      description: "description" in data ? data.description : "",
+      externalSource: "source" in data ? body : null,
       slug: slug,
     } as SearchInformation)
 );

@@ -1,6 +1,6 @@
-import type { BlogFrontmatter } from "@content/_schemas";
-
-export type SearchInformation = Pick<
-  BlogFrontmatter,
-  "title" | "description"
-> & { slug: string };
+export type SearchInformation = {
+  title: string;
+  description?: string;
+  slug: string;
+  externalSource?: string;
+};
