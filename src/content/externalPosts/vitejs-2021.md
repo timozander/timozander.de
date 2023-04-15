@@ -1,6 +1,6 @@
 ---
 source: heise Developer
-title: "Vite.js: Blazing fast build tool from Vue.js foundry"
+title: "Vite.js: Blazing fast build tool by the Vue.js foundry"
 date: 2021-02-23
 language: de
 ---
