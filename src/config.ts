@@ -5,6 +5,7 @@ export const SITE = {
   author: "Timo Zander",
   desc: "Hey, my name is Timo Zander. I am a software developer and write about all things tech.",
   title: "Timo Zander",
+  metaTitle: "Timo Zander — Cologne-based Software Developer",
   ogImage: "og-image.jpg",
   lightAndDarkMode: false,
   postPerPage: 30,

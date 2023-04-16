@@ -21,7 +21,7 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
 ---
 
 <Layout title={title} author={author} description={description} ogImage={ogUrl}>
-  <Header />
+  <Header activeNav={"blog"} />
   <div class="mx-auto flex w-full max-w-5xl justify-start px-2">
     <button
       class="focus-outline mt-8 mb-5 flex hover:opacity-75"
