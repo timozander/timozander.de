@@ -9,6 +9,10 @@ TypeScript
 Senacor
 RStV
 TMG
+multistep
+XAMPP
+naïve
+pre
 
 ProseLayout
 astro
