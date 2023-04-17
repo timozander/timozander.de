@@ -5,6 +5,7 @@ import Footer from "@components/sections/Footer.astro";
 import Tag from "@components/Tag.astro";
 import type { CollectionEntry } from "astro:content";
 import TimeDisplay from "@components/TimeDisplay.astro";
+import { getReadingTime } from "@utils/getReadingTime";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -18,6 +19,8 @@ const { Content } = await post.render();
 
 const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
   .href;
+
+const readTime = getReadingTime(post.body);
 ---
 
 <Layout title={title} author={author} description={description} ogImage={ogUrl}>
@@ -33,7 +36,17 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
   </div>
   <main id="main-content">
     <h1 class="post-title">{title}</h1>
-    <TimeDisplay datetime={date} size="lg" class="my-2" />
+    <div class="flex gap-2 items-center">
+      <TimeDisplay
+        datetime={date}
+        size="lg"
+        class="my-2 text-lg! opacity-100!"
+      />
+      <p>—</p>
+      <p>
+        {readTime} minute{readTime != 2 ? "s" : ""} to read
+      </p>
+    </div>
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-5xl">
       <Content />
     </article>
@@ -57,7 +70,7 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
     @apply mx-auto w-full max-w-5xl px-4 pb-12;
   }
   .post-title {
-    @apply text-5xl font-semibold text-skin-accent;
+    @apply text-5xl font-semibold text-skin-accent text-justify;
   }
   .tags-container {
     @apply mb-8;

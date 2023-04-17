@@ -10,11 +10,11 @@ Last year, I took the plunge and gave IT courses at the [closest German equivale
 In essence, they are:
 
 - [Getting to know the average user](#getting-to-know-the-average-user)
-- [More concise language](#more-concise-language)
+- [Honing your language skills](#honing-your-language-skills)
 - [Learning to teach](#learning-to-teach)
 
 
-You find more details below.
+Continue reading to learn more about my personal experiences.
 
 ___
 
@@ -36,17 +36,15 @@ So, as a developer, make sure to
 
 Especially multistep registration or activation forms can benefit from having optional "Got stuck? Click here for help"-prompts that will prevent user frustration.
 
-## More concise language
+## Honing your language skills
 
-The only people I normally talk about tech with are programmers or at least have a strong interest in tech. So it is easy to fall into the trap of over-relying on technical terms, jargon and acronyms. Especially when English is not their native language, programmers often end up communicating in a weird mix between English terms and -- in my case -- German prose. My excuse has always been that using such terms helps me to be less verbose and more precise. But that's not true. It's just a **lazy way of communicating**.
+The only people I normally talk about tech with are programmers or at least techies at heart. So I often fall into the trap of over-relying on technical terms, jargon and acronyms. Especially since English is not my native language, I end up communicating in a weird mix between English terms and -- in my case -- German prose. My excuse has always been that using such terms helps me to be less verbose and more precise. But that's not true. It's just a **lazy way of communicating**.
 
 Don't get me wrong, there is nothing wrong with being lazy while communicating. Not every chat you have with coworkers needs to be a deeply insightful and well-crafted conversation. The goal is to first and foremost get your point across. But when you are teaching, you need to be concise and clear. You need to be able to explain complex concepts in a way that is easy to understand *without* using some specific terms. And especially when students ask questions about some feature's background, that's not easy. 
 
-For example, many questions about some more advanced features of the WordPress block editor require knowledge about HTML. I suggest you to **not** fall into the trap of saying "Sorry, the answer requires too much background knowledge and is out-of-scope". Instead, try to give some idea about the why and how. 
+For example, many questions about more advanced features of the WordPress block editor require knowledge about HTML. I suggest you to **not** fall into the trap of saying "Sorry, the answer requires too much background knowledge and is out-of-scope". Instead, try to give some idea about the why and how. There is actually a lot to learn from those "X explained in 3 minutes" videos. Many of them do a great job at compressing complex topics into a condensed video. And this brevity is really needed to not lose your students in the midst of a lengthy explanation. 
 
-<!-- TODO add more here about concise language -->
-
-
+My tip is to look up some explainers on YouTube for topics that you are familiar with and pay attention to how they explain things, but also to where corners were cut and where not.
 
 ## Learning to teach
 
@@ -56,4 +54,4 @@ One of my mistakes was consistently **underestimated the time** needed for any t
 
 In my other course, the first lesson was basically spent to set up all the student's local environments. For WordPress I decided to use [XAMPP](https://www.apachefriends.org/de/index.html) with some pre-bundled WordPress installation. My naïve assumption was that this would work out smoothly, but the issues were endless: work computers without the privilege to install software, Mac users (for which I wasn't prepared), students that had issues just sharing their screen with me, etc.
 
-Surprisingly, explaining many of the technical concepts worked out quite well. I made heavy use of metaphors, similes and used popular and widespread websites as examples. For example, teaching CSS could heavily rely on interactive playgrounds and visual demos. 
+Surprisingly, explaining many of the technical concepts worked out quite well. I made heavy use of metaphors, similes and used popular and widespread websites as demonstration. For example, teaching CSS can heavily rely on interactive playgrounds and visual demos. 
