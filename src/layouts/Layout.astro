@@ -12,6 +12,7 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export interface Props {
   title?: string;
+  metaTitle?: string;
   author?: string;
   description?: string;
   ogImage?: string;
@@ -19,6 +20,7 @@ export interface Props {
 
 const {
   title = SITE.title,
+  metaTitle = SITE.metaTitle,
   author = SITE.author,
   description = SITE.desc,
   ogImage = SITE.ogImage,
@@ -45,7 +47,7 @@ const fallbackImageURL = new URL(SITE.ogImage, Astro.url.origin).href;
 
     <!-- General Meta Tags -->
     <title>{title}</title>
-    <meta name="title" content={title} />
+    <meta name="title" content={metaTitle} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
 

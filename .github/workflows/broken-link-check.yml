@@ -1,17 +1,18 @@
 on:
-    schedule:
-      - cron: 0 0 * * SUN # every monday
-    repository_dispatch: # run manually
-      types: [check-link]
-    push:
-      branches: [ main ]
-  
+  schedule:
+    - cron: 0 0 * * SUN # every monday
+  repository_dispatch: # run manually
+    types: [check-link]
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
 name: Broken Link Check
 jobs:
   broken-link-checker:
     runs-on: ubuntu-latest
     steps:
-
       - name: Get GH Pages URL
         id: gh_pages_url
         uses: actions/github-script@v5

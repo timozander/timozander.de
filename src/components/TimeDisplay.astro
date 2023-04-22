@@ -16,11 +16,11 @@ const date = myDatetime.toLocaleDateString([], {
 });
 ---
 
-<div class={`flex items-center space-x-2 opacity-80 ${cssClass}`}>
+<div class={`flex items-center space-x-2 opacity-80 text-sm ${cssClass}`}>
   <i class="i-ph-calendar-blank"></i>
 
   <span class="sr-only">Posted on:</span>
-  <span class="text-sm">
+  <span>
     {date}
   </span>
 </div>
