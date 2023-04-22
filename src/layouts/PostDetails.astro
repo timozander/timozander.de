@@ -17,8 +17,7 @@ const { title, author, description, ogImage, date, tags } = post.data;
 
 const { Content } = await post.render();
 
-const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
-  .href;
+const ogUrl = ogImage ? new URL(ogImage).href : undefined;
 
 const readTime = getReadingTime(post.body);
 ---
