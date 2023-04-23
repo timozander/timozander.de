@@ -142,8 +142,5 @@ html {
 }
 
 .prose hr {
-  @apply border-solid border-0 border-b-1 mx-50 border-skin-line;
-}
-.prose hr::before {
-  content: "....";
+  @apply border-solid border-0 border-b-2 mx-25 md:mx-50 border-skin-line;
 }

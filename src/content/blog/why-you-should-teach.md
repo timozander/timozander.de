@@ -59,3 +59,4 @@ ___
 
 The added benefit of teaching: You can help people to learn new skills and be more capable when using technology. With the growing [shortage of teachers](https://www.dw.com/en/germanys-schools-are-running-out-of-teachers/a-64541184), especially in STEM, any helping hand is needed. In Germany specially, the level of commitment is quite low, and the pay is tax-free until a certain threshold: So if you got curious, check out your local Community College and see if they need some help.
 
+[Discuss on Hacker News](https://news.ycombinator.com/item?id=35674077)
