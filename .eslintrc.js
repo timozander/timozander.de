@@ -9,6 +9,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
+  plugins: ["jsx-a11y"],
   overrides: [
     {
       files: ["*.astro"],
@@ -20,4 +21,7 @@ module.exports = {
       rules: {},
     },
   ],
+  globals: {
+    JSX: true,
+  },
 };

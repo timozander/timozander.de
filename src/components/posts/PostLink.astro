@@ -1,23 +1,27 @@
 ---
 import TimeDisplay from "@components/TimeDisplay.astro";
+import type { HeadingLevel } from "@types";
 
 interface Props {
   title: string;
   href: string;
   date: Date;
   source?: string;
+  headingLevel?: HeadingLevel;
 }
-const { title, href, date, source } = Astro.props;
+const { title, href, date, source, headingLevel = 2 } = Astro.props;
+
+const HeadingTag = `h${headingLevel}` as keyof JSX.IntrinsicElements;
 ---
 
 <li class="my-7">
   <a
     href={href}
-    target={!!source ? "_blank" : "_self"}
+    target={source ? "_blank" : "_self"}
     class="inline-block text-lg font-medium mb-1"
   >
     {
-      !!source && (
+      source && (
         <>
           <span class="source transition-all text-skin-muted inline-block text-xs bg-white bg-opacity-10 rounded px-2 py-0.5">
             {source}
@@ -27,9 +31,9 @@ const { title, href, date, source } = Astro.props;
         </>
       )
     }
-    <h2 class="text-xl font-medium decoration-dashed inline">
+    <HeadingTag class="text-xl font-medium decoration-dashed inline">
       {title}
-    </h2>
+    </HeadingTag>
   </a>
   <TimeDisplay datetime={date} />
 </li>

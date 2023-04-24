@@ -2,8 +2,6 @@
 import { LOGO_IMAGE, SITE } from "@config";
 import Hr from "@components/Hr.astro";
 
-import logoPNG from "/assets/logo.png";
-
 export type ActiveNavValues = "blog" | "about" | "search";
 export interface Props {
   activeNav?: ActiveNavValues;
@@ -17,18 +15,7 @@ const { activeNav } = Astro.props;
   <div class="nav-container">
     <div class="top-nav-wrap">
       <a href="/" class="logo">
-        {
-          LOGO_IMAGE.enable ? (
-            <img
-              src={logoPNG}
-              alt="Timo Zander Logo"
-              width={LOGO_IMAGE.width}
-              height={LOGO_IMAGE.height}
-            />
-          ) : (
-            SITE.title
-          )
-        }
+        {SITE.title}
       </a>
       <nav id="nav-menu">
         <button
@@ -81,8 +68,6 @@ const { activeNav } = Astro.props;
 
   searchButtons.forEach(button => {
     button.addEventListener("click", () => {
-      const searchInput = document.querySelector(".search-input");
-
       window.dispatchEvent(new Event("search"));
     });
   });
