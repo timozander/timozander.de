@@ -81,8 +81,6 @@ const { activeNav } = Astro.props;
 
   searchButtons.forEach(button => {
     button.addEventListener("click", () => {
-      const searchInput = document.querySelector(".search-input");
-
       window.dispatchEvent(new Event("search"));
     });
   });

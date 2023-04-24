@@ -84,7 +84,6 @@ watch(isVisible, () => {
   if (isVisible.value === true) {
     document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
-    console.log("focus");
 
     nextTick(() => {
       searchBar.value?.focus();

@@ -1,12 +1,14 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import PostLink from "./PostLink.astro";
+import type { HeadingLevel } from "@types";
 
 interface Props {
   posts: (CollectionEntry<"blog"> | CollectionEntry<"externalPosts">)[];
+  headingLevel?: HeadingLevel;
 }
 
-const { posts } = Astro.props;
+const { posts, headingLevel = 2 } = Astro.props;
 ---
 
 <ul>
@@ -26,6 +28,7 @@ const { posts } = Astro.props;
           title={data.title}
           date={data.date}
           source={source}
+          headingLevel={headingLevel}
         />
       );
     })
