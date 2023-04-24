@@ -6,6 +6,8 @@ import Tag from "@components/Tag.astro";
 import type { CollectionEntry } from "astro:content";
 import TimeDisplay from "@components/TimeDisplay.astro";
 import { getReadingTime } from "@utils/getReadingTime";
+import { SITE } from "@config";
+import { generatePageTitle } from "@utils/generatePageTitle";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -22,7 +24,12 @@ const ogUrl = ogImage ? new URL(ogImage, Astro.url.origin).href : undefined;
 const readTime = getReadingTime(post.body);
 ---
 
-<Layout title={title} author={author} description={description} ogImage={ogUrl}>
+<Layout
+  title={generatePageTitle(title)}
+  author={author}
+  description={description}
+  ogImage={ogUrl}
+>
   <Header activeNav={"blog"} />
   <div class="mx-auto flex w-full max-w-5xl justify-start px-2">
     <button
