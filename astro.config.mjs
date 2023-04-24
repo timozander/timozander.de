@@ -4,13 +4,21 @@ import remarkCollapse from "remark-collapse";
 import rehypeExternalLinks from "rehype-external-links";
 import sitemap from "@astrojs/sitemap";
 import UnoCSS from "unocss/astro";
-// https://astro.build/config
 import vue from "@astrojs/vue";
+import compress from "astro-compress";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://timozander.de/",
-  integrations: [UnoCSS(), sitemap(), vue()],
+  integrations: [
+    UnoCSS(),
+    sitemap(),
+    vue(),
+    compress({
+      css: true,
+      html: false,
+    }),
+  ],
   markdown: {
     remarkPlugins: [
       remarkToc,
