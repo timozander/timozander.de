@@ -1,4 +1,5 @@
 ---
+import { Schema } from "astro-seo-schema";
 import SearchContainer from "@components/search/SearchContainer.astro";
 import { SITE } from "@config";
 
@@ -51,6 +52,16 @@ const fallbackImageURL = new URL(SITE.ogImage, Astro.url.origin).href;
     <meta name="title" content={metaTitle} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
+
+    <!-- Google -->
+    <Schema
+      item={{
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: SITE.author,
+        url: SITE.website,
+      }}
+    />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={title} />

@@ -19,6 +19,9 @@ dependencies:
   astro-compress:
     specifier: ^1.1.42
     version: 1.1.42
+  astro-seo-schema:
+    specifier: ^2.0.0
+    version: 2.0.0(astro@2.1.9)(typescript@5.0.4)
   fuse.js:
     specifier: ^6.6.2
     version: 6.6.2
@@ -1904,6 +1907,17 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /astro-seo-schema@2.0.0(astro@2.1.9)(typescript@5.0.4):
+    resolution: {integrity: sha512-VMsoQr/v4VN3wLiVm4czfabQlQOKOVim45rwcYWVTuLZuksnE848F1GqejqSaUrCqVrUd8n31p6gLgS2yghw3A==}
+    peerDependencies:
+      astro: ^2.0.0
+    dependencies:
+      astro: 2.1.9(@types/node@18.15.11)
+      schema-dts: 1.1.2(typescript@5.0.4)
+    transitivePeerDependencies:
+      - typescript
+    dev: false
 
   /astro@2.1.9(@types/node@18.15.11):
     resolution: {integrity: sha512-UkbG0lgue1b/t4yMI+AkAGEfdOwcPS2RUYQ/QIurtKjP6W5gtKQveRTBuHH7iwiBziH+z8Ecc5/OAALoXSvMlQ==}
@@ -6220,6 +6234,14 @@ packages:
   /sax@1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
     dev: true
+
+  /schema-dts@1.1.2(typescript@5.0.4):
+    resolution: {integrity: sha512-MpNwH0dZJHinVxk9bT8XUdjKTxMYrA5bLtrrGmFA6PTLwlOKnhi67XoRd6/ty+Djt6ZC0slR57qFhZDNMI6DhQ==}
+    peerDependencies:
+      typescript: '>=4.1.0'
+    dependencies:
+      typescript: 5.0.4
+    dev: false
 
   /section-matter@1.0.0:
     resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
