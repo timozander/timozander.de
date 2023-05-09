@@ -1,5 +1,5 @@
 ---
-title: Creating a server on Hetzner Cloud using Pulumi
+title: Managing infrastructure on Hetzner Cloud using Pulumi
 description: How to use Pulumi to create and provision new servers on Hetzner Cloud, to later deploy a Docker application.
 draft: false
 date: 2023-05-09
