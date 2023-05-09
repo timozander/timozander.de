@@ -240,6 +240,4 @@ After the successful creation of your server, all that is left to do is to ssh i
       docker image prune -f
 ```
 
-
-
-[You find the full source code on my GitHub repository](https://github.com/timozander/pulumi-hcloud-docker-example)
+Feel free to contact me if you run into any troubles. I am by no means an expert on this, but I spent enough hours suffering through issues myself. [You find the full source code on my GitHub repository](https://github.com/timozander/pulumi-hcloud-docker-example)
