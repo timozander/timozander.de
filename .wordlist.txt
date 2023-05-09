@@ -16,6 +16,17 @@ pre
 Pulumi
 Hetzner
 hcloud
+Terraform
+UI
+SDK
+subdirectories
+Jitsi
+IPs
+js
+runtime
+VPS
+IPv
+hacky
 
 ProseLayout
 astro
