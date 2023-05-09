@@ -13,6 +13,24 @@ multistep
 XAMPP
 naïve
 pre
+Pulumi
+Pulumi's
+Hetzner
+hcloud
+Terraform
+UI
+SDK
+subdirectories
+Jitsi
+IPs
+js
+runtime
+VPS
+IPv
+hacky
+DNS
+Nginx
+CLI
 
 ProseLayout
 astro
