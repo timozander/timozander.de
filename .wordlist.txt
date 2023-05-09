@@ -14,6 +14,7 @@ XAMPP
 naïve
 pre
 Pulumi
+Pulumi's
 Hetzner
 hcloud
 Terraform
@@ -27,6 +28,9 @@ runtime
 VPS
 IPv
 hacky
+DNS
+Nginx
+CLI
 
 ProseLayout
 astro
