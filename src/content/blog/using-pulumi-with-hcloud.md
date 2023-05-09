@@ -2,10 +2,10 @@
 title: Creating a server on Hetzner Cloud using Pulumi
 description: How to use Pulumi to create and provision new servers on Hetzner Cloud, to later deploy a Docker application.
 draft: false
-date: 2023-05-25
+date: 2023-05-09
 ---
 
-[Hetzner](https://www.hetzner.com/) has always been my go-to VPS provider. For one side project, I wanted to try out [Hetzner Cloud](https://www.hetzner.com/cloud) (hcloud) since I needed to very spontaneously spin up and down servers. [Pulumi](https://www.pulumi.com/) has also been on my radar for a while now, so I decided to combine both. My previous experience with _Infrastructure as Code_ was basically zero, so I had to learn a lot. This post is a summary of what I learned and how I set up the infrastructure for my particular project.
+[Hetzner](https://www.hetzner.com/) has always been my go-to VPS provider. For one side project, I wanted to try out [Hetzner Cloud](https://www.hetzner.com/cloud) (hcloud) since I needed to spontaneously spin up and down servers. [Pulumi](https://www.pulumi.com/) has also been on my radar for a while now, so I decided to combine both. My previous experience with _Infrastructure as Code_ was basically zero, so I had to learn a lot. This post is a summary of what I learned and how I set up the infrastructure for my particular project.
 
 - [My goal](#my-goal)
 - [Preparing the server environment](#preparing-the-server-environment)
@@ -89,7 +89,7 @@ if (config.getBoolean("create_ip")) {
 
 ```
 
-Furthermore, I generated a fresh SSH key that I will use for the Pulumi provisioning, but also linked already existing keys to the server. This way, I can conveniently access it after its provisioning. In the Hetzner Cloud Console, you can add Labels to your keys, so that they can be specifically queried here.
+Furthermore, I generated a fresh SSH key that I will use for the Pulumi provisioning, but also linked already existing keys to the server. This way, I can conveniently access it after its provisioning. In the Hetzner Cloud Console, you can add labels to your keys, so that they can be specifically queried here.
 
 ```ts
 // Get all SSH keys that should be assigned to server
@@ -142,7 +142,7 @@ const server = new hcloud.Server("server", {
 });
 ```
 
-Each Pulumi resource needs a unique identifier. For the server, I just used `server`. Those names are only used to identify resources _within_ stacks, not across. So as long as there is only one server resource within your infrastructure, it is perfectly fine to give it a simple name. Keep it mind that those names will also be shown in user-facing outputs. A good name can therefore help to understand which specific resource is causing an error. Also, Pulumi usually uses the given identifier to [name the physical resources](https://www.pulumi.com/docs/intro/concepts/resources/names/#autonaming) at your cloud provider.
+Each Pulumi resource needs a unique identifier. For the server, I just used `server`. Those names are only used to identify resources _within_ stacks, not across. So as long as there is only one server resource within your infrastructure, it is perfectly fine to give it a simple name. Keep in mind that those names will also be shown in user-facing outputs. A good name can therefore help to understand which specific resource is causing an error. Also, Pulumi usually uses the given identifier to [name the physical resources](https://www.pulumi.com/docs/intro/concepts/resources/names/#autonaming) at your cloud provider.
 
 
 ## Preparing the Docker registry
@@ -184,7 +184,7 @@ Here you can nicely observe [Pulumi's Output concept](https://www.pulumi.com/doc
 
 ## Uploading configuration files
 
-I wanted to upload my `user_conf.d` directory for my Nginx server, too. Since this does not change all that often, deploying it with every new version seemed unnecessary. Unfortunately, the `remote.CopyFile` resource that I used to upload the `docker-compose.yml` does not allow for uploading directories (there is [an open issue](https://github.com/pulumi/pulumi-command/issues/23) though). 
+I wanted to upload my `user_conf.d` directory for my Nginx server, too. Since this does not change all that often, deploying it with every new version seemed unnecessary. Unfortunately, the `remote.CopyFile` resource that I used to upload the `docker-compose.yml` does not allow for uploading directories (there is [an open issue](https://github.com/pulumi/pulumi-command/issues/23)). 
 
 ```ts
 // Install necessary software and pull container
