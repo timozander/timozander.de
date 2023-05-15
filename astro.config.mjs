@@ -12,7 +12,9 @@ export default defineConfig({
   site: "https://timozander.de/",
   integrations: [
     UnoCSS(),
-    sitemap(),
+    sitemap({
+      filter: page => !page.match(/\/blog\/\d+\//),
+    }),
     vue(),
     compress({
       css: true,
