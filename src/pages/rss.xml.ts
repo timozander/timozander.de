@@ -9,7 +9,7 @@ export async function get() {
     description: SITE.desc,
     site: SITE.website,
     items: posts.map(({ slug, data }) => ({
-      link: `blog/${slug}`,
+      link: `blog/${slug}/`,
       title: data.title,
       description: data.description,
       pubDate: new Date(data.date),

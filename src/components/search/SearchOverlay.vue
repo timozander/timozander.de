@@ -20,7 +20,7 @@ const generateHref = (item: SearchInformation) => {
   if (item.externalSource) {
     return item.externalSource;
   } else {
-    return `/blog/${item.slug}`;
+    return `/blog/${item.slug}/`;
   }
 };
 
@@ -35,7 +35,7 @@ const openItem = (item: SearchInformation) => {
 
     anchor.remove();
   } else {
-    window.location.href = `/blog/${item.slug}`;
+    window.location.href = `/blog/${item.slug}/`;
   }
 
   isVisible.value = false;

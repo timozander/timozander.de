@@ -14,7 +14,7 @@ const { posts, headingLevel = 2 } = Astro.props;
 <ul>
   {
     posts.map(({ slug, data, body }) => {
-      let link = `/blog/${slug}`;
+      let link = `/blog/${slug}/`;
 
       let source = "source" in data ? data.source : undefined;
 
