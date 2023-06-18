@@ -15,6 +15,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@astrojs/mdx": "^0.19.7",
     "@astrojs/rss": "^2.1.0",
     "@astrojs/vue": "^2.0.1",
     "@fontsource/fira-code": "^4.5.13",

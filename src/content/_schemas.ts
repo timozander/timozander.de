@@ -23,3 +23,12 @@ export const externalPostsSchema = z.object({
 
 export type ExternalPostsFrontmatter = z.infer<typeof externalPostsSchema>;
 export type Language = ExternalPostsFrontmatter["language"];
+
+export const talkSchema = z
+  .object({
+    title: z.string(),
+    date: z.date(),
+    event: z.string(),
+    location: z.string(),
+  })
+  .strict();

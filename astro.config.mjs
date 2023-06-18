@@ -6,11 +6,13 @@ import sitemap from "@astrojs/sitemap";
 import UnoCSS from "unocss/astro";
 import vue from "@astrojs/vue";
 import compress from "astro-compress";
+import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://timozander.de/",
   integrations: [
+    mdx(),
     UnoCSS(),
     sitemap({
       filter: page => !page.match(/\/blog\/\d+\//),
