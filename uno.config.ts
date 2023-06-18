@@ -36,17 +36,16 @@ export default defineConfig({
         base: "rgb(var(--color-text-base))",
         muted: "rgb(var(--color-text-muted))",
         fill: "rgb(var(--color-fill))",
-        accent: "rgb(var(--color-accent))",
+        accent: {
+          base: "rgb(var(--color-accent))",
+          hover: "rgb(var(--color-accent-hover))",
+        },
         line: "rgb(var(--color-border))",
       },
       font: {
         base: '"Open Sans", Helvetica, Arial, sans-serif',
         code: "",
       },
-      // 'skin-base': 'rgb(var(--color-text-base))',
-      // 'skin-accent': 'rgb(var(--color-accent))',
-      // 'skin-fill': 'rgb(var(--color-text-base))',
-      // 'skin-line': 'rgb(var(--color-border))',
     },
   },
 });
