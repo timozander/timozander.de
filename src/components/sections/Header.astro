@@ -75,7 +75,7 @@ const { activeNav } = Astro.props;
 
 <style>
   #skip-to-content {
-    @apply absolute -top-full left-16 z-50 bg-skin-accent py-2 px-3 text-skin-inverted transition-all focus:top-4;
+    @apply absolute -top-full left-16 z-50 bg-skin-accent-base py-2 px-3 text-skin-inverted transition-all focus:top-4;
   }
   .nav-container {
     @apply mx-auto flex max-w-5xl flex-col items-center justify-between sm:flex-row;
@@ -104,21 +104,21 @@ const { activeNav } = Astro.props;
     @apply col-span-2 flex items-center justify-center;
   }
   nav ul li a {
-    @apply w-full px-4 py-3 text-center font-medium hover:text-skin-accent sm:my-0 sm:px-2 sm:py-1;
+    @apply w-full px-4 py-3 text-center font-medium hover:text-skin-accent-base sm:my-0 sm:px-2 sm:py-1;
   }
 
   nav a.active {
     @apply underline decoration-wavy decoration-2 underline-offset-12;
   }
   nav a.active svg {
-    @apply fill-skin-accent;
+    @apply fill-skin-accent-base;
   }
 
   nav button {
     @apply p-1;
   }
   nav button svg {
-    @apply h-6 w-6 fill-skin-base hover:fill-skin-accent;
+    @apply h-6 w-6 fill-skin-base hover:fill-skin-accent-base;
   }
   #theme-btn {
     @apply p-3 sm:p-1;

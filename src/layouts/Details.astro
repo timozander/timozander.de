@@ -1,0 +1,74 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header, { ActiveNavValues } from "@components/sections/Header.astro";
+import Footer from "@components/sections/Footer.astro";
+import Tag from "@components/Tag.astro";
+import type { CollectionEntry } from "astro:content";
+import TimeDisplay from "@components/TimeDisplay.astro";
+import { getReadingTime } from "@utils/getReadingTime";
+import { SITE } from "@config";
+import { generatePageTitle } from "@utils/generatePageTitle";
+
+export interface Props {
+  title: string;
+  metaTitle?: string;
+  author?: string;
+  description?: string;
+  ogImage?: string;
+  date?: Date;
+
+  activeNav?: ActiveNavValues;
+}
+
+const {
+  title,
+  author = SITE.author,
+  description,
+  ogImage,
+  date,
+
+  activeNav,
+} = Astro.props;
+---
+
+<Layout
+  title={generatePageTitle(title)}
+  author={author}
+  description={description}
+  ogImage={ogImage}
+>
+  <Header activeNav={activeNav} />
+
+  <slot name="pre-title" />
+
+  <main id="main-content">
+    <h1 class="post-title">{title}</h1>
+    <div class="flex gap-2 items-center opacity-70">
+      {
+        date ? (
+          <TimeDisplay
+            datetime={date}
+            size="lg"
+            class="my-2 text-lg! opacity-100!"
+          />
+        ) : null
+      }
+
+      <slot name="meta-details" />
+    </div>
+
+    <div class="prose mx-auto mt-8 max-w-5xl">
+      <slot name="content" />
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    @apply mx-auto w-full max-w-5xl px-4 pb-12 pt-8;
+  }
+  .post-title {
+    @apply text-5xl font-semibold text-skin-accent-base;
+  }
+</style>
