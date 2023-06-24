@@ -1,6 +1,6 @@
 ---
 title: 5 Tips for Speaking at conferences for regular people
-description: TODO
+description: Talking at a conference is hard, especially if this is not your main job. Here are my tips for having a successful talk as a normal person.
 draft: false
 date: 2023-06-23
 ---
