@@ -1,19 +1,19 @@
 ---
-title: 5 Tips for Speaking at conferences for regular people
+title: 5 Tips for Speaking at Conferences as a Regular Person
 description: Talking at a conference is hard, especially if this is not your main job. Here are my tips for having a successful talk as a normal person.
 draft: false
-date: 2023-06-23
+date: 2023-06-25
 ---
 
 During the [enterJS conference 2023](https://enterjs.de/), I gave [my second conference talk](/talk/enterjs-astro-2023/) ever. Afterward, a lot of people asked how I got into speaking and what it was like for me to prepare. So I decided to write down some of the tips that I follow while preparing. I do not consider myself a _naturally gifted_ speaker -- therefore, I believe that putting in the work beforehand is necessary for eventually giving a successful talk.
 
 This article _does not_ focus on creating good content, but rather on the act of speaking itself. So here are my tips for that:
 
-- [1. Be careful when submitting your topic](#1-be-careful-when-submitting-your-topic)
-- [2. Craft good slides](#2-craft-good-slides)
-- [3. Find your personal style](#3-find-your-personal-style)
-- [4. Write a script](#4-write-a-script)
-- [5. Practice, practice, practice](#5-practice-practice-practice)
+1. [Be careful when submitting your topic](#1-be-careful-when-submitting-your-topic)
+2. [Craft good slides](#2-craft-good-slides)
+3. [Find your personal style](#3-find-your-personal-style)
+4. [Write a script](#4-write-a-script)
+5. [Practice, practice, practice](#5-practice-practice-practice)
 
 ___ 
 
@@ -37,13 +37,13 @@ There is nothing more awkward than speakers trying to force themselves to be fun
 
 ## 4. Write a script
 
-This might be a controversial one: I personally had good experiences with writing a fully fleshed-out script during an early part of your preparation. The key is to *not* write an essay or an article, but to choose a tone that you feel comfortable speaking in. In the same language that you would use to talk to an interested coworker about your topic. Consider the following example:
+This might be a controversial one: I personally had good experiences with writing a fully fleshed-out script during an early part of your preparation. The key is *not* to write an essay or an article, but to choose a tone that you feel comfortable speaking in. In the same language that you would use to talk to an interested coworker about your topic. Consider the following example:
 
 > I want to let that sink in for a moment, because we developers are sometimes really spoiled by technological progress. We are not just talking about “red flower”-kind of prompts. But about specifics, about positioning, about adjectives, about cultural references. And the results look really amazing.
 
 My advice is to use short sentences with a rather simple structure. Especially when I speak in German, I try to avoid situations where the prefix of a verb is moved to the end of the sentence (_“Darüber denke ich nach”_). You also see a light use of rhetorical devices, such as the enumeration. _Do not_ open a list of such devices, but instead use them intuitively. If you are not sure whether a sentence sounds natural, read it out loud (to a friend). If it sounds weird, it is weird.
 
-The idea is then **not** to learn this script by heart. Instead, I read it a couple of times and then start transforming my main arguments into bullet points. If there is some particularly good simile or reference I wrote, then I keep them in the compressed notes. The same applies to transitions between slides.
+To me, the script is not meant to be learned by heart. Instead, I read it a couple of times and then start transforming my main arguments into bullet points. If there is some particularly good simile or reference I wrote, then I keep them in the compressed notes. The same applies to transitions between slides.
 
 The background is that during early practice sessions, I often had the issue that my attempts were varying heavily in how much I talked about specific points. Consequently, the effective time was very hard to measure and the quality of the talk did not improve that much during practice. A script allows you to mentally fix certain points through the act of writing them down, and then focus on improving the rest.
 
