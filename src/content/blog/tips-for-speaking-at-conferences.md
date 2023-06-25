@@ -9,11 +9,11 @@ During the [enterJS conference 2023](https://enterjs.de/), I gave [my second con
 
 This article _does not_ focus on creating good content, but rather on the act of speaking itself. So here are my tips for that:
 
-1. [Be careful when submitting your topic](#1-be-careful-when-submitting-your-topic)
-2. [Craft good slides](#2-craft-good-slides)
-3. [Find your personal style](#3-find-your-personal-style)
-4. [Write a script](#4-write-a-script)
-5. [Practice, practice, practice](#5-practice-practice-practice)
+- [1. Be careful when submitting your topic](#1-be-careful-when-submitting-your-topic)
+- [2. Craft good slides](#2-craft-good-slides)
+- [3. Find your personal style](#3-find-your-personal-style)
+- [4. Write a script](#4-write-a-script)
+- [5. Practice, practice, practice](#5-practice-practice-practice)
 
 ___ 
 
@@ -21,7 +21,7 @@ ___
 
 A lot of time passes between your topic submission and the actual talk. In my case, there was a three month period between submission and the conference, but that can easily extend up to half a year. This causes several issues.
 
-For once, you can lose interest in the topic. Especially when you present some new technology, 6 months is a long time. The project can take a turn you disagree with, your personal focus could shift -- or the technology could be dead by the time of the talk. Even though a part of this risk is unavoidable, I recommend to only talk about things with **significant momentum**. In the JavaScript world, pay careful attention to how long some framework has been around and how it performs in the yearly questionnaires, such as the [State of JS](https:/stateofjs.com/) or [StackOverflow Developer Survey](https://survey.stackoverflow.co/).
+For once, you can lose interest in the topic. Especially when you present some new technology, 6 months is a long time. The project can take a turn you disagree with, your personal focus could shift -- or the technology could be dead by the time of the talk. Even though a part of this risk is unavoidable, I recommend to only talk about things with **significant momentum**. In the JavaScript world, pay careful attention to how long some framework has been around and how it performs in the yearly questionnaires, such as the [State of JS](https://stateofjs.com/) or [StackOverflow Developer Survey](https://survey.stackoverflow.co/).
 
 If you have to submit an Abstract for your talk, don't make it too specific. Avoid talking about granular content points. Instead, paint a broader picture of what your audience will learn from your talk. This way, you have more flexibility when actually designing and rehearsing the presentation. You will definitely end up repeatedly dumping entire sections and redoing others, so this would create a discrepancy between what you promised and what you deliver. I also strongly recommend to **not** change the Abstract after its submission. Often conference organizers will refuse to do so anyway and it is also unfair to future attendees. *Under-promise and over-deliver*, never the opposite.
 
