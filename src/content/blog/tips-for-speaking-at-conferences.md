@@ -5,7 +5,7 @@ draft: false
 date: 2023-06-23
 ---
 
-During the [enterJS conference 2023](https://enterjs.de/), I gave [my second conference talk](/talk/enterjs-astro-2023/) ever. Afterwards, a lot of people asked how I got into speaking and what it was like for me to prepare. So I decided to write down some of the tips that I follow while preparing. I do not consider myself a _naturally gifted_ speaker -- therefore, I believe that putting in the work beforehand is necessary for eventually giving a successful talk.
+During the [enterJS conference 2023](https://enterjs.de/), I gave [my second conference talk](/talk/enterjs-astro-2023/) ever. Afterward, a lot of people asked how I got into speaking and what it was like for me to prepare. So I decided to write down some of the tips that I follow while preparing. I do not consider myself a _naturally gifted_ speaker -- therefore, I believe that putting in the work beforehand is necessary for eventually giving a successful talk.
 
 This article _does not_ focus on creating good content, but rather on the act of speaking itself. So here are my tips for that:
 
@@ -19,11 +19,11 @@ ___
 
 ## 1. Be careful when submitting your topic
 
-A lot of time passes between your topic submission and the actual talk. In my case, there was a three month period between submission and the conference, but that can easily extend up to half a year. This causes several issues.
+A lot of time passes between your topic submission and the actual talk. In my case, there was a three-month period between submission and the conference, but that can easily extend up to half a year. This causes several issues.
 
 For once, you can lose interest in the topic. Especially when you present some new technology, 6 months is a long time. The project can take a turn you disagree with, your personal focus could shift -- or the technology could be dead by the time of the talk. Even though a part of this risk is unavoidable, I recommend to only talk about things with **significant momentum**. In the JavaScript world, pay careful attention to how long some framework has been around and how it performs in the yearly questionnaires, such as the [State of JS](https://stateofjs.com/) or [StackOverflow Developer Survey](https://survey.stackoverflow.co/).
 
-If you have to submit an Abstract for your talk, don't make it too specific. Avoid talking about granular content points. Instead, paint a broader picture of what your audience will learn from your talk. This way, you have more flexibility when actually designing and rehearsing the presentation. You will definitely end up repeatedly dumping entire sections and redoing others, so this would create a discrepancy between what you promised and what you deliver. I also strongly recommend to **not** change the Abstract after its submission. Often conference organizers will refuse to do so anyway and it is also unfair to future attendees. *Under-promise and over-deliver*, never the opposite.
+If you have to submit an Abstract for your talk, don't make it too specific. Avoid talking about granular content points. Instead, paint a broader picture of what your audience will learn from your talk. This way, you have more flexibility when actually designing and rehearsing the presentation. You will definitely end up repeatedly dumping entire sections and redoing others, so this would create a discrepancy between what you promised and what you deliver. I also strongly recommend to **not** change the Abstract after its submission. Often conference organizers will refuse to do so anyway, and it is also unfair to future attendees. *Under-promise and over-deliver*, never the opposite.
 
 ## 2. Craft good slides
 
@@ -31,7 +31,7 @@ This topic is done to death, but here is my word of warning: If you include code
 
 ## 3. Find your personal style
 
-You can find plenty conference talks online that are extremely entertaining by themselves, regardless of your interest in their contents. These speakers captivate their audiences -- by being funny, engaging and entertaining. However, they are also not you. Keep in mind that _selection bias_ plays a big role here: The majority of *actual* conference talks do not have TED-level quality. They are not supposed to. They are supposed to be informative and interesting, but not necessarily entertaining. **And that is okay.**
+You can find plenty of conference talks online that are extremely entertaining by themselves, regardless of your interest in their contents. These speakers captivate their audiences -- by being funny, engaging and entertaining. However, they are also not you. Keep in mind that _selection bias_ plays a big role here: The majority of *actual* conference talks do not have TED-level quality. They are not supposed to. They are supposed to be informative and interesting, but not necessarily entertaining. **And that is okay.**
 
 There is nothing more awkward than speakers trying to force themselves to be funny by putting memes on their slides or by reading out an overwhelming amount of pre-scripted jokes. Especially when you are nervous, this will rarely work out. Instead, focus on your strengths. If you are a good storyteller, tell a story. If you are good at explaining complex topics in a structured and methodical way, then do that. And **if** you are good at making people laugh, make people laugh. But do not try to be someone you are not.
 
@@ -45,7 +45,7 @@ My advice is to use short sentences with a rather simple structure. Especially w
 
 The idea is then **not** to learn this script by heart. Instead, I read it a couple of times and then start transforming my main arguments into bullet points. If there is some particularly good simile or reference I wrote, then I keep them in my bullet points. The same applies to transitions between slides.
 
-The background is that during early practice session, I often had the issue my attempts were vastly different in how much I talked about specific points. Consequently, the effective time was very hard to determine and the quality of the talk did not improve that much during practice. A script allows you to mentally fix certain points through the act of writing them down.
+The background is that during early practice sessions, I often had the issue my attempts were vastly different in how much I talked about specific points. Consequently, the effective time was very hard to determine and the quality of the talk did not improve that much during practice. A script allows you to mentally fix certain points through the act of writing them down.
 
 ## 5. Practice, practice, practice
 
@@ -57,4 +57,4 @@ When creating the presentation, you will also tremendously underestimate the tim
 
 ___ 
 
-Similarly to [how I advocated for teaching](/blog/why-you-should-teach/), I strongly believe that speaking in “public” is beneficial in many ways. Especially regional conferences present a good opportunity since their audiences are often smaller. Alternatively, if you opt for a larger conference, choose a specific niche that you are interested in that is not already well-covered in their program. Organizers are usually keep their eyes open for interesting submissions that are a little off the beaten track.
+Similarly to [how I advocated for teaching](/blog/why-you-should-teach/), I strongly believe that speaking in “public” is beneficial in many ways. Especially regional conferences present a good opportunity since their audiences are often smaller. Alternatively, if you opt for a larger conference, choose a specific niche that you are interested in that is not already well-covered in their program. Organizers are usually keeping their eyes open for interesting submissions that are a little off the beaten track.
