@@ -37,3 +37,11 @@ astro
 activeNav
 se
 explainers
+
+enterJS
+StackOverflow
+
+Darüber
+denke
+ich
+nach
