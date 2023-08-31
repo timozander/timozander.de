@@ -4,10 +4,10 @@ import SearchContainer from "@components/search/SearchContainer.astro";
 import { SITE } from "@config";
 
 import "@fontsource/fira-code/400.css";
-import "@fontsource/fira-code/variable.css";
+import "@fontsource-variable/fira-code";
 import "@fontsource/rubik/400.css";
-import "@fontsource/rubik/variable.css";
-import "@fontsource/rubik/variable-italic.css";
+import "@fontsource-variable/rubik";
+import "@fontsource-variable/rubik/wght-italic.css";
 import "../styles/base.css";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -38,7 +38,7 @@ const socialImageURL = new URL(
 const fallbackImageURL = new URL(SITE.ogImage, Astro.url.origin).href;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />

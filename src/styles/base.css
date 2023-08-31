@@ -4,8 +4,8 @@
 }
 @supports (font-variation-settings: normal) {
   :root {
-    --font-base: "RubikVariable", Helvetica, Arial, sans-serif;
-    --font-mono: "Fira CodeVariable", "Consolas", monospace;
+    --font-base: "Rubik Variable", Helvetica, Arial, sans-serif;
+    --font-mono: "Fira Code Variable", "Consolas", monospace;
   }
 }
 

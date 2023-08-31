@@ -5,7 +5,6 @@ import rehypeExternalLinks from "rehype-external-links";
 import sitemap from "@astrojs/sitemap";
 import UnoCSS from "unocss/astro";
 import vue from "@astrojs/vue";
-import compress from "astro-compress";
 import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
@@ -13,15 +12,16 @@ export default defineConfig({
   site: "https://timozander.de/",
   integrations: [
     mdx(),
-    UnoCSS(),
+    UnoCSS({
+      injectReset: true,
+      injectEntry: true,
+      
+    }),
     sitemap({
       filter: page => !page.match(/\/blog\/\d+\//),
     }),
     vue(),
-    compress({
-      css: true,
-      html: false,
-    }),
+
   ],
   markdown: {
     remarkPlugins: [
@@ -43,7 +43,7 @@ export default defineConfig({
       ],
     ],
     shikiConfig: {
-      theme: "material-ocean",
+      theme: "material-theme-ocean",
       wrap: true,
     },
     extendDefaultPlugins: true,
