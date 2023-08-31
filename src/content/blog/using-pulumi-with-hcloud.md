@@ -142,7 +142,7 @@ const server = new hcloud.Server("server", {
 });
 ```
 
-Each Pulumi resource needs a unique identifier. For the server, I just used `server`. Those names are only used to identify resources _within_ stacks, not across. So as long as there is only one server resource within your infrastructure, it is perfectly fine to give it a simple name. Keep in mind that those names will also be shown in user-facing outputs. A good name can therefore help to understand which specific resource is causing an error. Also, Pulumi usually uses the given identifier to [name the physical resources](https://www.pulumi.com/docs/intro/concepts/resources/names/#autonaming) at your cloud provider.
+Each Pulumi resource needs a unique identifier. For the server, I just used `server`. Those names are only used to identify resources _within_ stacks, not across. So as long as there is only one server resource within your infrastructure, it is perfectly fine to give it a simple name. Keep in mind that those names will also be shown in user-facing outputs. A good name can therefore help to understand which specific resource is causing an error. Also, Pulumi usually uses the given identifier to [name the physical resources](https://www.pulumi.com/docs/concepts/resources/names) at your cloud provider.
 
 
 ## Preparing the Docker registry
