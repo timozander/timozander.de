@@ -8,7 +8,6 @@ import {
 } from "unocss";
 
 export default defineConfig({
-  shortcuts: [],
   transformers: [transformerDirectives()],
   presets: [
     presetUno(),
