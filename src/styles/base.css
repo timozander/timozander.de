@@ -10,15 +10,15 @@
 }
 
 html[data-theme="dark"] {
-  --color-text-base: 234, 237, 243;
-  --color-text-muted: 192, 201, 219;
-  --color-card: 52, 63, 96;
-  --color-card-muted: 138, 51, 2;
-  --color-border: 90, 93, 132;
+  --color-text-base: 234 237 243;
+  --color-text-muted: 192 201 219;
+  --color-card: 52 63 96;
+  --color-card-muted: 138 51 2;
+  --color-border: 90 93 132;
 
-  --color-fill: 25, 26, 37;
-  --color-accent: 255, 158, 176;
-  --color-accent-hover: 255, 184, 197;
+  --color-fill: 25 26 37;
+  --color-accent: 255 158 176;
+  --color-accent-hover: 255 184 197;
 }
 
 #sun-svg,
