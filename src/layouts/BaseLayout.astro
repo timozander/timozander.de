@@ -1,19 +1,19 @@
 ---
-import { SITE } from "@config";
-import Footer from "@components/sections/Footer.astro";
-import Header, { ActiveNavValues } from "@components/sections/Header.astro";
-import Layout from "./Layout.astro";
-import Breadcrumbs from "@components/Breadcrumbs.astro";
-import { generatePageTitle } from "@utils/generatePageTitle";
+import { SITE } from "@config"
+import Footer from "@components/sections/Footer.astro"
+import Header, { ActiveNavValues } from "@components/sections/Header.astro"
+import Layout from "./Layout.astro"
+import Breadcrumbs from "@components/Breadcrumbs.astro"
+import { generatePageTitle } from "@utils/generatePageTitle"
 
 export interface Props {
-  title: string;
-  description?: string;
-  breadcrumbs?: boolean;
-  activeNav?: ActiveNavValues;
+  title: string
+  description?: string
+  breadcrumbs?: boolean
+  activeNav?: ActiveNavValues
 
-  author?: string;
-  ogImage?: string;
+  author?: string
+  ogImage?: string
 }
 
 const {
@@ -23,7 +23,7 @@ const {
   author,
   ogImage,
   activeNav,
-} = Astro.props;
+} = Astro.props
 ---
 
 <Layout title={generatePageTitle(title)} author={author} ogImage={ogImage}>

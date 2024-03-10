@@ -1,14 +1,14 @@
 export type SocialObjects = {
-  name: SocialMedia;
-  iconName: string;
-  href: string;
-  active: boolean;
-  linkTitle: string;
-}[];
+  name: SocialMedia
+  iconName: string
+  href: string
+  active: boolean
+  linkTitle: string
+}[]
 
 export type SocialIcons = {
-  [social in SocialMedia]: string;
-};
+  [social in SocialMedia]: string
+}
 
 export type SocialMedia =
   | "Github"
@@ -30,6 +30,6 @@ export type SocialMedia =
   | "Skype"
   | "Steam"
   | "Telegram"
-  | "Mastodon";
+  | "Mastodon"
 
-export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6

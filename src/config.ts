@@ -1,4 +1,4 @@
-import type { SocialObjects } from "./types";
+import type { SocialObjects } from "./types"
 
 export const SITE = {
   website: "https://timozander.de/",
@@ -10,14 +10,14 @@ export const SITE = {
   lightAndDarkMode: false,
   postPerPage: 30,
   recentPostCount: 3,
-};
+}
 
 export const LOGO_IMAGE = {
   enable: false,
   svg: true,
   width: 216,
   height: 46,
-};
+}
 
 export const SOCIALS: SocialObjects = [
   {
@@ -46,7 +46,7 @@ export const SOCIALS: SocialObjects = [
     iconName: "i-ph-twitter-logo",
     href: "https://twitter.com/tzdev",
     linkTitle: `${SITE.title} on Twitter`,
-    active: true,
+    active: false,
   },
   {
     name: "Mastodon",
@@ -55,4 +55,4 @@ export const SOCIALS: SocialObjects = [
     linkTitle: `${SITE.title} on Mastodon`,
     active: false,
   },
-];
+]

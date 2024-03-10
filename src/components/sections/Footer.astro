@@ -1,16 +1,16 @@
 ---
-import Hr from "@components/Hr.astro";
-import LinkButton from "@components/LinkButton.astro";
-import RssButton from "@components/media/RssButton.astro";
-import Socials from "@components/Socials.astro";
+import Hr from "@components/Hr.astro"
+import LinkButton from "@components/LinkButton.astro"
+import RssButton from "@components/media/RssButton.astro"
+import Socials from "@components/Socials.astro"
 
-const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear()
 
 export interface Props {
-  noMarginTop?: boolean;
+  noMarginTop?: boolean
 }
 
-const { noMarginTop = false } = Astro.props;
+const { noMarginTop = false } = Astro.props
 ---
 
 <footer class={`${noMarginTop ? "" : "mt-auto"}`}>

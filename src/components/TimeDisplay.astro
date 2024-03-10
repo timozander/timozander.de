@@ -1,19 +1,19 @@
 ---
 export interface Props {
-  datetime: string | Date;
-  size?: "sm" | "lg";
-  class?: string;
+  datetime: string | Date
+  size?: "sm" | "lg"
+  class?: string
 }
 
-const { datetime, class: cssClass } = Astro.props;
+const { datetime, class: cssClass } = Astro.props
 
-const myDatetime = new Date(datetime);
+const myDatetime = new Date(datetime)
 
 const date = myDatetime.toLocaleDateString("en-UK", {
   year: "numeric",
   month: "long",
   day: "numeric",
-});
+})
 ---
 
 <div class={`flex items-center space-x-2 opacity-80 text-sm ${cssClass}`}>

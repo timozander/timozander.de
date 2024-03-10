@@ -1,15 +1,15 @@
 ---
-type HTMLAttributeAnchorTarget = "_self" | "_blank" | "_parent" | "_top";
+type HTMLAttributeAnchorTarget = "_self" | "_blank" | "_parent" | "_top"
 
-export type ButtonType = "primary" | "default";
+export type ButtonType = "primary" | "default"
 interface Props {
-  href: string;
-  className?: string;
-  ariaLabel?: string;
-  type?: ButtonType;
-  title?: string;
-  disabled?: boolean;
-  target?: HTMLAttributeAnchorTarget;
+  href: string
+  className?: string
+  ariaLabel?: string
+  type?: ButtonType
+  title?: string
+  disabled?: boolean
+  target?: HTMLAttributeAnchorTarget
 }
 
 const {
@@ -20,7 +20,7 @@ const {
   target = undefined,
   disabled = false,
   type = "default",
-} = Astro.props;
+} = Astro.props
 ---
 
 <a

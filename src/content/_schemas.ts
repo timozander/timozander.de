@@ -1,4 +1,4 @@
-import { z } from "astro:content";
+import { z } from "astro:content"
 
 export const blogSchema = z
   .object({
@@ -10,19 +10,19 @@ export const blogSchema = z
     ogImage: z.string().optional(),
     description: z.string(),
   })
-  .strict();
+  .strict()
 
-export type BlogFrontmatter = z.infer<typeof blogSchema>;
+export type BlogFrontmatter = z.infer<typeof blogSchema>
 
 export const externalPostsSchema = z.object({
   source: z.string(),
   title: z.string(),
   language: z.union([z.literal("en"), z.literal("de")]),
   date: z.date(),
-});
+})
 
-export type ExternalPostsFrontmatter = z.infer<typeof externalPostsSchema>;
-export type Language = ExternalPostsFrontmatter["language"];
+export type ExternalPostsFrontmatter = z.infer<typeof externalPostsSchema>
+export type Language = ExternalPostsFrontmatter["language"]
 
 export const talkSchema = z
   .object({
@@ -31,4 +31,4 @@ export const talkSchema = z
     event: z.string(),
     location: z.string(),
   })
-  .strict();
+  .strict()

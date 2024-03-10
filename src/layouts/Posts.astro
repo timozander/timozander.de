@@ -1,19 +1,19 @@
 ---
-import LinkButton from "@components/LinkButton.astro";
-import PostsList from "@components/posts/PostsList.astro";
-import type { CollectionEntry } from "astro:content";
-import BaseLayout from "./BaseLayout.astro";
+import LinkButton from "@components/LinkButton.astro"
+import PostsList from "@components/posts/PostsList.astro"
+import type { CollectionEntry } from "astro:content"
+import BaseLayout from "./BaseLayout.astro"
 
 export interface Props {
-  pageNum: number;
-  totalPages: number;
-  posts: (CollectionEntry<"blog"> | CollectionEntry<"externalPosts">)[];
+  pageNum: number
+  totalPages: number
+  posts: (CollectionEntry<"blog"> | CollectionEntry<"externalPosts">)[]
 }
 
-const { pageNum, totalPages, posts } = Astro.props;
+const { pageNum, totalPages, posts } = Astro.props
 
-const prev = pageNum > 1 ? "" : "disabled";
-const next = pageNum < totalPages ? "" : "disabled";
+const prev = pageNum > 1 ? "" : "disabled"
+const next = pageNum < totalPages ? "" : "disabled"
 ---
 
 <BaseLayout

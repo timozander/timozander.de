@@ -1,11 +1,11 @@
-import { SOCIALS } from "./src/config";
+import { SOCIALS } from "./src/config"
 import {
   defineConfig,
   presetIcons,
   presetTypography,
   presetUno,
   transformerDirectives,
-} from "unocss";
+} from "unocss"
 
 export default defineConfig({
   transformers: [transformerDirectives()],
@@ -28,7 +28,7 @@ export default defineConfig({
       },
     }),
   ],
-  safelist: [...SOCIALS.map(i => i.iconName)],
+  safelist: [...SOCIALS.map((i) => i.iconName)],
   theme: {
     colors: {
       skin: {
@@ -47,4 +47,4 @@ export default defineConfig({
       },
     },
   },
-});
+})

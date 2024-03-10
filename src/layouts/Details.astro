@@ -1,23 +1,23 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import Header, { ActiveNavValues } from "@components/sections/Header.astro";
-import Footer from "@components/sections/Footer.astro";
-import Tag from "@components/Tag.astro";
-import type { CollectionEntry } from "astro:content";
-import TimeDisplay from "@components/TimeDisplay.astro";
-import { getReadingTime } from "@utils/getReadingTime";
-import { SITE } from "@config";
-import { generatePageTitle } from "@utils/generatePageTitle";
+import Layout from "@layouts/Layout.astro"
+import Header, { ActiveNavValues } from "@components/sections/Header.astro"
+import Footer from "@components/sections/Footer.astro"
+import Tag from "@components/Tag.astro"
+import type { CollectionEntry } from "astro:content"
+import TimeDisplay from "@components/TimeDisplay.astro"
+import { getReadingTime } from "@utils/getReadingTime"
+import { SITE } from "@config"
+import { generatePageTitle } from "@utils/generatePageTitle"
 
 export interface Props {
-  title: string;
-  metaTitle?: string;
-  author?: string;
-  description?: string;
-  ogImage?: string;
-  date?: Date;
+  title: string
+  metaTitle?: string
+  author?: string
+  description?: string
+  ogImage?: string
+  date?: Date
 
-  activeNav?: ActiveNavValues;
+  activeNav?: ActiveNavValues
 }
 
 const {
@@ -28,7 +28,7 @@ const {
   date,
 
   activeNav,
-} = Astro.props;
+} = Astro.props
 ---
 
 <Layout

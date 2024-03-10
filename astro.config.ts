@@ -1,11 +1,11 @@
-import { defineConfig } from "astro/config";
-import remarkToc from "remark-toc";
-import remarkCollapse from "remark-collapse";
-import rehypeExternalLinks from "rehype-external-links";
-import sitemap from "@astrojs/sitemap";
-import UnoCSS from "unocss/astro";
-import vue from "@astrojs/vue";
-import mdx from "@astrojs/mdx";
+import { defineConfig } from "astro/config"
+import remarkToc from "remark-toc"
+import remarkCollapse from "remark-collapse"
+import rehypeExternalLinks from "rehype-external-links"
+import sitemap from "@astrojs/sitemap"
+import UnoCSS from "unocss/astro"
+import vue from "@astrojs/vue"
+import mdx from "@astrojs/mdx"
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,13 +15,11 @@ export default defineConfig({
     UnoCSS({
       injectReset: true,
       injectEntry: true,
-      
     }),
     sitemap({
-      filter: page => !page.match(/\/blog\/\d+\//),
+      filter: (page) => !page.match(/\/blog\/\d+\//),
     }),
     vue(),
-
   ],
   markdown: {
     remarkPlugins: [
@@ -48,4 +46,4 @@ export default defineConfig({
     },
     extendDefaultPlugins: true,
   },
-});
+})
