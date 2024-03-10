@@ -4,8 +4,8 @@ import PostLink from "./PostLink.astro";
 import type { HeadingLevel } from "@types";
 
 interface Props {
-  posts: (CollectionEntry<"blog"> | CollectionEntry<"externalPosts">)[];
-  headingLevel?: HeadingLevel;
+	posts: (CollectionEntry<"blog"> | CollectionEntry<"externalPosts">)[];
+	headingLevel?: HeadingLevel;
 }
 
 const { posts, headingLevel = 2 } = Astro.props;

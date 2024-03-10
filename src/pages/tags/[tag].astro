@@ -6,21 +6,21 @@ import getPostsByTag from "@utils/getPostsByTag";
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 export interface Props {
-  post: CollectionEntry<"blog">;
-  tag: string;
+	post: CollectionEntry<"blog">;
+	tag: string;
 }
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+	const posts = await getCollection("blog");
 
-  const tags = getUniqueTags(posts);
+	const tags = getUniqueTags(posts);
 
-  return tags.map(tag => {
-    return {
-      params: { tag },
-      props: { tag },
-    };
-  });
+	return tags.map((tag) => {
+		return {
+			params: { tag },
+			props: { tag },
+		};
+	});
 }
 
 const { tag } = Astro.props;

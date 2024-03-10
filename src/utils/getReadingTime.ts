@@ -1,10 +1,10 @@
 const WORDS_PER_MINUTE = 200;
 
 export function getReadingTime(content: string) {
-  if (!content) return;
+	if (!content) return;
 
-  const clean = content.replace(/<\/?[^>]+(>|$)/g, "");
-  const numberOfWords = clean.split(/\s/g).length;
+	const clean = content.replace(/<\/?[^>]+(>|$)/g, "");
+	const numberOfWords = clean.split(/\s/g).length;
 
-  return Math.ceil(numberOfWords / WORDS_PER_MINUTE);
+	return Math.ceil(numberOfWords / WORDS_PER_MINUTE);
 }

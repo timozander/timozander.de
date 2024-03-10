@@ -3,11 +3,11 @@ import TimeDisplay from "@components/TimeDisplay.astro";
 import type { HeadingLevel } from "@types";
 
 interface Props {
-  title: string;
-  href: string;
-  date: Date;
-  source?: string;
-  headingLevel?: HeadingLevel;
+	title: string;
+	href: string;
+	date: Date;
+	source?: string;
+	headingLevel?: HeadingLevel;
 }
 const { title, href, date, source, headingLevel = 2 } = Astro.props;
 

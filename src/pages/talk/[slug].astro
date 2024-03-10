@@ -11,16 +11,16 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import Details from "@layouts/Details.astro";
 
 export interface Props {
-  talk: CollectionEntry<"talks">;
+	talk: CollectionEntry<"talks">;
 }
 
 export async function getStaticPaths() {
-  const talks = await getCollection("talks");
+	const talks = await getCollection("talks");
 
-  return talks.map(talk => ({
-    params: { slug: talk.slug },
-    props: { talk },
-  }));
+	return talks.map((talk) => ({
+		params: { slug: talk.slug },
+		props: { talk },
+	}));
 }
 
 const { slug } = Astro.params;

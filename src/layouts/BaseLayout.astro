@@ -7,22 +7,22 @@ import Breadcrumbs from "@components/Breadcrumbs.astro";
 import { generatePageTitle } from "@utils/generatePageTitle";
 
 export interface Props {
-  title: string;
-  description?: string;
-  breadcrumbs?: boolean;
-  activeNav?: ActiveNavValues;
+	title: string;
+	description?: string;
+	breadcrumbs?: boolean;
+	activeNav?: ActiveNavValues;
 
-  author?: string;
-  ogImage?: string;
+	author?: string;
+	ogImage?: string;
 }
 
 const {
-  title,
-  breadcrumbs = true,
-  description,
-  author,
-  ogImage,
-  activeNav,
+	title,
+	breadcrumbs = true,
+	description,
+	author,
+	ogImage,
+	activeNav,
 } = Astro.props;
 ---
 

@@ -9,43 +9,41 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://timozander.de/",
-  integrations: [
-    mdx(),
-    UnoCSS({
-      injectReset: true,
-      injectEntry: true,
-      
-    }),
-    sitemap({
-      filter: page => !page.match(/\/blog\/\d+\//),
-    }),
-    vue(),
-
-  ],
-  markdown: {
-    remarkPlugins: [
-      remarkToc,
-      [
-        remarkCollapse,
-        {
-          test: "Table of contents",
-        },
-      ],
-    ],
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          rel: ["noreferrer", "noopener"],
-          target: "_blank",
-        },
-      ],
-    ],
-    shikiConfig: {
-      theme: "material-theme-ocean",
-      wrap: true,
-    },
-    extendDefaultPlugins: true,
-  },
+	site: "https://timozander.de/",
+	integrations: [
+		mdx(),
+		UnoCSS({
+			injectReset: true,
+			injectEntry: true,
+		}),
+		sitemap({
+			filter: (page) => !page.match(/\/blog\/\d+\//),
+		}),
+		vue(),
+	],
+	markdown: {
+		remarkPlugins: [
+			remarkToc,
+			[
+				remarkCollapse,
+				{
+					test: "Table of contents",
+				},
+			],
+		],
+		rehypePlugins: [
+			[
+				rehypeExternalLinks,
+				{
+					rel: ["noreferrer", "noopener"],
+					target: "_blank",
+				},
+			],
+		],
+		shikiConfig: {
+			theme: "material-theme-ocean",
+			wrap: true,
+		},
+		extendDefaultPlugins: true,
+	},
 });

@@ -13,26 +13,26 @@ import "../styles/base.css";
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export interface Props {
-  title?: string;
-  metaTitle?: string;
-  author?: string;
-  description?: string;
-  ogImage?: string;
+	title?: string;
+	metaTitle?: string;
+	author?: string;
+	description?: string;
+	ogImage?: string;
 }
 
 const {
-  title = SITE.metaTitle,
-  metaTitle = SITE.metaTitle,
-  author = SITE.author,
-  description = SITE.desc,
-  ogImage = SITE.ogImage,
+	title = SITE.metaTitle,
+	metaTitle = SITE.metaTitle,
+	author = SITE.author,
+	description = SITE.desc,
+	ogImage = SITE.ogImage,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const socialImageURL = new URL(
-  ogImage ? ogImage : SITE.ogImage,
-  Astro.url.origin
+	ogImage ? ogImage : SITE.ogImage,
+	Astro.url.origin,
 ).href;
 
 const fallbackImageURL = new URL(SITE.ogImage, Astro.url.origin).href;

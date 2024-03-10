@@ -3,13 +3,13 @@ import type { ActiveNavValues } from "@components/sections/Header.astro";
 import BaseLayout from "./BaseLayout.astro";
 
 export interface Props {
-  frontmatter: {
-    title: string;
-    id?: string;
-    description?: string;
-    breadcrumbs?: boolean;
-    activeNav?: ActiveNavValues;
-  };
+	frontmatter: {
+		title: string;
+		id?: string;
+		description?: string;
+		breadcrumbs?: boolean;
+		activeNav?: ActiveNavValues;
+	};
 }
 
 const { frontmatter } = Astro.props;

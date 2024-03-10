@@ -5,9 +5,9 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
 
 export interface Props {
-  pageNum: number;
-  totalPages: number;
-  posts: (CollectionEntry<"blog"> | CollectionEntry<"externalPosts">)[];
+	pageNum: number;
+	totalPages: number;
+	posts: (CollectionEntry<"blog"> | CollectionEntry<"externalPosts">)[];
 }
 
 const { pageNum, totalPages, posts } = Astro.props;

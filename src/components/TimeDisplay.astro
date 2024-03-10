@@ -1,8 +1,8 @@
 ---
 export interface Props {
-  datetime: string | Date;
-  size?: "sm" | "lg";
-  class?: string;
+	datetime: string | Date;
+	size?: "sm" | "lg";
+	class?: string;
 }
 
 const { datetime, class: cssClass } = Astro.props;
@@ -10,9 +10,9 @@ const { datetime, class: cssClass } = Astro.props;
 const myDatetime = new Date(datetime);
 
 const date = myDatetime.toLocaleDateString("en-UK", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
+	year: "numeric",
+	month: "long",
+	day: "numeric",
 });
 ---
 

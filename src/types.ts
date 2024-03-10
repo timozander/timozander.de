@@ -1,35 +1,35 @@
 export type SocialObjects = {
-  name: SocialMedia;
-  iconName: string;
-  href: string;
-  active: boolean;
-  linkTitle: string;
+	name: SocialMedia;
+	iconName: string;
+	href: string;
+	active: boolean;
+	linkTitle: string;
 }[];
 
 export type SocialIcons = {
-  [social in SocialMedia]: string;
+	[social in SocialMedia]: string;
 };
 
 export type SocialMedia =
-  | "Github"
-  | "Facebook"
-  | "Instagram"
-  | "LinkedIn"
-  | "Mail"
-  | "Twitter"
-  | "Twitch"
-  | "YouTube"
-  | "WhatsApp"
-  | "Snapchat"
-  | "Pinterest"
-  | "TikTok"
-  | "CodePen"
-  | "Discord"
-  | "GitLab"
-  | "Reddit"
-  | "Skype"
-  | "Steam"
-  | "Telegram"
-  | "Mastodon";
+	| "Github"
+	| "Facebook"
+	| "Instagram"
+	| "LinkedIn"
+	| "Mail"
+	| "Twitter"
+	| "Twitch"
+	| "YouTube"
+	| "WhatsApp"
+	| "Snapchat"
+	| "Pinterest"
+	| "TikTok"
+	| "CodePen"
+	| "Discord"
+	| "GitLab"
+	| "Reddit"
+	| "Skype"
+	| "Steam"
+	| "Telegram"
+	| "Mastodon";
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
