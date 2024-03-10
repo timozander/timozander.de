@@ -1,24 +1,24 @@
 ---
-import getSortedPosts from "@utils/getSortedPosts";
-import { getCollection } from "astro:content";
-import type { SearchInformation } from "./Search";
-import SearchOverlay from "./SearchOverlay.vue";
+import getSortedPosts from "@utils/getSortedPosts"
+import { getCollection } from "astro:content"
+import type { SearchInformation } from "./Search"
+import SearchOverlay from "./SearchOverlay.vue"
 
 // Retrieve all articles
-const posts = await getCollection("blog");
-const externalPosts = await getCollection("externalPosts");
-const sortedPosts = getSortedPosts(posts, externalPosts);
+const posts = await getCollection("blog")
+const externalPosts = await getCollection("externalPosts")
+const sortedPosts = getSortedPosts(posts, externalPosts)
 
 // List of items to search in
 const searchData = sortedPosts.map(
-	({ slug, data, body }) =>
-		({
-			title: data.title,
-			description: "description" in data ? data.description : "",
-			externalSource: "source" in data ? body : null,
-			slug: slug,
-		}) as SearchInformation,
-);
+  ({ slug, data, body }) =>
+    ({
+      title: data.title,
+      description: "description" in data ? data.description : "",
+      externalSource: "source" in data ? body : null,
+      slug: slug,
+    }) as SearchInformation,
+)
 ---
 
 <SearchOverlay client:idle searchData={searchData} />

@@ -1,32 +1,32 @@
 ---
-import { CollectionEntry, getCollection } from "astro:content";
-import Posts from "@layouts/Posts.astro";
-import PostDetails from "@layouts/PostDetails.astro";
-import getSortedPosts from "@utils/getSortedPosts";
-import getPageNumbers from "@utils/getPageNumbers";
-import { SITE } from "@config";
-import { generatePageTitle } from "@utils/generatePageTitle";
-import Layout from "@layouts/Layout.astro";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import Details from "@layouts/Details.astro";
+import { CollectionEntry, getCollection } from "astro:content"
+import Posts from "@layouts/Posts.astro"
+import PostDetails from "@layouts/PostDetails.astro"
+import getSortedPosts from "@utils/getSortedPosts"
+import getPageNumbers from "@utils/getPageNumbers"
+import { SITE } from "@config"
+import { generatePageTitle } from "@utils/generatePageTitle"
+import Layout from "@layouts/Layout.astro"
+import BaseLayout from "@layouts/BaseLayout.astro"
+import Details from "@layouts/Details.astro"
 
 export interface Props {
-	talk: CollectionEntry<"talks">;
+  talk: CollectionEntry<"talks">
 }
 
 export async function getStaticPaths() {
-	const talks = await getCollection("talks");
+  const talks = await getCollection("talks")
 
-	return talks.map((talk) => ({
-		params: { slug: talk.slug },
-		props: { talk },
-	}));
+  return talks.map((talk) => ({
+    params: { slug: talk.slug },
+    props: { talk },
+  }))
 }
 
-const { slug } = Astro.params;
-const { talk } = Astro.props;
+const { slug } = Astro.params
+const { talk } = Astro.props
 
-const { Content } = await talk.render();
+const { Content } = await talk.render()
 ---
 
 <Details title={talk.data.title} date={talk.data.date}>

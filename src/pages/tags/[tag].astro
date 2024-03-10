@@ -1,33 +1,33 @@
 ---
-import { CollectionEntry, getCollection } from "astro:content";
-import Card from "@components/Card.astro";
-import getUniqueTags from "@utils/getUniqueTags";
-import getPostsByTag from "@utils/getPostsByTag";
-import BaseLayout from "@layouts/BaseLayout.astro";
+import { CollectionEntry, getCollection } from "astro:content"
+import Card from "@components/Card.astro"
+import getUniqueTags from "@utils/getUniqueTags"
+import getPostsByTag from "@utils/getPostsByTag"
+import BaseLayout from "@layouts/BaseLayout.astro"
 
 export interface Props {
-	post: CollectionEntry<"blog">;
-	tag: string;
+  post: CollectionEntry<"blog">
+  tag: string
 }
 
 export async function getStaticPaths() {
-	const posts = await getCollection("blog");
+  const posts = await getCollection("blog")
 
-	const tags = getUniqueTags(posts);
+  const tags = getUniqueTags(posts)
 
-	return tags.map((tag) => {
-		return {
-			params: { tag },
-			props: { tag },
-		};
-	});
+  return tags.map((tag) => {
+    return {
+      params: { tag },
+      props: { tag },
+    }
+  })
 }
 
-const { tag } = Astro.props;
+const { tag } = Astro.props
 
-const posts = await getCollection("blog", ({ data }) => !data.draft);
+const posts = await getCollection("blog", ({ data }) => !data.draft)
 
-const tagPosts = getPostsByTag(posts, tag);
+const tagPosts = getPostsByTag(posts, tag)
 ---
 
 <BaseLayout

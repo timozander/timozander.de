@@ -1,41 +1,41 @@
 ---
-import { Schema } from "astro-seo-schema";
-import SearchContainer from "@components/search/SearchContainer.astro";
-import { SITE } from "@config";
+import { Schema } from "astro-seo-schema"
+import SearchContainer from "@components/search/SearchContainer.astro"
+import { SITE } from "@config"
 
-import "@fontsource/fira-code/400.css";
-import "@fontsource-variable/fira-code";
-import "@fontsource/rubik/400.css";
-import "@fontsource-variable/rubik";
-import "@fontsource-variable/rubik/wght-italic.css";
-import "../styles/base.css";
+import "@fontsource/fira-code/400.css"
+import "@fontsource-variable/fira-code"
+import "@fontsource/rubik/400.css"
+import "@fontsource-variable/rubik"
+import "@fontsource-variable/rubik/wght-italic.css"
+import "../styles/base.css"
 
-const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION
 
 export interface Props {
-	title?: string;
-	metaTitle?: string;
-	author?: string;
-	description?: string;
-	ogImage?: string;
+  title?: string
+  metaTitle?: string
+  author?: string
+  description?: string
+  ogImage?: string
 }
 
 const {
-	title = SITE.metaTitle,
-	metaTitle = SITE.metaTitle,
-	author = SITE.author,
-	description = SITE.desc,
-	ogImage = SITE.ogImage,
-} = Astro.props;
+  title = SITE.metaTitle,
+  metaTitle = SITE.metaTitle,
+  author = SITE.author,
+  description = SITE.desc,
+  ogImage = SITE.ogImage,
+} = Astro.props
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
 const socialImageURL = new URL(
-	ogImage ? ogImage : SITE.ogImage,
-	Astro.url.origin,
-).href;
+  ogImage ? ogImage : SITE.ogImage,
+  Astro.url.origin,
+).href
 
-const fallbackImageURL = new URL(SITE.ogImage, Astro.url.origin).href;
+const fallbackImageURL = new URL(SITE.ogImage, Astro.url.origin).href
 ---
 
 <!doctype html>

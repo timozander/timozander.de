@@ -1,17 +1,17 @@
-import type { CollectionEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content"
 
 const getUniqueTags = (posts: CollectionEntry<"blog">[]) => {
-	let tags: string[] = [];
-	const filteredPosts = posts.filter(({ data }) => !data.draft);
-	filteredPosts.forEach((post) => {
-		tags = [...tags, ...post.data.tags]
-			.map((tag) => tag.toLowerCase())
-			.filter(
-				(value: string, index: number, self: string[]) =>
-					self.indexOf(value) === index,
-			);
-	});
-	return tags;
-};
+  let tags: string[] = []
+  const filteredPosts = posts.filter(({ data }) => !data.draft)
+  filteredPosts.forEach((post) => {
+    tags = [...tags, ...post.data.tags]
+      .map((tag) => tag.toLowerCase())
+      .filter(
+        (value: string, index: number, self: string[]) =>
+          self.indexOf(value) === index,
+      )
+  })
+  return tags
+}
 
-export default getUniqueTags;
+export default getUniqueTags

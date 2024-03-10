@@ -1,17 +1,17 @@
 ---
-import TimeDisplay from "@components/TimeDisplay.astro";
-import type { HeadingLevel } from "@types";
+import TimeDisplay from "@components/TimeDisplay.astro"
+import type { HeadingLevel } from "@types"
 
 interface Props {
-	title: string;
-	href: string;
-	date: Date;
-	source?: string;
-	headingLevel?: HeadingLevel;
+  title: string
+  href: string
+  date: Date
+  source?: string
+  headingLevel?: HeadingLevel
 }
-const { title, href, date, source, headingLevel = 2 } = Astro.props;
+const { title, href, date, source, headingLevel = 2 } = Astro.props
 
-const HeadingTag = `h${headingLevel}` as keyof JSX.IntrinsicElements;
+const HeadingTag = `h${headingLevel}` as keyof JSX.IntrinsicElements
 ---
 
 <li class="my-7">

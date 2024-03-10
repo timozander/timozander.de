@@ -1,13 +1,13 @@
 ---
-import { SITE } from "@config";
-import Hr from "@components/Hr.astro";
+import { SITE } from "@config"
+import Hr from "@components/Hr.astro"
 
-export type ActiveNavValues = "blog" | "about" | "search";
+export type ActiveNavValues = "blog" | "about" | "search"
 export interface Props {
-	activeNav?: ActiveNavValues;
+  activeNav?: ActiveNavValues
 }
 
-const { activeNav } = Astro.props;
+const { activeNav } = Astro.props
 ---
 
 <header>

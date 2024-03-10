@@ -1,23 +1,23 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
-import Header from "@components/sections/Header.astro";
-import Footer from "@components/sections/Footer.astro";
-import LinkButton from "@components/LinkButton.astro";
-import Hr from "@components/Hr.astro";
-import Socials from "@components/Socials.astro";
-import getSortedPosts from "@utils/getSortedPosts";
-import { SITE, SOCIALS } from "@config";
-import PostsList from "@components/posts/PostsList.astro";
+import { getCollection } from "astro:content"
+import Layout from "@layouts/Layout.astro"
+import Header from "@components/sections/Header.astro"
+import Footer from "@components/sections/Footer.astro"
+import LinkButton from "@components/LinkButton.astro"
+import Hr from "@components/Hr.astro"
+import Socials from "@components/Socials.astro"
+import getSortedPosts from "@utils/getSortedPosts"
+import { SITE, SOCIALS } from "@config"
+import PostsList from "@components/posts/PostsList.astro"
 
-const posts = await getCollection("blog");
-const externalPosts = await getCollection("externalPosts");
+const posts = await getCollection("blog")
+const externalPosts = await getCollection("externalPosts")
 
-const sortedPosts = getSortedPosts(posts, externalPosts);
+const sortedPosts = getSortedPosts(posts, externalPosts)
 
-const socialCount = SOCIALS.filter((social) => social.active).length;
+const socialCount = SOCIALS.filter((social) => social.active).length
 
-const email = SOCIALS.filter((s) => s.name === "Mail")[0]!!;
+const email = SOCIALS.filter((s) => s.name === "Mail")[0]!!
 ---
 
 <Layout>

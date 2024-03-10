@@ -1,5 +1,5 @@
-import { SITE } from "@config";
+import { SITE } from "@config"
 
 export const generatePageTitle = (title: string) => {
-	return `${title} | ${SITE.title}`;
-};
+  return `${title} | ${SITE.title}`
+}
