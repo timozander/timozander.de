@@ -2,7 +2,7 @@
 import { SITE } from "@config"
 import Hr from "@components/Hr.astro"
 
-export type ActiveNavValues = "blog" | "about" | "search"
+export type ActiveNavValues = "blog" | "about" | "projects" | "search"
 export interface Props {
   activeNav?: ActiveNavValues
 }
@@ -39,6 +39,11 @@ const { activeNav } = Astro.props
           <li>
             <a href="/about/" class={activeNav === "about" ? "active" : ""}>
               About
+            </a>
+          </li>
+           <li>
+            <a href="/projects/" class={activeNav === "projects" ? "active" : ""}>
+              Projects
             </a>
           </li>
           <li>
