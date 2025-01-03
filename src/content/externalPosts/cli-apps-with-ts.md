@@ -1,5 +1,5 @@
 ---
-source: Heise
+source: heise
 title: "Creating CLI apps with TypeScript"
 date: 2024-10-15
 language: de
