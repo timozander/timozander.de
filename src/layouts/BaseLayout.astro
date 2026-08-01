@@ -1,53 +1,52 @@
 ---
-import { SITE } from "@config"
-import Footer from "@components/sections/Footer.astro"
-import Header, { ActiveNavValues } from "@components/sections/Header.astro"
-import Layout from "./Layout.astro"
-import Breadcrumbs from "@components/Breadcrumbs.astro"
-import { generatePageTitle } from "@utils/generatePageTitle"
+import Head from "@/components/Head.astro";
+import Header from "@/components/Header.astro";
+import ScrollToTop from "@/components/ScrollToTop.astro";
+import HeadingAnchors from "@/scripts/HeadingAnchors.astro";
 
-export interface Props {
-  title: string
-  description?: string
-  breadcrumbs?: boolean
-  activeNav?: ActiveNavValues
-
-  author?: string
-  ogImage?: string
+interface Props {
+  lang?: string;
+  schema?: Record<string, unknown>;
 }
 
-const {
-  title,
-  breadcrumbs = true,
-  description,
-  author,
-  ogImage,
-  activeNav,
-} = Astro.props
+const { lang = "en", schema } = Astro.props;
 ---
 
-<Layout title={generatePageTitle(title)} author={author} ogImage={ogImage}>
-  <Header activeNav={activeNav} />
-  {breadcrumbs ? <Breadcrumbs /> : <div class="mt-8" />}
-  <main id="main-content">
-    <h1>
-      {title}
-    </h1>
-    {description && <p>{description}</p>}
+<!doctype html>
+<html lang={lang}>
+  <Head schema={schema}>
+    <slot name="seo" slot="seo" />
+    <slot name="head" slot="head" />
+  </Head>
+  <body
+    class="font-content bg-background text-foreground selection:bg-selection"
+  >
+    <Header />
+    <!-- Main content -->
+    <main class="app-layout flex flex-col space-y-8 sm:space-y-10">
+      {/* Page/Post Header Section */}
+      <slot name="header" />
 
-    <slot />
-  </main>
-  <Footer />
-</Layout>
+      {/* Page/Post Meta Section */}
+      <slot name="meta" />
 
-<style>
-  #main-content {
-    @apply mx-auto w-full max-w-5xl px-4 pb-12;
-  }
-  #main-content h1 {
-    @apply text-2xl font-semibold sm:text-3xl;
-  }
-  #main-content p {
-    @apply mt-2 mb-6 text-md;
-  }
-</style>
+      {/* Page/Post Content */}
+      <slot />
+
+      {/* Post Navigation */}
+      <slot name="navigation" />
+
+      {/* Additional Content */}
+      <slot name="after" />
+    </main>
+
+    <slot name="footer" />
+    <!-- <Footer /> -->
+    <ScrollToTop />
+
+    <!-- Additional page-specific scripts -->
+    <slot name="scripts" />
+    <HeadingAnchors />
+    <pagefind-modal></pagefind-modal>
+  </body>
+</html>

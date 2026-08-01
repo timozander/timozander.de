@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from "astro:content";
+import PageLayout from "@/layouts/PageLayout.astro";
+import { getPageSlug, type Page } from "@/utils/content";
+
+export const getStaticPaths = async () => {
+  const RESERVED = new Set(["search", "home-intro"]);
+
+  const allPages = await getCollection(
+    "pages",
+    ({ id, data }) => !data.draft && !RESERVED.has(id),
+  );
+
+  return allPages.map((page) => ({
+    params: {
+      slug: getPageSlug(page.id, page.filePath),
+    },
+    props: {
+      page,
+    },
+  }));
+};
+
+type Props = {
+  page: Page;
+};
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<PageLayout entry={page} showHeader>
+  <div class="app-prose page-content" data-pagefind-body>
+    <meta data-pagefind-filter="collection[content]" content="page" />
+    <Content />
+  </div>
+</PageLayout>

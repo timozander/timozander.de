@@ -1,4 +1,0 @@
-Pulumi
-hcloud
-Hetzner
-Hcloud
