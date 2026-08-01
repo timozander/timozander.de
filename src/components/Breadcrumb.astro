@@ -1,0 +1,91 @@
+---
+import HomeIcon from "@/assets/home.svg";
+
+interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items?: BreadcrumbItem[];
+  currentLabel?: string;
+}
+
+const { items, currentLabel } = Astro.props;
+
+const pathname = Astro.url.pathname;
+
+const segments = pathname.split("/").filter(Boolean);
+
+const pathBreadcrumbs = segments.map((segment, index) => {
+  const href = "/" + segments.slice(0, index + 1).join("/");
+
+  const label = decodeURIComponent(segment)
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+  return {
+    label,
+    href,
+  };
+});
+
+const breadcrumbs =
+  items && items.length > 0
+    ? currentLabel
+      ? [
+          ...items,
+          {
+            label: currentLabel,
+            href: pathname,
+          },
+        ]
+      : items
+    : pathBreadcrumbs;
+---
+
+{
+  breadcrumbs.length > 0 && (
+    <nav
+      aria-label="Breadcrumb"
+      class="text-muted-foreground font-ui my-8 flex flex-wrap items-center gap-2 text-xs"
+    >
+      <a
+        href="/"
+        class="hover:text-foreground flex items-center gap-1 transition-colors"
+      >
+        <HomeIcon class="text-muted-forground size-4" />
+        Home
+      </a>
+
+      {breadcrumbs.map((crumb, index) => {
+        const isLast = index === breadcrumbs.length - 1;
+
+        return (
+          <>
+            <span aria-hidden="true" class="text-border">
+              /
+            </span>
+
+            {isLast ? (
+              <span
+                aria-current="page"
+                class="text-primary max-w-[30ch] truncate"
+                title={crumb.label}
+              >
+                {crumb.label}
+              </span>
+            ) : (
+              <a
+                href={crumb.href}
+                class="hover:text-foreground transition-colors"
+              >
+                {crumb.label}
+              </a>
+            )}
+          </>
+        );
+      })}
+    </nav>
+  )
+}

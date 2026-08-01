@@ -1,0 +1,236 @@
+---
+import siteConfig from "@/site.config";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  type Post,
+  getPostSlug,
+  getAllPosts,
+  getRelatedPosts,
+} from "@/utils/content";
+import { slugify } from "@/utils/text";
+import { getCoverImage, getGalleryImages } from "@/utils/image";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import ReadingProgress from "@/components/ReadingProgress.astro";
+import SharePost from "@/components/content/SharePost.astro";
+import SEO from "@/components/SEO.astro";
+import PostNavigation from "@/components/content/PostNavigation.astro";
+import { generatePostSchema } from "@/utils/schema";
+import PostMeta from "@/components/content/PostMeta.astro";
+import RelatedPosts from "@/components/content/RelatedPosts.astro";
+import Footer from "@/components/Footer.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import ImageWrapper from "@/components/ImageWrapper.astro";
+import PostGallery from "@/components/content/PostGallery.astro";
+import GalleryInit from "@/components/GalleryInit.astro";
+
+type Props = {
+  post: Post;
+  prevPost?: Post | null;
+  nextPost?: Post | null;
+};
+
+const { post, prevPost, nextPost } = Astro.props;
+
+const {
+  title,
+  description,
+  cover,
+  published,
+  tags,
+  externalUrl,
+  source,
+  lang,
+} = post.data;
+const showDescription = description && !externalUrl;
+
+const allPosts = await getAllPosts();
+const relatedPosts = getRelatedPosts(post, allPosts, siteConfig.relatedPosts);
+const ogImage = `/og/posts/${getPostSlug(post)}.png`;
+const structuredData = externalUrl ? undefined : generatePostSchema(post);
+const coverImage = getCoverImage(cover);
+const galleryImages = getGalleryImages(post.filePath ?? "");
+---
+
+<BaseLayout schema={structuredData}>
+  <SEO
+    slot="seo"
+    {title}
+    description={description ?? ""}
+    type="article"
+    publishedTime={published}
+    {tags}
+    {ogImage}
+    noindex={Boolean(externalUrl)}
+  />
+  <Fragment slot="header">
+    <Breadcrumb
+      items={[
+        {
+          label: "Posts",
+          href: "/posts",
+        },
+      ]}
+      currentLabel={post.data.title}
+    />
+    <!-- Post Header -->
+    <header class="space-y-4">
+      <!-- Title -->
+      <h1
+        class="mb-2 text-3xl leading-tight font-medium tracking-tight text-balance md:text-4xl"
+        transition:name={slugify(post.data.title.replaceAll(".", "-"))}
+      >
+        {post.data.title}
+      </h1>
+
+      <!-- Description -->
+      {
+        showDescription && (
+          <p class="text-prettyfont-content text-muted-foreground max-w-xl text-base leading-relaxed font-light italic">
+            {description}
+          </p>
+        )
+      }
+
+      <!-- Metadata -->
+      <div
+        class="post-meta font-ui text-muted-foreground mb-3 flex flex-row items-baseline gap-2 text-xs"
+      >
+        <PostMeta post={post} accentCategory showReadingTime />
+      </div>
+      {
+        externalUrl && (
+          <div class="border-border bg-muted/30 text-muted-foreground rounded-sm border px-4 py-3 text-sm">
+            <p>
+              Originally published
+              {source ? (
+                <>
+                  {" "}
+                  at <strong class="text-foreground">{source}</strong>
+                </>
+              ) : (
+                " externally"
+              )}
+              {lang === "de"
+                ? " in German"
+                : lang === "en"
+                  ? " in English"
+                  : ""}
+              .
+            </p>
+            <p class="mt-2">
+              <a
+                href={externalUrl}
+                class="inline-cta text-muted-foreground hover:text-foreground"
+              >
+                <span class="inline-cta-line" />
+                Continue to the original article
+              </a>
+            </p>
+          </div>
+        )
+      }
+      <div class="divider"></div>
+    </header>
+  </Fragment>
+
+  <section>
+    <!-- Cover -->
+    {
+      !externalUrl && coverImage && (
+        <section class="breakout ring-border overflow-hidden rounded-sm shadow-sm ring">
+          <ImageWrapper
+            src={coverImage}
+            alt={title}
+            class="block h-auto w-full"
+            fetchPriority="high"
+          />
+        </section>
+      )
+    }
+
+    <!-- Post Content -->
+    {
+      !externalUrl && (
+        <article
+          data-pagefind-body
+          class="post-content flex flex-col space-y-2"
+        >
+          <meta data-pagefind-meta="title[content]" content={title} />
+          <meta
+            data-pagefind-sort="date[content]"
+            content={published.toISOString()}
+          />
+          <meta
+            data-pagefind-filter="collection[content]"
+            content={post.collection}
+          />
+          {tags?.map((tag) => (
+            <meta data-pagefind-filter="tag[content]" content={tag} />
+          ))}
+          <div class="app-prose post-content">
+            <slot />
+            <hr />
+          </div>
+          {galleryImages.length > 0 && (
+            <PostGallery images={galleryImages} galleryId={post.id} />
+          )}
+        </article>
+      )
+    }
+
+    {
+      !externalUrl && post.data.annotation && (
+        <span class="font-annotation text-primary mt-4 block max-w-70 -rotate-1 text-xl leading-snug md:max-w-80 md:text-2xl">
+          {post.data.annotation}
+        </span>
+      )
+    }
+
+    {
+      !externalUrl && post.data.tags && post.data.tags.length > 0 && (
+        <div class="flex flex-wrap items-baseline gap-3">
+          <SectionHeader title="filed under" />
+          {post.data.tags.map((tag) => (
+            <a
+              href={`/tags/${slugify(tag)}`}
+              class="font-ui text-muted-foreground link-hover text-sm underline"
+            >
+              {tag}
+            </a>
+          ))}
+        </div>
+      )
+    }
+    {!externalUrl && <SharePost title={post.data.title} />}
+    <div class="divider"></div>
+  </section>
+
+  {
+    !externalUrl && (
+      <Fragment slot="navigation">
+        <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+      </Fragment>
+    )
+  }
+  {
+    !externalUrl && (
+      <Fragment slot="after">
+        {relatedPosts.length > 0 && (
+          <RelatedPosts posts={relatedPosts} sectionTitle="More like this" />
+        )}
+      </Fragment>
+    )
+  }
+  {
+    !externalUrl && (
+      <Fragment slot="scripts">
+        <ReadingProgress />
+        <GalleryInit />
+      </Fragment>
+    )
+  }
+
+  <Fragment slot="footer">
+    <Footer />
+  </Fragment>
+</BaseLayout>

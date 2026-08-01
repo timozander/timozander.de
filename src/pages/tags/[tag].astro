@@ -1,50 +1,39 @@
 ---
-import { CollectionEntry, getCollection } from "astro:content"
-import Card from "@components/Card.astro"
-import getUniqueTags from "@utils/getUniqueTags"
-import getPostsByTag from "@utils/getPostsByTag"
-import BaseLayout from "@layouts/BaseLayout.astro"
+import type { GetStaticPaths } from "astro";
+import PageLayout from "@/layouts/PageLayout.astro";
+import PostFeed from "@/components/content/PostFeed.astro";
+import { getAllTagArchives, type TagArchive } from "@/utils/content";
+import { titleify, slugify } from "@/utils/text";
 
-export interface Props {
-  post: CollectionEntry<"blog">
-  tag: string
+export const getStaticPaths = (async () => {
+  const tagArchives = await getAllTagArchives();
+
+  return tagArchives.map((archive) => ({
+    params: {
+      tag: archive.slug,
+    },
+    props: {
+      archive,
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = {
+  archive: TagArchive;
+};
+
+export function getTagTransitionName(tag: string) {
+  return `tag-${slugify(tag.replaceAll(".", "-"))}`;
 }
-
-export async function getStaticPaths() {
-  const posts = await getCollection("blog")
-
-  const tags = getUniqueTags(posts)
-
-  return tags.map((tag) => {
-    return {
-      params: { tag },
-      props: { tag },
-    }
-  })
-}
-
-const { tag } = Astro.props
-
-const posts = await getCollection("blog", ({ data }) => !data.draft)
-
-const tagPosts = getPostsByTag(posts, tag)
+const { archive } = Astro.props;
+const title = `Tag: ${titleify(archive.tag)}`;
+const description = `Posts tagged "${titleify(archive.tag)}".`;
 ---
 
-<BaseLayout
-  title={`Tag:${tag}`}
-  description={`All the articles with the tag "${tag}".`}
-  activeNav="tags"
+<PageLayout
+  title={title}
+  description={description}
+  transitionName={getTagTransitionName(archive.tag)}
 >
-  <ul>
-    {
-      tagPosts.map(({ slug, data }) => (
-        <Card
-          href={`/blog/${slug}`}
-          title={data.title}
-          description={data.description}
-          pubDatetime={data.date}
-        />
-      ))
-    }
-  </ul>
-</BaseLayout>
+  <PostFeed posts={archive.posts} />
+</PageLayout>

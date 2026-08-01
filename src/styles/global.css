@@ -1,0 +1,256 @@
+@import "tailwindcss";
+@import "glightbox/dist/css/glightbox.min.css";
+@import "./theme.css";
+@import "./typography.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+html {
+	font-size: clamp(16px, 1rem + 0.15vw, 18px);
+}
+
+@layer base {
+	body::before {
+		content: "";
+		position: fixed;
+		inset: 0;
+		pointer-events: none;
+		z-index: 9999;
+		opacity: 0.03;
+		background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+		background-repeat: repeat;
+		background-size: 200px 200px;
+	}
+
+	[data-theme="dark"] body::before {
+		opacity: 0.02;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		body::before {
+			display: none;
+		}
+	}
+
+	* {
+		@apply border-border outline-accent/75;
+		scrollbar-width: auto;
+		scrollbar-color: var(--color-muted) transparent;
+	}
+	html {
+		scroll-behavior: smooth;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	h1,
+	h2,
+	h3 {
+		text-wrap: balance;
+	}
+
+	p,
+	li,
+	blockquote {
+		text-wrap: pretty;
+	}
+
+	a,
+	button {
+		@apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+	}
+	button:not(:disabled) {
+		@apply transition-transform duration-150 active:scale-[0.96];
+	}
+	button:not(:disabled),
+	[role="button"]:not(:disabled) {
+		cursor: pointer;
+	}
+
+	::selection {
+		background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+
+		color: var(--foreground);
+	}
+}
+
+@utility max-w-app {
+	@apply max-w-2xl;
+}
+
+@utility app-layout {
+	@apply max-w-app mx-auto w-full px-4;
+}
+
+@utility active-nav {
+	@apply underline decoration-[1.5px] underline-offset-6;
+}
+
+@utility content-layout {
+	@apply mx-auto w-full max-w-3xl px-4;
+}
+
+@utility ease-fluid {
+	transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility breakout {
+	@apply -mx-4;
+}
+
+@utility link-hover {
+	@apply hover:text-primary ease-fluid transition-colors duration-200;
+}
+
+@utility inline-cta {
+	@apply ease-fluid inline-flex items-center gap-[0.7rem] font-mono text-[0.78rem] tracking-[0.14em] uppercase no-underline transition-all duration-300;
+}
+
+@utility inline-cta-line {
+	@apply inline-block h-px w-7 bg-current;
+	transition:
+		width 450ms cubic-bezier(0.22, 1, 0.36, 1),
+		background-color 200ms ease;
+}
+
+:target {
+	scroll-margin-block: 1rem;
+}
+
+@layer components {
+	/* ── Scroll To Top ───────────────────────────────── */
+	.scroll-to-top {
+		@apply bg-muted/70 border-border text-muted-foreground fixed right-6 bottom-20 z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border shadow-sm transition-[color,background-color,box-shadow,opacity,transform] duration-200 sm:bottom-6;
+		&:hover {
+			@apply text-primary -translate-y-0.5 shadow-md;
+		}
+		&[hidden] {
+			@apply hidden;
+		}
+
+		animation: scroll-to-top-fade linear both;
+		animation-timeline: scroll();
+		animation-range: 0px 300px;
+	}
+
+	@keyframes scroll-to-top-fade {
+		from {
+			opacity: 0;
+			pointer-events: none;
+		}
+		to {
+			opacity: 1;
+			pointer-events: auto;
+		}
+	}
+
+	.nav-link {
+		@apply text-muted-foreground relative inline-flex min-h-10 items-center no-underline transition-colors duration-200;
+		@apply hover:text-primary;
+		@apply aria-[current=page]:text-primary;
+
+		@apply after:bg-accent after:absolute after:-bottom-0.5 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:rounded-full;
+		@apply after:transition-[width] after:duration-200;
+		@apply after:content-[''];
+
+		@apply hover:after:w-full;
+	}
+
+	.divider {
+		@apply bg-border mt-8 h-px;
+	}
+
+	.sec-divider {
+		@apply border-border my-6 w-24 border-b md:my-12;
+	}
+
+	.heading-anchor {
+		@apply text-muted-foreground ms-2 inline-block w-4 text-center no-underline opacity-0 transition-opacity duration-200;
+	}
+
+	:is(h2, h3, h4):hover .heading-anchor {
+		@apply opacity-100;
+	}
+
+	@keyframes content-enter {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.post-content {
+		animation: content-enter 300ms ease;
+	}
+
+	.post-meta > * + *::before {
+		content: "·";
+		margin-right: 0.5rem;
+		margin-left: 0.25rem;
+	}
+
+	/* ── Gallery ─────────────────────────────────────── */
+	.gallery-grid {
+		@apply breakout my-6 grid gap-2;
+
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	@media (min-width: 768px) {
+		.gallery-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	.gallery-single {
+		@apply breakout my-6;
+	}
+
+	.gallery-item {
+		@apply bg-background ring-border block cursor-zoom-in overflow-hidden rounded-sm ring;
+		transition: box-shadow 0.2s ease;
+		&:hover {
+			@apply shadow-md;
+		}
+	}
+
+	.gallery-item__image {
+		@apply block aspect-3/2 h-full w-full rounded-sm object-cover;
+		transition:
+			opacity 0.2s ease,
+			filter 0.2s ease;
+	}
+
+	/* ── GLightbox overrides ─────────────────────────── */
+	.glightbox-clean .gslide-description {
+		@apply bg-background;
+	}
+
+	.glightbox-clean .gslide-title {
+		@apply text-foreground;
+	}
+
+	.glightbox-clean .gslide-desc {
+		@apply text-muted-foreground;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			scroll-behavior: auto !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+}
