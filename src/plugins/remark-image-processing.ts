@@ -1,6 +1,14 @@
 import { visit } from "unist-util-visit";
+import type { Properties } from "hast";
 import type { Plugin } from "unified";
-import type { Root, Image, Paragraph } from "mdast";
+import type { Root, Image, Paragraph, PhrasingContent, RootContent, Html, Text } from "mdast";
+import type { VFile } from "vfile";
+
+declare module "hast" {
+	interface Properties {
+		"data-caption"?: string | undefined;
+	}
+}
 
 /**
  * Consolidated image processing plugin for Astro Base
@@ -12,40 +20,57 @@ import type { Root, Image, Paragraph } from "mdast";
  * - loading="lazy" and decoding="async" on all images
  */
 
+function ensureNodeData(node: Image | Paragraph) {
+	node.data ??= {};
+	return node.data;
+}
+
+function ensureHProperties(node: Image | Paragraph): Properties {
+	const data = ensureNodeData(node);
+	data.hProperties ??= {};
+	return data.hProperties;
+}
+
+function isBlankText(node: PhrasingContent): node is Text {
+	return node.type === "text" && node.value.trim() === "";
+}
+
+function isImageNode(node: PhrasingContent): node is Image {
+	return node.type === "image";
+}
+
+function createHtml(value: string): Html {
+	return {
+		type: "html",
+		value,
+	};
+}
+
 // ── Path Resolution ──────────────────────────────────────────────────────────
 
-function resolveImagePaths(tree: Root, file: any) {
+function resolveImagePaths(tree: Root, file: VFile) {
 	visit(tree, "image", (node: Image) => {
 		if (!node.url) return;
 
-		// Skip remote URLs
 		if (node.url.startsWith("http://") || node.url.startsWith("https://")) return;
-
-		// Skip absolute paths served from public/
 		if (node.url.startsWith("/")) return;
-
-		// Already correctly relative
 		if (node.url.startsWith("./") || node.url.startsWith("../")) return;
 
 		const url = node.url;
 
-		// Bare filename — no path separators
 		if (!url.includes("/")) {
 			node.url = `./attachments/${url}`;
 			return;
 		}
 
-		// Relative path with attachments/ or images/ prefix
 		if (url.startsWith("attachments/") || url.startsWith("images/")) {
 			node.url = `./${url}`;
 			return;
 		}
 
-		// Obsidian absolute vault path e.g. posts/forts-of-sahyadri/rajgad/attachments/image.jpg
-		// or pages/attachments/me-wide.jpg
-		// Derive content root from file path and strip it
-		if (file?.path) {
-			const normalizedPath = file.path.replace(/\\/g, "/");
+		const filePath = file.path;
+		if (typeof filePath === "string") {
+			const normalizedPath = filePath.replace(/\\/g, "/");
 			const contentIndex = normalizedPath.indexOf("/src/content/");
 
 			if (contentIndex !== -1) {
@@ -53,21 +78,13 @@ function resolveImagePaths(tree: Root, file: any) {
 					.slice(contentIndex + "/src/content/".length)
 					.replace(/\/[^/]+\.md$/, "");
 
-				// contentRoot = posts/forts-of-sahyadri/rajgad  or  pages/about
-
-				// Case 1: url is under this specific content entry's path
-				// posts/my-post/attachments/image.jpg from posts/my-post/index.md
 				if (url.startsWith(`${contentRoot}/`)) {
 					node.url = `./${url.slice(contentRoot.length + 1)}`;
 					return;
 				}
 
-				// Case 2: vault-absolute path within the same collection
-				// pages/attachments/me-wide.jpg from pages/about.md
-				// Strip the collection name prefix — file is already inside that collection dir
-				const collectionName = contentRoot.split("/")[0]; // 'pages' or 'posts'
+				const collectionName = contentRoot.split("/")[0];
 				if (url.startsWith(`${collectionName}/`)) {
-					// pages/attachments/me-wide.jpg → attachments/me-wide.jpg → ./attachments/me-wide.jpg
 					const pathWithinCollection = url.slice(collectionName.length + 1);
 					node.url = `./${pathWithinCollection}`;
 					return;
@@ -75,7 +92,6 @@ function resolveImagePaths(tree: Root, file: any) {
 			}
 		}
 
-		// Fallback — prefix with ./
 		node.url = `./${url}`;
 	});
 }
@@ -84,14 +100,9 @@ function resolveImagePaths(tree: Root, file: any) {
 
 function addImageAttributes(tree: Root) {
 	visit(tree, "image", (node: Image) => {
-		if (!node.data) node.data = {};
-		if (!node.data.hProperties) node.data.hProperties = {};
-
-		const props = node.data.hProperties as Record<string, any>;
-		// lazy for all images — browser handles priority naturally;
-		// avoids forcing high-res decode on images that may be off-screen
-		props.loading = props.loading || "lazy";
-		props.decoding = props.decoding || "async";
+		const props = ensureHProperties(node);
+		props.loading ??= "lazy";
+		props.decoding ??= "async";
 	});
 }
 
@@ -101,10 +112,7 @@ function processImageCaptions(tree: Root) {
 	visit(tree, "image", (node: Image) => {
 		if (!node.title) return;
 
-		if (!node.data) node.data = {};
-		if (!node.data.hProperties) node.data.hProperties = {};
-
-		const props = node.data.hProperties as Record<string, any>;
+		const props = ensureHProperties(node);
 		props["data-caption"] = node.title;
 		props.title = node.title;
 	});
@@ -112,36 +120,38 @@ function processImageCaptions(tree: Root) {
 
 // ── Image Grids ───────────────────────────────────────────────────────────────
 
+function isImageOnlyParagraph(node: RootContent): node is Paragraph {
+	return (
+		node.type === "paragraph" &&
+		node.children.length > 0 &&
+		node.children.every((child) => isImageNode(child) || isBlankText(child))
+	);
+}
+
 function mergeConsecutiveImageParagraphs(tree: Root) {
-	if (!tree.children?.length) return;
+	if (!tree.children.length) return;
 
 	let i = 0;
 	while (i < tree.children.length) {
 		const node = tree.children[i];
-
-		// Must be a paragraph containing only images
 		if (!isImageOnlyParagraph(node)) {
 			i++;
 			continue;
 		}
 
-		// Collect consecutive image-only paragraphs
-		const group: Paragraph[] = [node as Paragraph];
+		const group: Paragraph[] = [node];
 		let j = i + 1;
 
 		while (j < tree.children.length) {
 			const next = tree.children[j];
 			if (!isImageOnlyParagraph(next)) break;
-			group.push(next as Paragraph);
+			group.push(next);
 			j++;
 		}
 
 		if (group.length > 1) {
-			// Merge all images into the first paragraph
 			const merged = group[0];
-			merged.children = group.flatMap((p) => p.children.filter((child) => child.type === "image"));
-
-			// Remove the consumed paragraphs
+			merged.children = group.flatMap((paragraph) => paragraph.children.filter(isImageNode));
 			tree.children.splice(i + 1, group.length - 1);
 		}
 
@@ -149,53 +159,31 @@ function mergeConsecutiveImageParagraphs(tree: Root) {
 	}
 }
 
-function isImageOnlyParagraph(node: any): boolean {
-	if (node.type !== "paragraph") return false;
-	if (!node.children?.length) return false;
+function wrapImageInGalleryItem(image: Image): PhrasingContent[] {
+	ensureHProperties(image).className = ["gallery-item__image"];
 
-	return node.children.every(
-		(child: any) => child.type === "image" || (child.type === "text" && child.value.trim() === ""),
-	);
+	return [createHtml('<div class="gallery-item">'), image, createHtml("</div>")];
 }
 
 function processImageGrids(tree: Root) {
-	visit(tree, "paragraph", (node: Paragraph, index, parent) => {
-		if (!node.children?.length) return;
+	visit(tree, "paragraph", (node: Paragraph) => {
+		if (!node.children.length) return;
 
-		const existingClass = (node.data?.hProperties as any)?.class || "";
+		const existingClass = node.data?.hProperties?.className?.[0] ?? "";
 		if (existingClass === "gallery-grid" || existingClass === "gallery-single") return;
 
-		const images = node.children.filter((child) => child.type === "image") as Image[];
-
+		const images = node.children.filter(isImageNode);
 		const otherContent = node.children.filter(
-			(child) =>
-				child.type !== "image" && !(child.type === "text" && (child as any).value.trim() === ""),
+			(child) => !isImageNode(child) && !isBlankText(child),
 		);
 
 		if (images.length === 0 || otherContent.length > 0) return;
 
-		if (!node.data) node.data = {};
-		if (!node.data.hProperties) node.data.hProperties = {};
-
-		// Convert paragraph element to div
-		node.data.hName = "div";
-		const props = node.data.hProperties as Record<string, any>;
-		props.class = images.length === 1 ? "gallery-single" : "gallery-grid";
-
-		node.children = images.map((img) => {
-			if (!img.data) img.data = {};
-			if (!img.data.hProperties) img.data.hProperties = {};
-			(img.data.hProperties as any).class = "gallery-item__image";
-
-			return {
-				type: "div",
-				data: {
-					hName: "div",
-					hProperties: { class: "gallery-item" },
-				},
-				children: [img],
-			} as any;
-		});
+		const data = ensureNodeData(node);
+		const props = ensureHProperties(node);
+		data.hName = "div";
+		props.className = [images.length === 1 ? "gallery-single" : "gallery-grid"];
+		node.children = images.flatMap(wrapImageInGalleryItem);
 	});
 }
 

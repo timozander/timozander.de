@@ -1,7 +1,6 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import { getAssetPath } from "./url";
 import { slugify } from "./text";
-import siteConfig from "@/site.config";
 import { PAGES_PATH } from "@/content.config";
 
 export type Post = CollectionEntry<"posts">;

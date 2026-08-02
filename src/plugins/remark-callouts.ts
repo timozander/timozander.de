@@ -1,6 +1,6 @@
 import { visit } from "unist-util-visit";
 import type { Plugin } from "unified";
-import type { Root, Blockquote, Paragraph, Text } from "mdast";
+import type { Root, Blockquote, Paragraph, Text, Html } from "mdast";
 
 /**
  * Remark Callouts Plugin
@@ -36,8 +36,23 @@ const iconPaths: Record<string, string> = {
 };
 
 function getIconSVG(iconName: string): string {
-	const path = iconPaths[iconName] || iconPaths["info"];
+	const path = iconPaths[iconName] || iconPaths.info;
 	return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="callout__icon">${path}</svg>`;
+}
+
+function isParagraph(node: Blockquote["children"][number] | undefined): node is Paragraph {
+	return node?.type === "paragraph";
+}
+
+function isText(node: Paragraph["children"][number] | undefined): node is Text {
+	return node?.type === "text";
+}
+
+function createHtml(value: string): Html {
+	return {
+		type: "html",
+		value,
+	};
 }
 
 // ── Callout type map ──────────────────────────────────────────────────────────
@@ -73,13 +88,13 @@ const remarkCallouts: Plugin<[], Root> = () => {
 	return (tree) => {
 		visit(tree, "blockquote", (node: Blockquote, index, parent) => {
 			const firstChild = node.children[0];
-			if (!firstChild || firstChild.type !== "paragraph") return;
+			if (!isParagraph(firstChild)) return;
 
-			const firstText = (firstChild as Paragraph).children[0];
-			if (!firstText || firstText.type !== "text") return;
+			const firstText = firstChild.children[0];
+			if (!isText(firstText)) return;
 
-			const text = (firstText as Text).value;
-			const calloutMatch = text.match(/^\[!([\w-]+)\]([+\-]?)(?:\s+(.+))?/);
+			const text = firstText.value;
+			const calloutMatch = text.match(/^\[!([\w-]+)\]([+-]?)(?:\s+(.+))?/);
 			if (!calloutMatch) return;
 
 			const [fullMatch, calloutType, collapseState, customTitle] = calloutMatch;
@@ -94,15 +109,13 @@ const remarkCallouts: Plugin<[], Root> = () => {
 			const calloutTitle = customTitle || mapping.title;
 			const remainingText = text.slice(fullMatch.length).trim();
 
-			// Content children — remove the first paragraph if it only had the syntax
 			let contentChildren = [...node.children];
 			if (remainingText) {
-				(firstText as Text).value = remainingText;
+				firstText.value = remainingText;
 			} else {
 				contentChildren = contentChildren.slice(1);
 			}
 
-			// Build wrapper class
 			const wrapperClass = [
 				"callout",
 				`callout-${mapping.type}`,
@@ -120,20 +133,15 @@ const remarkCallouts: Plugin<[], Root> = () => {
           </button>`
 				: "";
 
-			const openHtml: any = {
-				type: "html",
-				value: `<div class="${wrapperClass}">
+			const openHtml = createHtml(`<div class="${wrapperClass}">
   <div class="callout__title">
     ${getIconSVG(mapping.icon)}
     <span class="callout__label">${calloutTitle}</span>
     ${toggleButton}
   </div>
-  <div class="callout__content"${isCollapsed ? " hidden" : ""}>`,
-			};
+  <div class="callout__content"${isCollapsed ? " hidden" : ""}>`);
 
-			const closeHtml: any = {
-				type: "html",
-				value: `</div>
+			const closeHtml = createHtml(`</div>
 <script>
 (function(){
   var btn = document.currentScript.previousElementSibling
@@ -153,8 +161,7 @@ const remarkCallouts: Plugin<[], Root> = () => {
   });
 })();
 </script>
-</div>`,
-			};
+</div>`);
 
 			if (parent && typeof index === "number") {
 				parent.children.splice(index, 1, openHtml, ...contentChildren, closeHtml);

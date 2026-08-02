@@ -7,10 +7,14 @@ type Theme = typeof LIGHT | typeof DARK;
 
 let themeValue: Theme = window.__theme?.value ?? getPreferredTheme();
 
-function getPreferredTheme(): Theme {
-	const stored = localStorage.getItem(THEME_KEY) as Theme | null;
+function isTheme(value: string | null): value is Theme {
+	return value === LIGHT || value === DARK;
+}
 
-	if (stored) {
+function getPreferredTheme(): Theme {
+	const stored = localStorage.getItem(THEME_KEY);
+
+	if (isTheme(stored)) {
 		return stored;
 	}
 
@@ -27,10 +31,10 @@ function applyTheme(theme: Theme) {
 		value: theme,
 	};
 
-	updateThemeColor(theme);
+	updateThemeColor();
 }
 
-function updateThemeColor(theme: Theme) {
+function updateThemeColor() {
 	const background = getComputedStyle(document.documentElement)
 		.getPropertyValue("--background")
 		.trim();

@@ -107,11 +107,21 @@ export function remarkObsidian() {
 
 			const wikilinkRegex = /(?<!!)\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
 
-			const imageMatches: Array<{
+			type ImageMatch = {
 				start: number;
 				end: number;
 				node: Image;
-			}> = [];
+				kind: "image";
+			};
+
+			type LinkMatch = {
+				start: number;
+				end: number;
+				node: Link;
+				kind: "link";
+			};
+
+			const imageMatches: ImageMatch[] = [];
 
 			let match: RegExpExecArray | null;
 
@@ -126,6 +136,7 @@ export function remarkObsidian() {
 					start: match.index,
 
 					end: match.index + match[0].length,
+					kind: "image",
 
 					node: {
 						type: "image",
@@ -135,11 +146,7 @@ export function remarkObsidian() {
 				});
 			}
 
-			const wikilinkMatches: Array<{
-				start: number;
-				end: number;
-				node: Link;
-			}> = [];
+			const wikilinkMatches: LinkMatch[] = [];
 
 			wikilinkRegex.lastIndex = 0;
 
@@ -148,8 +155,10 @@ export function remarkObsidian() {
 			while ((match = wikilinkRegex.exec(value)) !== null) {
 				// Ignore image embeds
 
+				const matchIndex = match?.index ?? -1;
+
 				const overlaps = imageMatches.some(
-					(img) => match!.index >= img.start && match!.index < img.end,
+					(img) => matchIndex >= img.start && matchIndex < img.end,
 				);
 
 				if (overlaps) {
@@ -164,6 +173,7 @@ export function remarkObsidian() {
 					start: match.index,
 
 					end: match.index + match[0].length,
+					kind: "link",
 
 					node: {
 						type: "link",
@@ -179,17 +189,7 @@ export function remarkObsidian() {
 				});
 			}
 
-			const matches = [
-				...imageMatches.map((m) => ({
-					...m,
-					kind: "image" as const,
-				})),
-
-				...wikilinkMatches.map((m) => ({
-					...m,
-					kind: "link" as const,
-				})),
-			].sort((a, b) => a.start - b.start);
+			const matches = [...imageMatches, ...wikilinkMatches].sort((a, b) => a.start - b.start);
 
 			// No wikilinks or embeds
 

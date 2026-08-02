@@ -1,12 +1,10 @@
 // src/utils/og.tsx
 
+import { readFile } from "node:fs/promises";
 import satori from "satori";
 import { html } from "satori-html";
 import { Resvg } from "@resvg/resvg-js";
 import siteConfig from "@/site.config";
-import notoSansRegular from "@/assets/fonts/NotoSans-Regular.ttf";
-import notoSerifRegular from "@/assets/fonts/NotoSerif-Regular.ttf";
-import notoSerifBold from "@/assets/fonts/NotoSerif-Bold.ttf";
 
 export type OgImageOptions = {
 	title: string;
@@ -18,6 +16,12 @@ export type OgImageOptions = {
 
 const WIDTH = 1200;
 const HEIGHT = 630;
+
+const [notoSerifRegular, notoSerifBold, notoSansRegular] = await Promise.all([
+	readFile(new URL("../assets/fonts/NotoSerif-Regular.ttf", import.meta.url)),
+	readFile(new URL("../assets/fonts/NotoSerif-Bold.ttf", import.meta.url)),
+	readFile(new URL("../assets/fonts/NotoSans-Regular.ttf", import.meta.url)),
+]);
 
 function formatDate(date?: Date) {
 	if (!date) return "";
@@ -122,21 +126,21 @@ export async function generateOgImage({
 		fonts: [
 			{
 				name: "Lipi Serif",
-				data: notoSerifRegular as unknown as ArrayBuffer,
+				data: notoSerifRegular,
 				weight: 400,
 				style: "normal",
 			},
 
 			{
 				name: "Lipi Serif",
-				data: notoSerifBold as unknown as ArrayBuffer,
+				data: notoSerifBold,
 				weight: 700,
 				style: "normal",
 			},
 
 			{
 				name: "Lipi Sans",
-				data: notoSansRegular as unknown as ArrayBuffer,
+				data: notoSansRegular,
 				weight: 400,
 				style: "normal",
 			},

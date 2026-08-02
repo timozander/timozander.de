@@ -4,25 +4,10 @@ type Props = {
 };
 
 const { title } = Astro.props;
-const postUrl = Astro.url.href;
-const shareLinks = [
-  {
-    label: "X",
-    href: `https://x.com/intent/tweet?url=${encodeURIComponent(
-      postUrl,
-    )}&text=${encodeURIComponent(title)}`,
-  },
-
-  {
-    label: "LinkedIn",
-    href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-      postUrl,
-    )}`,
-  },
-];
 ---
 
 <section
+  aria-label={`Share ${title}`}
   class="text-muted-foreground font-ui mt-4 flex flex-row items-baseline gap-2 text-sm"
 >
   <button
