@@ -75,52 +75,6 @@ export async function getAllPages(): Promise<Page[]> {
 	return pagesCache;
 }
 
-export async function getAllTagArchives(): Promise<TagArchive[]> {
-	const posts = await getAllPosts();
-	const archives = new Map<
-		string,
-		{
-			tag: string;
-			slug: string;
-			posts: Post[];
-			postIds: Set<string>;
-		}
-	>();
-
-	for (const post of posts) {
-		for (const tag of post.data.tags ?? []) {
-			const slug = slugify(tag);
-
-			if (!slug) {
-				continue;
-			}
-
-			const archive = archives.get(slug) ?? {
-				tag,
-				slug,
-				posts: [],
-				postIds: new Set<string>(),
-			};
-
-			if (!archive.postIds.has(post.id)) {
-				archive.posts.push(post);
-				archive.postIds.add(post.id);
-			}
-
-			archives.set(slug, archive);
-		}
-	}
-
-	return Array.from(archives.values())
-		.map(({ tag, slug, posts }) => ({
-			tag,
-			slug,
-			count: posts.length,
-			posts,
-		}))
-		.sort((a, b) => a.tag.localeCompare(b.tag));
-}
-
 function getEntrySlugSegment(id: string): string {
 	const segments = id.split("/");
 
@@ -197,15 +151,6 @@ export function getAdjacentPosts<T extends Post>(posts: T[], currentPost: T) {
 
 function scorePostSimilarity(currentPost: Post, candidatePost: Post): number {
 	let score = 0;
-
-	const currentTags = currentPost.data.tags ?? [];
-
-	const candidateTags = candidatePost.data.tags ?? [];
-
-	// Shared tags
-	const sharedTags = currentTags.filter((tag) => candidateTags.includes(tag));
-
-	score += sharedTags.length * 10;
 
 	// Same top-level directory
 	const currentPath = currentPost.filePath?.split("/").slice(0, -1).join("/") ?? "";
