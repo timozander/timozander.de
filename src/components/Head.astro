@@ -4,59 +4,45 @@ import { ClientRouter } from "astro:transitions";
 import "@/styles/global.css";
 
 interface Props {
-  lang?: string;
-  schema?: Record<string, unknown>;
+	lang?: string;
+	schema?: Record<string, unknown>;
 }
 
 const { schema } = Astro.props;
 ---
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="generator" content={Astro.generator} />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="generator" content={Astro.generator} />
 
-  <meta name="theme-color" content="#F5F4ED" />
+	<meta name="theme-color" content="#F5F4ED" />
 
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="sitemap" href="/sitemap-index.xml" />
-  <link
-    rel="alternate"
-    type="application/rss+xml"
-    title="RSS Feed"
-    href="/rss.xml"
-  />
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+	<link rel="sitemap" href="/sitemap-index.xml" />
+	<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
 
-  <!-- SEO injected per layout -->
-  <slot name="seo" />
-  {
-    schema && (
-      <script
-        is:inline
-        type="application/ld+json"
-        set:html={JSON.stringify(schema)}
-      />
-    )
-  }
-  <!-- Additional per-page head tags -->
-  <slot name="head" />
+	<!-- SEO injected per layout -->
+	<slot name="seo" />
+	{schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
+	<!-- Additional per-page head tags -->
+	<slot name="head" />
 
-  <script is:inline>
-    document.documentElement.setAttribute("data-theme", "light");
-    document.documentElement.setAttribute("data-pf-theme", "light");
-    document.documentElement.style.colorScheme = "light";
-  </script>
+	<script is:inline>
+		document.documentElement.setAttribute("data-theme", "light");
+		document.documentElement.setAttribute("data-pf-theme", "light");
+		document.documentElement.style.colorScheme = "light";
+	</script>
 
-  <link href="/pagefind/pagefind-component-ui.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/src/styles/pagefind.css" />
+	<link href="/pagefind/pagefind-component-ui.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/src/styles/pagefind.css" />
 
-  <script is:inline src="/pagefind/pagefind-component-ui.js" type="module"
-  ></script>
+	<script is:inline src="/pagefind/pagefind-component-ui.js" type="module"></script>
 
-  <Font cssVariable="--font-lipi-sans" preload />
-  <Font cssVariable="--font-lipi-serif" preload />
-  <Font cssVariable="--font-lipi-mono" preload />
-  <Font cssVariable="--font-lipi-hand" preload />
+	<Font cssVariable="--font-lipi-sans" preload />
+	<Font cssVariable="--font-lipi-serif" preload />
+	<Font cssVariable="--font-lipi-mono" preload />
+	<Font cssVariable="--font-lipi-hand" preload />
 
-  <ClientRouter />
+	<ClientRouter />
 </head>

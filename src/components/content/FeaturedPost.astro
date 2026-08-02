@@ -5,7 +5,7 @@ import PostMeta from "@/components/content/PostMeta.astro";
 import SectionHeader from "@/components/SectionHeader.astro";
 
 type Props = {
-  post: Post;
+	post: Post;
 };
 
 const { post } = Astro.props;
@@ -17,41 +17,38 @@ const sectionTitle = "Latest";
 ---
 
 <section class="my-2 py-4 md:my-4">
-  <SectionHeader title={sectionTitle} />
-  <article class="featured-post md:max-w-xl">
-    <div class="flex flex-col">
-      <div class="flex flex-col gap-2">
-        <PostTitle
-          post={post}
-          class="mt-0 text-2xl font-medium text-balance md:text-3xl"
-        />
-        <div
-          class="post-meta font-ui text-muted-foreground mb-2 flex flex-row items-baseline gap-2 text-xs"
-        >
-          <PostMeta post={post} showReadingTime />
-        </div>
+	<SectionHeader title={sectionTitle} />
+	<article class="featured-post md:max-w-xl">
+		<div class="flex flex-col">
+			<div class="flex flex-col gap-2">
+				<PostTitle post={post} class="mt-0 text-2xl font-medium text-balance md:text-3xl" />
+				<div
+					class="post-meta font-ui text-muted-foreground mb-2 flex flex-row items-baseline gap-2 text-xs"
+				>
+					<PostMeta post={post} showReadingTime />
+				</div>
 
-        {/* Description */}
-        {
-          showDescription && (
-            <p class="text-muted-foreground text-sm leading-normal italic md:max-w-xl md:text-sm">
-              {description}
-            </p>
-          )
-        }
+				{/* Description */}
+				{
+					showDescription && (
+						<p class="text-muted-foreground text-sm leading-normal italic md:max-w-xl md:text-sm">
+							{description}
+						</p>
+					)
+				}
 
-        {/* CTA row */}
-        <div class="mt-4 flex flex-wrap items-center gap-4 md:flex-row">
-          <a
-            href={url}
-            class="group inline-cta text-muted-foreground hover:text-foreground"
-            aria-label={`Read: ${post.data.title}`}
-          >
-            <span class="inline-cta-line group-hover:w-16"></span>
-            Continue reading
-          </a>
-        </div>
-      </div>
-    </div>
-  </article>
+				{/* CTA row */}
+				<div class="mt-4 flex flex-wrap items-center gap-4 md:flex-row">
+					<a
+						href={url}
+						class="group inline-cta text-muted-foreground hover:text-foreground"
+						aria-label={`Read: ${post.data.title}`}
+					>
+						<span class="inline-cta-line group-hover:w-16"></span>
+						Continue reading
+					</a>
+				</div>
+			</div>
+		</div>
+	</article>
 </section>

@@ -5,8 +5,8 @@ import ScrollToTop from "@/components/ScrollToTop.astro";
 import HeadingAnchors from "@/scripts/HeadingAnchors.astro";
 
 interface Props {
-  lang?: string;
-  schema?: Record<string, unknown>;
+	lang?: string;
+	schema?: Record<string, unknown>;
 }
 
 const { lang = "en", schema } = Astro.props;
@@ -14,39 +14,37 @@ const { lang = "en", schema } = Astro.props;
 
 <!doctype html>
 <html lang={lang}>
-  <Head schema={schema}>
-    <slot name="seo" slot="seo" />
-    <slot name="head" slot="head" />
-  </Head>
-  <body
-    class="font-content bg-background text-foreground selection:bg-selection"
-  >
-    <Header />
-    <!-- Main content -->
-    <main class="app-layout flex flex-col space-y-8 sm:space-y-10">
-      {/* Page/Post Header Section */}
-      <slot name="header" />
+	<Head schema={schema}>
+		<slot name="seo" slot="seo" />
+		<slot name="head" slot="head" />
+	</Head>
+	<body class="font-content bg-background text-foreground selection:bg-selection">
+		<Header />
+		<!-- Main content -->
+		<main class="app-layout flex flex-col space-y-8 sm:space-y-10">
+			{/* Page/Post Header Section */}
+			<slot name="header" />
 
-      {/* Page/Post Meta Section */}
-      <slot name="meta" />
+			{/* Page/Post Meta Section */}
+			<slot name="meta" />
 
-      {/* Page/Post Content */}
-      <slot />
+			{/* Page/Post Content */}
+			<slot />
 
-      {/* Post Navigation */}
-      <slot name="navigation" />
+			{/* Post Navigation */}
+			<slot name="navigation" />
 
-      {/* Additional Content */}
-      <slot name="after" />
-    </main>
+			{/* Additional Content */}
+			<slot name="after" />
+		</main>
 
-    <slot name="footer" />
-    <!-- <Footer /> -->
-    <ScrollToTop />
+		<slot name="footer" />
+		<!-- <Footer /> -->
+		<ScrollToTop />
 
-    <!-- Additional page-specific scripts -->
-    <slot name="scripts" />
-    <HeadingAnchors />
-    <pagefind-modal></pagefind-modal>
-  </body>
+		<!-- Additional page-specific scripts -->
+		<slot name="scripts" />
+		<HeadingAnchors />
+		<pagefind-modal></pagefind-modal>
+	</body>
 </html>

@@ -8,25 +8,25 @@ import siteConfig from "@/site.config";
 import { type Page, type Post } from "@/utils/content";
 
 interface Props {
-  entry?: Page | Post;
-  title?: string;
-  description?: string;
-  showBreadcrumb?: boolean;
-  transitionName?: string;
-  noindex?: boolean;
-  schema?: Record<string, unknown>;
-  showHeader?: boolean;
+	entry?: Page | Post;
+	title?: string;
+	description?: string;
+	showBreadcrumb?: boolean;
+	transitionName?: string;
+	noindex?: boolean;
+	schema?: Record<string, unknown>;
+	showHeader?: boolean;
 }
 
 const {
-  entry,
-  title: propTitle,
-  description: propDescription,
-  showBreadcrumb = true,
-  transitionName,
-  noindex = false,
-  schema,
-  showHeader = true,
+	entry,
+	title: propTitle,
+	description: propDescription,
+	showBreadcrumb = true,
+	transitionName,
+	noindex = false,
+	schema,
+	showHeader = true,
 } = Astro.props;
 
 const entryData = entry?.data;
@@ -39,30 +39,16 @@ const ogImage = entry ? `/og/${entry.id}.png` : undefined;
 ---
 
 <BaseLayout schema={schema}>
-  <SEO
-    slot="seo"
-    title={title}
-    description={description ?? ""}
-    ogImage={ogImage}
-    {noindex}
-  />
-  <Fragment slot="header">
-    {showBreadcrumb && <Breadcrumb />}
+	<SEO slot="seo" title={title} description={description ?? ""} ogImage={ogImage} {noindex} />
+	<Fragment slot="header">
+		{showBreadcrumb && <Breadcrumb />}
 
-    {
-      showHeader && (
-        <PageHeader
-          {title}
-          subheading={description}
-          transitionName={transitionName}
-        />
-      )
-    }
-  </Fragment>
-  <section>
-    <slot />
-  </section>
-  <Fragment slot="footer">
-    <Footer />
-  </Fragment>
+		{showHeader && <PageHeader {title} subheading={description} transitionName={transitionName} />}
+	</Fragment>
+	<section>
+		<slot />
+	</section>
+	<Fragment slot="footer">
+		<Footer />
+	</Fragment>
 </BaseLayout>

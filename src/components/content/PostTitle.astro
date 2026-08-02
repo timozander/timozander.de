@@ -3,9 +3,9 @@ import { getPostUrl, type Post } from "@/utils/content";
 import { slugify } from "@/utils/text";
 
 type Props = {
-  tag?: "h1" | "h2";
-  post: Post;
-  class?: string;
+	tag?: "h1" | "h2";
+	post: Post;
+	class?: string;
 };
 
 const { tag: Heading = "h2", post, class: className = "" } = Astro.props;
@@ -16,7 +16,7 @@ const titleClass = ["text-balance", className].filter(Boolean).join(" ");
 ---
 
 <a href={url} class="hover:text-primary no-underline">
-  <Heading class={titleClass} transition:name={titleSlug}>
-    {post.data.title}
-  </Heading>
+	<Heading class={titleClass} transition:name={titleSlug}>
+		{post.data.title}
+	</Heading>
 </a>

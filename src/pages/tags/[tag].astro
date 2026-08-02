@@ -6,24 +6,24 @@ import { getAllTagArchives, type TagArchive } from "@/utils/content";
 import { titleify, slugify } from "@/utils/text";
 
 export const getStaticPaths = (async () => {
-  const tagArchives = await getAllTagArchives();
+	const tagArchives = await getAllTagArchives();
 
-  return tagArchives.map((archive) => ({
-    params: {
-      tag: archive.slug,
-    },
-    props: {
-      archive,
-    },
-  }));
+	return tagArchives.map((archive) => ({
+		params: {
+			tag: archive.slug,
+		},
+		props: {
+			archive,
+		},
+	}));
 }) satisfies GetStaticPaths;
 
 type Props = {
-  archive: TagArchive;
+	archive: TagArchive;
 };
 
 export function getTagTransitionName(tag: string) {
-  return `tag-${slugify(tag.replaceAll(".", "-"))}`;
+	return `tag-${slugify(tag.replaceAll(".", "-"))}`;
 }
 const { archive } = Astro.props;
 const title = `Tag: ${titleify(archive.tag)}`;
@@ -31,9 +31,9 @@ const description = `Posts tagged "${titleify(archive.tag)}".`;
 ---
 
 <PageLayout
-  title={title}
-  description={description}
-  transitionName={getTagTransitionName(archive.tag)}
+	title={title}
+	description={description}
+	transitionName={getTagTransitionName(archive.tag)}
 >
-  <PostFeed posts={archive.posts} />
+	<PostFeed posts={archive.posts} />
 </PageLayout>

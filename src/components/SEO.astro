@@ -2,25 +2,23 @@
 import siteConfig from "@/site.config";
 
 interface Props {
-  title: string;
-  description: string;
-  type?: "website" | "article";
-  publishedTime?: Date;
-  tags?: string[];
-  image?: string; // post cover used for display context, not OG
-  ogImage?: string; // explicit OG image path takes priority for social sharing
-  noindex?: boolean;
+	title: string;
+	description: string;
+	type?: "website" | "article";
+	publishedTime?: Date;
+	image?: string; // post cover used for display context, not OG
+	ogImage?: string; // explicit OG image path takes priority for social sharing
+	noindex?: boolean;
 }
 
 const {
-  title,
-  description,
-  type = "website",
-  publishedTime,
-  tags,
-  image,
-  ogImage,
-  noindex = false,
+	title,
+	description,
+	type = "website",
+	publishedTime,
+	image,
+	ogImage,
+	noindex = false,
 } = Astro.props;
 
 const pageTitle = `${title} - ${siteConfig.title}`;
@@ -28,10 +26,10 @@ const canonical = new URL(Astro.url.pathname, siteConfig.url).href;
 
 // ogImage wins for social sharing; image (cover) is fallback; then default
 const resolvedOgImage = ogImage
-  ? new URL(ogImage, siteConfig.url).href
-  : image
-    ? new URL(image, siteConfig.url).href
-    : new URL("/og/default.png", siteConfig.url).href;
+	? new URL(ogImage, siteConfig.url).href
+	: image
+		? new URL(image, siteConfig.url).href
+		: new URL("/og/default.png", siteConfig.url).href;
 ---
 
 <!-- Core -->
@@ -48,16 +46,9 @@ const resolvedOgImage = ogImage
 <meta property="og:type" content={type} />
 <meta property="og:image" content={resolvedOgImage} />
 {
-  type === "article" && publishedTime && (
-    <meta
-      property="article:published_time"
-      content={publishedTime.toISOString()}
-    />
-  )
-}
-{
-  type === "article" &&
-    tags?.map((tag) => <meta property="article:tag" content={tag} />)
+	type === "article" && publishedTime && (
+		<meta property="article:published_time" content={publishedTime.toISOString()} />
+	)
 }
 
 <!-- Twitter / X -->

@@ -23,43 +23,38 @@ import type { GalleryImage as GalleryImageType } from "@/utils/image";
 import SectionHeader from "@/components/SectionHeader.astro";
 
 interface Props {
-  images: GalleryImageType[];
-  galleryId: string;
-  title?: string; // optional section heading override
+	images: GalleryImageType[];
+	galleryId: string;
+	title?: string; // optional section heading override
 }
 
 const { images, galleryId, title = "Gallery" } = Astro.props;
 ---
 
 <section class="post-gallery" data-pagefind-ignore aria-label={title}>
-  <div class="post-gallery__header mb-4 flex items-baseline gap-3">
-    <SectionHeader title={title} />
-    <span
-      class="post-gallery__count font-code text-muted-foreground text-sm tabular-nums"
-      >{images.length} photo{images.length !== 1 ? "s" : ""}</span
-    >
-  </div>
+	<div class="post-gallery__header mb-4 flex items-baseline gap-3">
+		<SectionHeader title={title} />
+		<span class="post-gallery__count font-code text-muted-foreground text-sm tabular-nums"
+			>{images.length} photo{images.length !== 1 ? "s" : ""}</span
+		>
+	</div>
 
-  <div class="gallery-grid">
-    {
-      images.map((image) => (
-        <GalleryImage image={image} galleryId={galleryId} />
-      ))
-    }
-  </div>
+	<div class="gallery-grid">
+		{images.map((image) => <GalleryImage image={image} galleryId={galleryId} />)}
+	</div>
 </section>
 
 <!-- GLightbox init — scoped to this component's gallery only -->
 <script>
-  import GLightbox from "glightbox";
+	import GLightbox from "glightbox";
 
-  // Initialise after DOM is ready — Astro handles this via module scripts
-  GLightbox({
-    selector: ".glightbox",
-    touchNavigation: true,
-    loop: true,
-    autoplayVideos: false,
-    keyboardNavigation: true,
-    closeButton: true,
-  });
+	// Initialise after DOM is ready — Astro handles this via module scripts
+	GLightbox({
+		selector: ".glightbox",
+		touchNavigation: true,
+		loop: true,
+		autoplayVideos: false,
+		keyboardNavigation: true,
+		closeButton: true,
+	});
 </script>

@@ -14,4 +14,5 @@ Contact: [timo@timozander.de](mailto:timo@timozander.de)
 ---
 
 Responsible for Content: Timo Zander.  
-All content is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+All content is licensed under
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).

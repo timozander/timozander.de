@@ -3,30 +3,27 @@
 ---
 
 <script is:inline>
-  document.addEventListener("click", async (event) => {
-    const target = event.target;
+	document.addEventListener("click", async (event) => {
+		const target = event.target;
 
-    if (
-      target instanceof HTMLAnchorElement &&
-      target.classList.contains("heading-anchor")
-    ) {
-      event.preventDefault();
+		if (target instanceof HTMLAnchorElement && target.classList.contains("heading-anchor")) {
+			event.preventDefault();
 
-      const url = new URL(target.href);
+			const url = new URL(target.href);
 
-      try {
-        await navigator.clipboard.writeText(url.toString());
+			try {
+				await navigator.clipboard.writeText(url.toString());
 
-        const original = target.textContent;
+				const original = target.textContent;
 
-        target.textContent = "✓";
+				target.textContent = "✓";
 
-        setTimeout(() => {
-          target.textContent = original;
-        }, 2000);
+				setTimeout(() => {
+					target.textContent = original;
+				}, 2000);
 
-        history.replaceState(null, "", url.hash);
-      } catch (_) {}
-    }
-  });
+				history.replaceState(null, "", url.hash);
+			} catch (_) {}
+		}
+	});
 </script>

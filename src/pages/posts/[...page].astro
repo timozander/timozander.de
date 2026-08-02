@@ -7,54 +7,53 @@ import siteConfig from "@/site.config";
 import PageHeader from "@/components/PageHeader.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const allPosts = await getAllPosts();
+	const allPosts = await getAllPosts();
 
-  return paginate(allPosts, {
-    pageSize: siteConfig.postsPerPage,
-  });
+	return paginate(allPosts, {
+		pageSize: siteConfig.postsPerPage,
+	});
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
 const isFirstPage = page.currentPage === 1;
 const title = isFirstPage ? "Blog" : `Blog - Page ${page.currentPage}`;
-const description =
-  "Writing from my own blog and articles published elsewhere.";
+const description = "Writing from my own blog and articles published elsewhere.";
 ---
 
 <PageLayout title={title} description={description} showHeader={false}>
-  <PageHeader {title} subheading={description} />
+	<PageHeader {title} subheading={description} />
 
-  <PostFeed posts={page.data} />
+	<PostFeed posts={page.data} />
 
-  <nav class="mt-12 flex items-center justify-between">
-    <div>
-      {
-        page.url.prev && (
-          <a
-            href={page.url.prev}
-            class="text-muted-foreground hover:text-foreground font-ui inline-flex min-h-10 items-center transition-colors"
-          >
-            ← Previous
-          </a>
-        )
-      }
-    </div>
+	<nav class="mt-12 flex items-center justify-between">
+		<div>
+			{
+				page.url.prev && (
+					<a
+						href={page.url.prev}
+						class="text-muted-foreground hover:text-foreground font-ui inline-flex min-h-10 items-center transition-colors"
+					>
+						← Previous
+					</a>
+				)
+			}
+		</div>
 
-    <div class="text-muted-foreground font-ui text-sm">
-      Page {page.currentPage} of {page.lastPage}
-    </div>
+		<div class="text-muted-foreground font-ui text-sm">
+			Page {page.currentPage} of {page.lastPage}
+		</div>
 
-    <div>
-      {
-        page.url.next && (
-          <a
-            href={page.url.next}
-            class="text-muted-foreground hover:text-foreground font-ui inline-flex min-h-10 items-center transition-colors"
-          >
-            Next →
-          </a>
-        )
-      }
-    </div>
-  </nav>
+		<div>
+			{
+				page.url.next && (
+					<a
+						href={page.url.next}
+						class="text-muted-foreground hover:text-foreground font-ui inline-flex min-h-10 items-center transition-colors"
+					>
+						Next →
+					</a>
+				)
+			}
+		</div>
+	</nav>
 </PageLayout>

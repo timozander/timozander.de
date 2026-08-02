@@ -4,21 +4,21 @@ import PostTitle from "./PostTitle.astro";
 import PostMeta from "./PostMeta.astro";
 
 type Props = {
-  post: Post;
+	post: Post;
 };
 
 const { post } = Astro.props;
 ---
 
 <div
-  class="text-muted-foreground flex flex-row items-baseline justify-between gap-x-3 py-1 first:pt-0"
+	class="text-muted-foreground flex flex-row items-baseline justify-between gap-x-3 py-1 first:pt-0"
 >
-  <PostTitle
-    post={post}
-    class="text-foreground hover:text-primary ease-fluid text-base leading-snug font-medium text-balance transition-colors transition-transform duration-150 md:text-lg"
-  />
+	<PostTitle
+		post={post}
+		class="text-foreground hover:text-primary ease-fluid text-base leading-snug font-medium text-balance transition-colors transition-transform duration-150 md:text-lg"
+	/>
 
-  <div class="font-ui flex shrink-0 flex-row gap-3 text-right text-xs">
-    <PostMeta post={post} />
-  </div>
+	<div class="font-ui flex shrink-0 flex-row gap-3 text-right text-xs">
+		<PostMeta post={post} />
+	</div>
 </div>

@@ -7,35 +7,35 @@ import { getPostSlug } from "@/utils/content";
 import { generateOgImage } from "@/utils/og";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
+	const posts = await getCollection("posts");
 
-  return posts.map((post) => ({
-    params: {
-      slug: getPostSlug(post),
-    },
+	return posts.map((post) => ({
+		params: {
+			slug: getPostSlug(post),
+		},
 
-    props: {
-      post,
-    },
-  }));
+		props: {
+			post,
+		},
+	}));
 }
 
 export const GET: APIRoute = async ({ props }) => {
-  const { post } = props;
+	const { post } = props;
 
-  const png = await generateOgImage({
-    title: post.data.title,
+	const png = await generateOgImage({
+		title: post.data.title,
 
-    description: post.data.description,
+		description: post.data.description,
 
-    category: post.data.category,
+		category: post.data.category,
 
-    published: post.data.updated ?? post.data.published,
-  });
+		published: post.data.updated ?? post.data.published,
+	});
 
-  return new Response(new Uint8Array(png), {
-    headers: {
-      "Content-Type": "image/png",
-    },
-  });
+	return new Response(new Uint8Array(png), {
+		headers: {
+			"Content-Type": "image/png",
+		},
+	});
 };

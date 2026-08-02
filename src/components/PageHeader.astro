@@ -1,32 +1,32 @@
 ---
 interface Props {
-  title?: string;
-  subheading?: string;
-  transitionName?: string;
+	title?: string;
+	subheading?: string;
+	transitionName?: string;
 }
 const { title, subheading, transitionName } = Astro.props;
 ---
 
 <section class="mb-2 flex flex-col">
-  {
-    title && (
-      <h1
-        class="font-content text-3xl leading-tight font-medium md:text-4xl"
-        transition:name={transitionName}
-      >
-        {title}
-      </h1>
-    )
-  }
-  {
-    subheading && (
-      <p class="text-muted-foreground mt-2 max-w-xl text-base leading-relaxed italic">
-        {subheading}
-      </p>
-    )
-  }
-  <div class="font-code text-muted-foreground mt-2 text-[10px]">
-    <slot name="meta" />
-  </div>
-  <div class="divider mb-8"></div>
+	{
+		title && (
+			<h1
+				class="font-content text-3xl leading-tight font-medium md:text-4xl"
+				transition:name={transitionName}
+			>
+				{title}
+			</h1>
+		)
+	}
+	{
+		subheading && (
+			<p class="text-muted-foreground mt-2 max-w-xl text-base leading-relaxed italic">
+				{subheading}
+			</p>
+		)
+	}
+	<div class="font-code text-muted-foreground mt-2 text-[10px]">
+		<slot name="meta" />
+	</div>
+	<div class="divider mb-8"></div>
 </section>

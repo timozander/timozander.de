@@ -5,47 +5,43 @@ import PostTitle from "@/components/content/PostTitle.astro";
 import PostMeta from "./PostMeta.astro";
 
 type Props = {
-  posts: Post[];
-  sectionTitle?: string;
-  sectionDesc?: string;
+	posts: Post[];
+	sectionTitle?: string;
+	sectionDesc?: string;
 };
 
 const { posts, sectionTitle, sectionDesc } = Astro.props;
 ---
 
 <section class="my-2 py-4 md:my-4">
-  <SectionHeader title={sectionTitle} subheading={sectionDesc} />
-  <div class="mt-4 flex flex-col space-y-4">
-    {
-      posts.map((post) => {
-        const showDescription = post.data.description && !post.data.externalUrl;
+	<SectionHeader title={sectionTitle} subheading={sectionDesc} />
+	<div class="mt-4 flex flex-col space-y-4">
+		{
+			posts.map((post) => {
+				const showDescription = post.data.description && !post.data.externalUrl;
 
-        return (
-          <div class="border-border/50 group ease-fluid flex flex-col space-y-3 border-b py-4 transition-transform first:pt-0 last:border-0">
-            <PostTitle
-              post={post}
-              class="link-hover text-base leading-snug font-medium text-balance md:text-xl"
-            />
-            {showDescription && (
-              <p class="text-muted-foreground text-sm leading-normal italic md:max-w-xl">
-                {post.data.description}
-              </p>
-            )}
-            <div class="post-meta font-ui text-muted-foreground flex flex-row items-baseline gap-2 text-xs">
-              <PostMeta post={post} showReadingTime />
-            </div>
-          </div>
-        );
-      })
-    }
-  </div>
+				return (
+					<div class="border-border/50 group ease-fluid flex flex-col space-y-3 border-b py-4 transition-transform first:pt-0 last:border-0">
+						<PostTitle
+							post={post}
+							class="link-hover text-base leading-snug font-medium text-balance md:text-xl"
+						/>
+						{showDescription && (
+							<p class="text-muted-foreground text-sm leading-normal italic md:max-w-xl">
+								{post.data.description}
+							</p>
+						)}
+						<div class="post-meta font-ui text-muted-foreground flex flex-row items-baseline gap-2 text-xs">
+							<PostMeta post={post} showReadingTime />
+						</div>
+					</div>
+				);
+			})
+		}
+	</div>
 
-  <a
-    href="/posts"
-    class="group inline-cta text-muted-foreground hover:text-foreground"
-  >
-    <span class="inline-cta-line group-hover:bg-primary group-hover:w-16"
-    ></span>
-    Browse the blog
-  </a>
+	<a href="/posts" class="group inline-cta text-muted-foreground hover:text-foreground">
+		<span class="inline-cta-line group-hover:bg-primary group-hover:w-16"></span>
+		Browse the blog
+	</a>
 </section>

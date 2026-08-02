@@ -1,26 +1,26 @@
 ---
 type Props = {
-  title: string;
+	title: string;
 };
 
 const { title } = Astro.props;
 ---
 
 <section
-  aria-label={`Share ${title}`}
-  class="text-muted-foreground font-ui mt-4 flex flex-row items-baseline gap-2 text-sm"
+	aria-label={`Share ${title}`}
+	class="text-muted-foreground font-ui mt-4 flex flex-row items-baseline gap-2 text-sm"
 >
-  <button
-    id="copy-link"
-    type="button"
-    class="group inline-cta text-muted-foreground hover:text-foreground items-center"
-  >
-    <span class="inline-cta-line group-hover:w-16"></span>
-    Copy Link
-  </button>
-  <!-- <div class="flex items-center gap-4 text-sm font-ui"> -->
+	<button
+		id="copy-link"
+		type="button"
+		class="group inline-cta text-muted-foreground hover:text-foreground items-center"
+	>
+		<span class="inline-cta-line group-hover:w-16"></span>
+		Copy Link
+	</button>
+	<!-- <div class="flex items-center gap-4 text-sm font-ui"> -->
 
-  <!-- {shareLinks.map((link) => (
+	<!-- {shareLinks.map((link) => (
       <a
         href={link.href}
         target="_blank"
@@ -30,31 +30,31 @@ const { title } = Astro.props;
         {link.label}
       </a>
     ))} -->
-  <!-- </div> -->
+	<!-- </div> -->
 </section>
 
 <script>
-  function setupCopyLink() {
-    const button = document.querySelector<HTMLButtonElement>("#copy-link");
+	function setupCopyLink() {
+		const button = document.querySelector<HTMLButtonElement>("#copy-link");
 
-    if (!button) return;
+		if (!button) return;
 
-    button.onclick = async () => {
-      try {
-        await navigator.clipboard.writeText(window.location.href);
+		button.onclick = async () => {
+			try {
+				await navigator.clipboard.writeText(window.location.href);
 
-        const original = button.textContent;
+				const original = button.textContent;
 
-        button.textContent = "Copied";
+				button.textContent = "Copied";
 
-        setTimeout(() => {
-          button.textContent = original;
-        }, 2000);
-      } catch (_) {}
-    };
-  }
+				setTimeout(() => {
+					button.textContent = original;
+				}, 2000);
+			} catch (_) {}
+		};
+	}
 
-  setupCopyLink();
+	setupCopyLink();
 
-  document.addEventListener("astro:after-swap", setupCopyLink);
+	document.addEventListener("astro:after-swap", setupCopyLink);
 </script>

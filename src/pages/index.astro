@@ -13,21 +13,13 @@ const structuredData = generateWebsiteSchema();
 ---
 
 <BaseLayout schema={structuredData}>
-  <SEO
-    slot="seo"
-    title="Home"
-    description={siteConfig.description}
-    ogImage="/og/default.png"
-  />
-  <h1 class="sr-only">{siteConfig.title}</h1>
+	<SEO slot="seo" title="Home" description={siteConfig.description} ogImage="/og/default.png" />
+	<h1 class="sr-only">{siteConfig.title}</h1>
 
-  <HomeHero />
-  <!-- <MastHead /> -->
-  <RecentPosts
-    posts={allPosts.slice(0, siteConfig.recentPosts + 1)}
-    sectionTitle="Latest"
-  />
-  <Fragment slot="footer">
-    <Footer />
-  </Fragment>
+	<HomeHero />
+	<!-- <MastHead /> -->
+	<RecentPosts posts={allPosts.slice(0, siteConfig.recentPosts + 1)} sectionTitle="Latest" />
+	<Fragment slot="footer">
+		<Footer />
+	</Fragment>
 </BaseLayout>

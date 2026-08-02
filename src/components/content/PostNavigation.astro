@@ -2,56 +2,56 @@
 import { type Post, getPostUrl } from "@/utils/content";
 
 interface Props {
-  prevPost?: Post | null;
-  nextPost?: Post | null;
+	prevPost?: Post | null;
+	nextPost?: Post | null;
 }
 
 const { prevPost, nextPost } = Astro.props;
 ---
 
 <section class="flex flex-col">
-  <nav class="post-navigation my-2" aria-label="Post navigation">
-    {/* GLOBAL PREV / NEXT */}
-    {
-      (prevPost || nextPost) && (
-        <div
-          class:list={[
-            "post-nav flex flex-row flex-wrap gap-4 text-sm",
-            {
-              "md:justify-between": !(prevPost && nextPost),
-            },
-          ]}
-        >
-          {prevPost && (
-            <a
-              href={getPostUrl(prevPost)}
-              class="group flex flex-1 flex-col gap-1 no-underline transition-colors"
-            >
-              <div class="group inline-cta text-muted-foreground flex items-center justify-start gap-2">
-                Previous Article
-              </div>
-              <span class="font font-content text-foreground link-hover text-base leading-snug font-medium md:text-lg">
-                {prevPost.data.title}
-              </span>
-            </a>
-          )}
+	<nav class="post-navigation my-2" aria-label="Post navigation">
+		{/* GLOBAL PREV / NEXT */}
+		{
+			(prevPost || nextPost) && (
+				<div
+					class:list={[
+						"post-nav flex flex-row flex-wrap gap-4 text-sm",
+						{
+							"md:justify-between": !(prevPost && nextPost),
+						},
+					]}
+				>
+					{prevPost && (
+						<a
+							href={getPostUrl(prevPost)}
+							class="group flex flex-1 flex-col gap-1 no-underline transition-colors"
+						>
+							<div class="group inline-cta text-muted-foreground flex items-center justify-start gap-2">
+								Previous Article
+							</div>
+							<span class="font font-content text-foreground link-hover text-base leading-snug font-medium md:text-lg">
+								{prevPost.data.title}
+							</span>
+						</a>
+					)}
 
-          {nextPost && (
-            <a
-              href={getPostUrl(nextPost)}
-              class="group flex flex-1 flex-col gap-1 text-right no-underline transition-colors"
-            >
-              <div class="group inline-cta text-muted-foreground flex items-center justify-end gap-2">
-                Next Article
-              </div>
-              <span class="font-content text-foreground link-hover text-base leading-snug font-medium md:text-lg">
-                {nextPost.data.title}
-              </span>
-            </a>
-          )}
-        </div>
-      )
-    }
-  </nav>
-  <div class="divider"></div>
+					{nextPost && (
+						<a
+							href={getPostUrl(nextPost)}
+							class="group flex flex-1 flex-col gap-1 text-right no-underline transition-colors"
+						>
+							<div class="group inline-cta text-muted-foreground flex items-center justify-end gap-2">
+								Next Article
+							</div>
+							<span class="font-content text-foreground link-hover text-base leading-snug font-medium md:text-lg">
+								{nextPost.data.title}
+							</span>
+						</a>
+					)}
+				</div>
+			)
+		}
+	</nav>
+	<div class="divider"></div>
 </section>

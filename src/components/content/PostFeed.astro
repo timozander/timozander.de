@@ -6,93 +6,83 @@ import PostTitle from "./PostTitle.astro";
 import PostMeta from "./PostMeta.astro";
 
 type Props = {
-  posts: Post[];
-  sectionTitle?: string;
-  sectionDesc?: string;
+	posts: Post[];
+	sectionTitle?: string;
+	sectionDesc?: string;
 };
 
 const { posts, sectionTitle, sectionDesc } = Astro.props;
 
 // Group posts by year, preserving descending order within each group
 const postsByYear = posts.reduce<Record<number, Post[]>>((acc, post) => {
-  const year = (post.data.updated ?? post.data.published).getFullYear();
-  (acc[year] ??= []).push(post);
-  return acc;
+	const year = (post.data.updated ?? post.data.published).getFullYear();
+	(acc[year] ??= []).push(post);
+	return acc;
 }, {});
 
 // Years descending
 const years = Object.keys(postsByYear)
-  .map(Number)
-  .sort((a, b) => b - a);
+	.map(Number)
+	.sort((a, b) => b - a);
 ---
 
 <section>
-  {
-    sectionTitle && (
-      <SectionHeader title={sectionTitle} subheading={sectionDesc} />
-    )
-  }
+	{sectionTitle && <SectionHeader title={sectionTitle} subheading={sectionDesc} />}
 
-  {
-    years.map((year) => {
-      const yearPosts = postsByYear[year];
+	{
+		years.map((year) => {
+			const yearPosts = postsByYear[year];
 
-      return (
-        <div class="mb-6 last:mb-0">
-          {/* Year header */}
-          <div class="border-border/50 mb-4 flex items-baseline justify-between border-b py-2">
-            <span class="text-muted-foreground text-base tracking-[0.12em] uppercase italic">
-              {year}
-            </span>
-            <span class="font-code text-muted-foreground text-sm tabular-nums">
-              {yearPosts.length} {yearPosts.length === 1 ? "post" : "posts"}
-            </span>
-          </div>
+			return (
+				<div class="mb-6 last:mb-0">
+					{/* Year header */}
+					<div class="border-border/50 mb-4 flex items-baseline justify-between border-b py-2">
+						<span class="text-muted-foreground text-base tracking-[0.12em] uppercase italic">
+							{year}
+						</span>
+						<span class="font-code text-muted-foreground text-sm tabular-nums">
+							{yearPosts.length} {yearPosts.length === 1 ? "post" : "posts"}
+						</span>
+					</div>
 
-          {/* Posts in this year */}
-          {yearPosts.map((post) => {
-            const isExternalPost = Boolean(post.data.externalUrl);
-            const showDescription = post.data.description && !isExternalPost;
+					{/* Posts in this year */}
+					{yearPosts.map((post) => {
+						const isExternalPost = Boolean(post.data.externalUrl);
+						const showDescription = post.data.description && !isExternalPost;
 
-            return (
-              <div
-                class:list={[
-                  "flex flex-col space-y-3 py-4 transition-all",
-                  isExternalPost
-                    ? "opacity-65 hover:opacity-95"
-                    : "group ease-fluid",
-                ]}
-              >
-                <PostTitle
-                  post={post}
-                  class={
-                    "link-hover text-lg leading-snug font-medium text-balance md:text-xl"
-                  }
-                />
-                {showDescription && (
-                  <p class="text-muted-foreground text-sm leading-normal italic md:max-w-xl">
-                    {post.data.description}
-                  </p>
-                )}
-                <div
-                  class:list={[
-                    "post-meta flex flex-row items-baseline gap-2 text-xs",
-                    isExternalPost
-                      ? "text-muted-foreground/80"
-                      : "text-muted-foreground",
-                  ]}
-                >
-                  <PostMeta
-                    post={post}
-                    accentCategory={!isExternalPost}
-                    showReadingTime={!isExternalPost}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      );
-    })
-  }
+						return (
+							<div
+								class:list={[
+									"flex flex-col space-y-3 py-4 transition-all",
+									isExternalPost ? "opacity-65 hover:opacity-95" : "group ease-fluid",
+								]}
+							>
+								<PostTitle
+									post={post}
+									class={"link-hover text-lg leading-snug font-medium text-balance md:text-xl"}
+								/>
+								{showDescription && (
+									<p class="text-muted-foreground text-sm leading-normal italic md:max-w-xl">
+										{post.data.description}
+									</p>
+								)}
+								<div
+									class:list={[
+										"post-meta flex flex-row items-baseline gap-2 text-xs",
+										isExternalPost ? "text-muted-foreground/80" : "text-muted-foreground",
+									]}
+								>
+									<PostMeta
+										post={post}
+										accentCategory={!isExternalPost}
+										showReadingTime={!isExternalPost}
+									/>
+								</div>
+							</div>
+						);
+					})}
+				</div>
+			);
+		})
+	}
 </section>
