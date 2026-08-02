@@ -29,7 +29,6 @@ export interface UserConfig {
 
 	postsPerPage?: number;
 	recentPosts?: number;
-	relatedPosts?: number;
 
 	showLogo?: boolean;
 	showThemeToggle?: boolean;
@@ -58,7 +57,6 @@ const siteConfig = {
 
 	postsPerPage: userConfig.postsPerPage ?? 8,
 	recentPosts: userConfig.recentPosts ?? 6,
-	relatedPosts: userConfig.relatedPosts ?? 4,
 
 	showLogo: userConfig.showLogo ?? false,
 	showThemeToggle: userConfig.showThemeToggle ?? true,

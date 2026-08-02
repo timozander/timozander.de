@@ -1,7 +1,6 @@
 ---
-import siteConfig from "@/site.config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { type Post, getPostSlug, getAllPosts, getRelatedPosts } from "@/utils/content";
+import { type Post, getPostSlug, getAllPosts } from "@/utils/content";
 import { slugify } from "@/utils/text";
 import { getGalleryImages } from "@/utils/image";
 import Breadcrumb from "@/components/Breadcrumb.astro";
@@ -11,7 +10,6 @@ import SEO from "@/components/SEO.astro";
 import PostNavigation from "@/components/content/PostNavigation.astro";
 import { generatePostSchema } from "@/utils/schema";
 import PostMeta from "@/components/content/PostMeta.astro";
-import RelatedPosts from "@/components/content/RelatedPosts.astro";
 import Footer from "@/components/Footer.astro";
 import PostGallery from "@/components/content/PostGallery.astro";
 import GalleryInit from "@/components/GalleryInit.astro";
@@ -27,8 +25,6 @@ const { post, prevPost, nextPost } = Astro.props;
 const { title, description, published, externalUrl, source, lang } = post.data;
 const showDescription = description && !externalUrl;
 
-const allPosts = await getAllPosts();
-const relatedPosts = getRelatedPosts(post, allPosts, siteConfig.relatedPosts);
 const ogImage = `/og/posts/${getPostSlug(post)}.png`;
 const structuredData = externalUrl ? undefined : generatePostSchema(post);
 const galleryImages = getGalleryImages(post.filePath ?? "");
@@ -117,7 +113,6 @@ const galleryImages = getGalleryImages(post.filePath ?? "");
 					<meta data-pagefind-filter="collection[content]" content={post.collection} />
 					<div class="app-prose post-content">
 						<slot />
-						<hr />
 					</div>
 					{galleryImages.length > 0 && <PostGallery images={galleryImages} galleryId={post.id} />}
 				</article>
@@ -132,15 +127,6 @@ const galleryImages = getGalleryImages(post.filePath ?? "");
 		!externalUrl && (
 			<Fragment slot="navigation">
 				<PostNavigation prevPost={prevPost} nextPost={nextPost} />
-			</Fragment>
-		)
-	}
-	{
-		!externalUrl && (
-			<Fragment slot="after">
-				{relatedPosts.length > 0 && (
-					<RelatedPosts posts={relatedPosts} sectionTitle="More like this" />
-				)}
 			</Fragment>
 		)
 	}

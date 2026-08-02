@@ -149,46 +149,6 @@ export function getAdjacentPosts<T extends Post>(posts: T[], currentPost: T) {
 	};
 }
 
-function scorePostSimilarity(currentPost: Post, candidatePost: Post): number {
-	let score = 0;
-
-	// Same top-level directory
-	const currentPath = currentPost.filePath?.split("/").slice(0, -1).join("/") ?? "";
-
-	const candidatePath = candidatePost.filePath?.split("/").slice(0, -1).join("/") ?? "";
-
-	if (currentPath && candidatePath && currentPath === candidatePath) {
-		score += 5;
-	}
-
-	// Slight recency boost
-	const currentDate = currentPost.data.updated ?? currentPost.data.published;
-
-	const candidateDate = candidatePost.data.updated ?? candidatePost.data.published;
-
-	const diffInDays =
-		Math.abs(currentDate.getTime() - candidateDate.getTime()) / (1000 * 60 * 60 * 24);
-
-	if (diffInDays < 30) {
-		score += 2;
-	}
-
-	return score;
-}
-
-export function getRelatedPosts(currentPost: Post, posts: Post[], limit: number): Post[] {
-	return posts
-		.filter((post) => post.id !== currentPost.id)
-		.map((post) => ({
-			post,
-			score: scorePostSimilarity(currentPost, post),
-		}))
-		.filter((item) => item.score > 0)
-		.sort((a, b) => b.score - a.score)
-		.slice(0, limit)
-		.map((item) => item.post);
-}
-
 // ── Grouping ───────────────────────────────────────────────────────────────────
 
 export function getPostsGroupedByYear(entries: Post[]): [string, Post[]][] {

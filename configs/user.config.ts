@@ -38,7 +38,6 @@ const userConfig: UserConfig = {
 
 	postsPerPage: 30,
 	recentPosts: 4,
-	relatedPosts: 4,
 
 	showLogo: false,
 	showThemeToggle: false,
