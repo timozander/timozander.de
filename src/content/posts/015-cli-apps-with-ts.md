@@ -7,14 +7,14 @@ description:
 published: 2024-10-15
 category: Elsewhere
 lang: de
-source: "heise"
+source: "heise Developer"
 externalUrl: "https://www.heise.de/hintergrund/TypeScript-erobert-die-Kommandozeile-Das-Ende-von-Bash-9980116.html"
 tags:
   - elsewhere
 ---
 
 > Originally published at
-> [heise](https://www.heise.de/hintergrund/TypeScript-erobert-die-Kommandozeile-Das-Ende-von-Bash-9980116.html)
+> [heise Developer](https://www.heise.de/hintergrund/TypeScript-erobert-die-Kommandozeile-Das-Ende-von-Bash-9980116.html)
 > in German.
 
 This article is also available in English. It was translated with technical
@@ -27,4 +27,4 @@ Entwicklerinnen und Entwickler. So ist es nicht verwunderlich, dass Developer
 CLI-Skripte – typischerweise in Bash, PowerShell oder Python geschrieben – auch
 immer häufiger mit TypeScript erstellen.
 
-[Continue reading at heise](https://www.heise.de/hintergrund/TypeScript-erobert-die-Kommandozeile-Das-Ende-von-Bash-9980116.html).
+[Continue reading at heise Developer](https://www.heise.de/hintergrund/TypeScript-erobert-die-Kommandozeile-Das-Ende-von-Bash-9980116.html).

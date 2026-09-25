@@ -28,7 +28,7 @@ previously a frontend engineer at Stripe.
 Bun is comparable to Deno and Node.js. Unlike Deno, Bun is supposed to be more
 compatible with Node.js. Some users call it a "drop-in replacement". It is open
 source, written in the Zig programming language and the first public version has
-been available since July 2022 (as heise Developer had reported). Heise author
+been available since July 2022 (as heise Developer had reported). heise Developer author
 and JavaScript developer Timo Zander tried out the runtime and talked to Jarred
 Sumner about the background for the heise Developer editorial team. This
 interview is part of our Young Professionals series.
