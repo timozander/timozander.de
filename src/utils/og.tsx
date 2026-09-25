@@ -1,6 +1,7 @@
 // src/utils/og.tsx
 
 import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import satori from "satori";
 import { html } from "satori-html";
 import { Resvg } from "@resvg/resvg-js";
@@ -18,9 +19,9 @@ const WIDTH = 1200;
 const HEIGHT = 630;
 
 const [notoSerifRegular, notoSerifBold, notoSansRegular] = await Promise.all([
-	readFile(new URL("../assets/fonts/NotoSerif-Regular.ttf", import.meta.url)),
-	readFile(new URL("../assets/fonts/NotoSerif-Bold.ttf", import.meta.url)),
-	readFile(new URL("../assets/fonts/NotoSans-Regular.ttf", import.meta.url)),
+	readFile(join(process.cwd(), "src/assets/fonts/NotoSerif-Regular.ttf")),
+	readFile(join(process.cwd(), "src/assets/fonts/NotoSerif-Bold.ttf")),
+	readFile(join(process.cwd(), "src/assets/fonts/NotoSans-Regular.ttf")),
 ]);
 
 function formatDate(date?: Date) {
